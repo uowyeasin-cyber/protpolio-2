@@ -1,0 +1,4 @@
+node_modules
+.cms-data
+.env*
+.vercel

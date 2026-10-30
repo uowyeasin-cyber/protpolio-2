@@ -1,0 +1,14 @@
+{
+  "name": "portfolio-studio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node tools/dev-server.mjs",
+    "build:editor": "node tools/build-editor.mjs",
+    "hash": "node tools/hash-password.mjs"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.8.2"
+  },
+  "engines": { "node": ">=18" }
+}
