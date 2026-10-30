@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon Battle City</title>
+  <style>/* ============================================================
+   NEON BATTLE CITY - COMPLETE GAME STYLES
+   The CSS creates an original battle-royale/city-at-night look.
+   It does NOT use PUBG assets; all visuals are CSS-generated.
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --panel: rgba(8, 14, 24, .82);
+  --line: rgba(255,255,255,.12);
+  --text: #f5f7ff;
+  --muted: #8f9bb0;
+  --accent: #36e0ff;
+  --danger: #ff476f;
+  --gold: #ffd45a;
+}
+
+body {
+  margin: 0;
+  background: #03060b;
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+#game {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 650px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(28,70,100,.55), transparent 38%),
+    linear-gradient(#07111d 0%, #0a1724 48%, #061018 100%);
+}
+
+/* ---------- Animated sky ---------- */
+
+#sky {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 75% 17%, rgba(255,255,255,.9) 0 1px, transparent 2px),
+    radial-gradient(circle at 22% 25%, rgba(255,255,255,.7) 0 1px, transparent 2px),
+    radial-gradient(circle at 55% 12%, rgba(255,255,255,.7) 0 1px, transparent 2px);
+  background-size: 180px 160px, 220px 190px, 280px 230px;
+  animation: stars 18s linear infinite;
+}
+
+@keyframes stars {
+  to { transform: translateY(20px); }
+}
+
+/* ---------- Procedural city silhouette ---------- */
+
+#city {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 25%;
+  height: 43%;
+  opacity: .95;
+  background:
+    linear-gradient(to top, #050a10 0 16%, transparent 16%),
+    repeating-linear-gradient(
+      90deg,
+      #08111a 0 48px,
+      #0d1b27 48px 83px,
+      #071019 83px 128px,
+      #101f2b 128px 164px
+    );
+  clip-path: polygon(
+    0 70%, 5% 61%, 9% 68%, 13% 38%, 18% 51%, 23% 30%,
+    27% 56%, 32% 42%, 37% 62%, 42% 23%, 48% 53%, 53% 35%,
+    58% 60%, 63% 28%, 68% 50%, 73% 40%, 78% 64%, 83% 31%,
+    89% 55%, 94% 45%, 100% 59%, 100% 100%, 0 100%
+  );
+  animation: cityMove 12s ease-in-out infinite alternate;
+}
+
+@keyframes cityMove {
+  from { transform: scale(1); }
+  to { transform: scale(1.025) translateX(-8px); }
+}
+
+/* ---------- Ocean / reflective floor ---------- */
+
+#ocean {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 31%;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(34,194,255,.09) 0 2px,
+      transparent 2px 14px
+    ),
+    linear-gradient(180deg, rgba(9,70,91,.35), #02070b);
+  transform-origin: center top;
+  animation: waves 4s ease-in-out infinite alternate;
+}
+
+@keyframes waves {
+  from { transform: perspective(500px) rotateX(5deg) scaleX(1.02); }
+  to { transform: perspective(500px) rotateX(0deg) scaleX(1.08); }
+}
+
+/* ---------- HUD ---------- */
+
+.hud {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 82px;
+  display: grid;
+  grid-template-columns: 1fr 300px 1fr;
+  align-items: center;
+  padding: 0 28px;
+  background: rgba(2,7,12,.75);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.brand-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 18px var(--accent);
+}
+
+.hud-center {
+  text-align: center;
+}
+
+.level-line {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 800;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+#rankText {
+  color: var(--gold);
+}
+
+.xp-bar {
+  height: 8px;
+  background: #111c2a;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+#xpFill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), #a6f8ff);
+  box-shadow: 0 0 18px rgba(54,224,255,.8);
+  transition: width .45s ease;
+}
+
+#xpText {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.stats {
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+  font-size: 14px;
+}
+
+/* ---------- Arena ---------- */
+
+#arena {
+  position: absolute;
+  top: 82px;
+  left: 0;
+  right: 0;
+  bottom: 188px;
+  overflow: hidden;
+}
+
+#locationName {
+  position: absolute;
+  z-index: 4;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #9eb4c7;
+}
+
+.light {
+  position: absolute;
+  width: 4px;
+  height: 90px;
+  bottom: 20%;
+  background: var(--accent);
+  filter: blur(1px);
+  box-shadow: 0 0 24px var(--accent);
+  animation: flicker 1.8s infinite alternate;
+}
+
+.l1 { left: 18%; }
+.l2 { left: 50%; height: 140px; animation-delay: .4s; }
+.l3 { right: 16%; height: 75px; animation-delay: .8s; }
+
+@keyframes flicker {
+  from { opacity: .3; }
+  to { opacity: .95; }
+}
+
+/* ---------- Fighters ---------- */
+
+.fighter {
+  position: absolute;
+  width: 90px;
+  height: 190px;
+  bottom: 23%;
+  z-index: 5;
+  transition: left .25s ease, transform .12s ease, filter .2s;
+}
+
+.player { left: 25%; }
+.enemy { right: 25%; transform: scaleX(-1); }
+
+.fighter.hit {
+  animation: hitShake .18s linear;
+  filter: brightness(2);
+}
+
+@keyframes hitShake {
+  25% { transform: translateX(-8px) scaleX(-1); }
+  75% { transform: translateX(8px) scaleX(-1); }
+}
+
+.player.hit { animation-name: playerHit; }
+
+@keyframes playerHit {
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+.head {
+  position: absolute;
+  top: 15px;
+  left: 29px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #d89a72;
+  border: 4px solid #18222e;
+}
+
+.body {
+  position: absolute;
+  top: 48px;
+  left: 23px;
+  width: 44px;
+  height: 68px;
+  border-radius: 10px 10px 6px 6px;
+  background: linear-gradient(135deg, #1e3448, #0a121c);
+  border: 2px solid #31536d;
+  box-shadow: inset 0 0 18px rgba(54,224,255,.15);
+}
+
+.arm, .leg {
+  position: absolute;
+  background: #172534;
+  border: 2px solid #34506a;
+  border-radius: 12px;
+}
+
+.arm {
+  width: 16px;
+  height: 62px;
+  top: 52px;
+}
+
+.a1 { left: 8px; transform: rotate(18deg); }
+.a2 { right: 7px; transform: rotate(-18deg); }
+
+.leg {
+  top: 111px;
+  width: 18px;
+  height: 67px;
+}
+
+.fighter .l1 { left: 22px; }
+.fighter .l2 { right: 22px; }
+
+.health {
+  position: absolute;
+  z-index: 8;
+  top: -12px;
+  left: 5px;
+  width: 80px;
+  height: 7px;
+  border-radius: 20px;
+  background: #111820;
+  overflow: hidden;
+}
+
+.health i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #ff305d, #ff8c66);
+  transition: width .2s ease;
+}
+
+.player .health i {
+  background: linear-gradient(90deg, #36e0ff, #8dfff1);
+}
+
+.fighter-label {
+  position: absolute;
+  top: -32px;
+  width: 100%;
+  text-align: center;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #d8e6f2;
+}
+
+/* ---------- Floating combat effects ---------- */
+
+#effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.damage {
+  position: absolute;
+  font-size: 26px;
+  font-weight: 1000;
+  animation: floatDamage .7s forwards;
+  text-shadow: 0 2px 12px #000;
+}
+
+.damage.crit {
+  font-size: 38px;
+  color: var(--gold);
+}
+
+@keyframes floatDamage {
+  from { opacity: 1; transform: translateY(0) scale(.8); }
+  to { opacity: 0; transform: translateY(-90px) scale(1.15); }
+}
+
+/* ---------- Overlay ---------- */
+
+#overlay {
+  position: absolute;
+  z-index: 50;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(1,5,9,.45);
+  backdrop-filter: blur(3px);
+}
+
+.panel {
+  width: min(470px, 90vw);
+  padding: 34px;
+  text-align: center;
+  background: rgba(6,13,22,.9);
+  border: 1px solid rgba(54,224,255,.22);
+  box-shadow: 0 25px 80px rgba(0,0,0,.5);
+  border-radius: 20px;
+  animation: panelIn .45s ease;
+}
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(25px) scale(.96); }
+  to { opacity: 1; transform: none; }
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.panel h1 {
+  font-size: clamp(42px, 7vw, 72px);
+  margin: 12px 0;
+  letter-spacing: -3px;
+}
+
+.panel p:not(.eyebrow) {
+  color: #a7b3c5;
+  line-height: 1.6;
+}
+
+#startBtn {
+  border: 0;
+  border-radius: 10px;
+  padding: 15px 28px;
+  margin-top: 10px;
+  color: #001017;
+  background: var(--accent);
+  font-weight: 1000;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(54,224,255,.25);
+  transition: transform .15s, box-shadow .15s;
+}
+
+#startBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 45px rgba(54,224,255,.5);
+}
+
+/* ---------- Controls ---------- */
+
+.controls {
+  position: absolute;
+  z-index: 30;
+  left: 0;
+  right: 0;
+  bottom: 92px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 16px;
+}
+
+.control {
+  min-width: 125px;
+  padding: 13px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: white;
+  background: rgba(7,14,23,.86);
+  cursor: pointer;
+  font-weight: 900;
+  transition: transform .12s, border-color .12s;
+}
+
+.control:hover {
+  transform: translateY(-3px);
+  border-color: rgba(54,224,255,.65);
+}
+
+.control:active {
+  transform: translateY(1px) scale(.97);
+}
+
+.control small {
+  color: #748398;
+  margin-left: 6px;
+}
+
+/* ---------- Bottom info ---------- */
+
+.bottom-info {
+  position: absolute;
+  z-index: 30;
+  left: 24px;
+  right: 24px;
+  bottom: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.card {
+  padding: 13px 16px;
+  background: rgba(4,10,17,.78);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.card-title {
+  display: block;
+  color: #69778a;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  margin-bottom: 5px;
+}
+
+/* ---------- Responsive layout ---------- */
+
+@media (max-width: 700px) {
+  #game { min-height: 600px; }
+
+  .hud {
+    grid-template-columns: 1fr 1fr;
+    height: 72px;
+    padding: 0 12px;
+  }
+
+  .hud-center { display: none; }
+
+  .stats { justify-content: flex-end; }
+
+  #arena {
+    top: 72px;
+    bottom: 220px;
+  }
+
+  .player { left: 15%; }
+  .enemy { right: 15%; }
+
+  .controls {
+    bottom: 95px;
+    flex-wrap: wrap;
+  }
+
+  .control {
+    min-width: 110px;
+    padding: 11px;
+  }
+
+  .bottom-info {
+    left: 10px;
+    right: 10px;
+    bottom: 8px;
+  }
+
+  .card:nth-child(2) { display: none; }
+  .bottom-info { grid-template-columns: 1fr 1fr; }
+}
+
+/* touch-friendly controls */
+.control { touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; }
+.control.cooling { opacity: .45; filter: grayscale(.6); }
+@media (hover: none), (max-width: 700px) {
+  .control { min-height: 54px; min-width: calc(50% - 8px); font-size: 1rem; }
+  .control small { display: none; }
+}
+</style>
+</head>
+<body>
+  <!-- =========================================================
+       MAIN GAME WRAPPER
+       Everything is rendered inside this container.
+       ========================================================= -->
+  <main id="game">
+    <!-- Animated city/ocean background -->
+    <div id="sky"></div>
+    <div id="city"></div>
+    <div id="ocean"></div>
+
+    <!-- Top HUD: level, XP, score and combo -->
+    <header class="hud">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        NEON BATTLE CITY
+      </div>
+
+      <div class="hud-center">
+        <div class="level-line">
+          <span id="levelText">LEVEL 1</span>
+          <span id="rankText">ROOKIE</span>
+        </div>
+        <div class="xp-bar">
+          <div id="xpFill"></div>
+        </div>
+        <small id="xpText">0 / 100 XP</small>
+      </div>
+
+      <div class="stats">
+        <span>🏆 <b id="score">0</b></span>
+        <span>⚡ <b id="combo">0</b>x</span>
+      </div>
+    </header>
+
+    <!-- Center combat arena -->
+    <section id="arena">
+      <div id="locationName">SECTOR 01 • HARBOR CITY</div>
+
+      <!-- Decorative city lights -->
+      <div class="light l1"></div>
+      <div class="light l2"></div>
+      <div class="light l3"></div>
+
+      <!-- Player -->
+      <div class="fighter player" id="player">
+        <div class="health"><i id="playerHealth"></i></div>
+        <div class="body"></div>
+        <div class="head"></div>
+        <div class="arm a1"></div>
+        <div class="arm a2"></div>
+        <div class="leg l1"></div>
+        <div class="leg l2"></div>
+        <span class="fighter-label">YOU</span>
+      </div>
+
+      <!-- Enemy -->
+      <div class="fighter enemy" id="enemy">
+        <div class="health"><i id="enemyHealth"></i></div>
+        <div class="body"></div>
+        <div class="head"></div>
+        <div class="arm a1"></div>
+        <div class="arm a2"></div>
+        <div class="leg l1"></div>
+        <div class="leg l2"></div>
+        <span class="fighter-label">ENEMY</span>
+      </div>
+
+      <!-- Floating damage / reward numbers are inserted here by JS -->
+      <div id="effects"></div>
+
+      <!-- Start / result overlay -->
+      <div id="overlay">
+        <div class="panel">
+          <p class="eyebrow">ONLINE FIGHTING ARENA</p>
+          <h1 id="overlayTitle">READY?</h1>
+          <p id="overlayMessage">
+            Defeat the enemy to earn XP, unlock the next level and collect rewards.
+          </p>
+          <button id="startBtn">START FIGHT</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom controls -->
+    <section class="controls">
+      <button class="control attack" data-action="attack">⚔ ATTACK <small>J</small></button>
+      <button class="control heavy" data-action="heavy">💥 HEAVY <small>K</small></button>
+      <button class="control dodge" data-action="dodge">↯ DODGE <small>L</small></button>
+      <button class="control heal" data-action="heal">❤ HEAL <small>I</small></button>
+    </section>
+
+    <!-- Mission / reward cards -->
+    <section class="bottom-info">
+      <div class="card">
+        <span class="card-title">CURRENT MISSION</span>
+        <b id="missionText">Win 1 fight</b>
+      </div>
+      <div class="card">
+        <span class="card-title">REWARD</span>
+        <b id="rewardText">100 XP + 50 Coins</b>
+      </div>
+      <div class="card">
+        <span class="card-title">CITY</span>
+        <b id="cityText">Harbor City</b>
+      </div>
+    </section>
+  </main>
+
+  <script>/* ============================================================
+   NEON BATTLE CITY - GAME ENGINE
+   ------------------------------------------------------------
+   This file contains:
+   1. Player/enemy stats
+   2. Attack + dodge + heal mechanics
+   3. Human-like random enemy behaviour
+   4. Score + XP + unlimited level progression
+   5. Level unlocks
+   6. Rewards / badges
+   7. Animated combat feedback
+   8. LocalStorage save system
+   ------------------------------------------------------------
+   All important parts have comments so you can modify them.
+   ============================================================ */
+
+// ------------------------------
+// 1) GAME STATE
+// ------------------------------
+
+// Saved progress uses namespaced keys, and works even where storage is blocked.
+const SAVE_PREFIX = "yeasin-portfolio:neon-battle-city:";
+const store = {
+  get(key) { try { return localStorage.getItem(SAVE_PREFIX + key); } catch (e) { return null; } },
+  set(key, value) { try { localStorage.setItem(SAVE_PREFIX + key, value); } catch (e) {} }
+};
+
+const state = {
+  level: Number(store.get("level")) || 1,
+  xp: Number(store.get("xp")) || 0,
+  score: Number(store.get("score")) || 0,
+  coins: Number(store.get("coins")) || 0,
+  wins: Number(store.get("wins")) || 0,
+
+  playerHP: 100,
+  enemyHP: 100,
+
+  combo: 0,
+  running: false,
+  dodging: false,
+  enemyTimer: null,
+  comboTimer: null,
+  lastHeal: 0
+};
+
+// ------------------------------
+// 2) DOM ELEMENTS
+// ------------------------------
+
+const player = document.querySelector("#player");
+const enemy = document.querySelector("#enemy");
+const playerHealth = document.querySelector("#playerHealth");
+const enemyHealth = document.querySelector("#enemyHealth");
+
+const levelText = document.querySelector("#levelText");
+const rankText = document.querySelector("#rankText");
+const xpFill = document.querySelector("#xpFill");
+const xpText = document.querySelector("#xpText");
+const scoreText = document.querySelector("#score");
+const comboText = document.querySelector("#combo");
+
+const cityText = document.querySelector("#cityText");
+const locationName = document.querySelector("#locationName");
+
+const overlay = document.querySelector("#overlay");
+const overlayTitle = document.querySelector("#overlayTitle");
+const overlayMessage = document.querySelector("#overlayMessage");
+const startBtn = document.querySelector("#startBtn");
+
+// ------------------------------
+// 3) UNLIMITED LEVEL SYSTEM
+// ------------------------------
+
+/*
+  XP required grows gradually.
+
+  Level 1 -> 100 XP
+  Level 2 -> 125 XP
+  Level 3 -> 150 XP
+  ...
+
+  Because this uses a formula instead of a fixed array,
+  the level can theoretically continue forever.
+*/
+function xpNeeded(level) {
+  return 100 + (level - 1) * 25;
+}
+
+/*
+  Every level gets a new city name.
+  The array loops, so the game never runs out of locations.
+*/
+const cities = [
+  "Harbor City",
+  "Neon Tokyo",
+  "Skyline Seoul",
+  "Desert Metro",
+  "Ocean District",
+  "Cyber London",
+  "Night Bangkok",
+  "Future Kuala",
+  "Chrome Dubai",
+  "Rainfall New York",
+  "Aurora Singapore",
+  "Volcano Sector"
+];
+
+/*
+  Ranks also loop after the last rank.
+  You can add as many ranks as you want.
+*/
+const ranks = [
+  "ROOKIE",
+  "SCOUT",
+  "FIGHTER",
+  "ELITE",
+  "VETERAN",
+  "COMMANDER",
+  "CHAMPION",
+  "MASTER",
+  "LEGEND",
+  "MYTHIC"
+];
+
+function currentCity() {
+  return cities[(state.level - 1) % cities.length];
+}
+
+function currentRank() {
+  // Higher levels keep the same top rank but add a star count.
+  const index = Math.min(Math.floor((state.level - 1) / 3), ranks.length - 1);
+  return ranks[index];
+}
+
+// ------------------------------
+// 4) UPDATE HUD
+// ------------------------------
+
+function updateHUD() {
+  const needed = xpNeeded(state.level);
+
+  levelText.textContent = `LEVEL ${state.level}`;
+  rankText.textContent = currentRank();
+  scoreText.textContent = state.score.toLocaleString();
+  comboText.textContent = state.combo;
+
+  xpText.textContent = `${state.xp} / ${needed} XP`;
+  xpFill.style.width = `${Math.min(100, (state.xp / needed) * 100)}%`;
+
+  cityText.textContent = currentCity();
+  locationName.textContent =
+    `SECTOR ${String(state.level).padStart(2, "0")} • ${currentCity().toUpperCase()}`;
+
+  document.querySelector("#missionText").textContent =
+    `Win ${state.level} fight${state.level === 1 ? "" : "s"} for bonus XP`;
+
+  document.querySelector("#rewardText").textContent =
+    `${100 + state.level * 10} XP + ${50 + state.level * 5} Coins`;
+}
+
+// ------------------------------
+// 5) SAVE PROGRESS
+// ------------------------------
+
+function saveGame() {
+  store.set("level", state.level);
+  store.set("xp", state.xp);
+  store.set("score", state.score);
+  store.set("coins", state.coins);
+  store.set("wins", state.wins);
+}
+
+// ------------------------------
+// 6) FLOATING DAMAGE EFFECT
+// ------------------------------
+
+function floatingText(text, x, y, critical = false) {
+  const el = document.createElement("div");
+
+  el.className = `damage ${critical ? "crit" : ""}`;
+  el.textContent = text;
+  el.style.left = `${x}px`;
+  el.style.top = `${y}px`;
+
+  document.querySelector("#effects").appendChild(el);
+
+  // Remove it after CSS animation finishes.
+  setTimeout(() => el.remove(), 750);
+}
+
+// ------------------------------
+// 7) SCREEN SHAKE
+// ------------------------------
+
+function screenShake() {
+  document.querySelector("#game").animate(
+    [
+      { transform: "translate(0,0)" },
+      { transform: "translate(-5px,2px)" },
+      { transform: "translate(5px,-2px)" },
+      { transform: "translate(0,0)" }
+    ],
+    { duration: 180 }
+  );
+}
+
+// ------------------------------
+// 8) ATTACK SYSTEM
+// ------------------------------
+
+function playerAttack(type = "normal") {
+  if (!state.running || state.dodging) return;
+
+  /*
+    Different attacks have different damage.
+
+    Normal: reliable
+    Heavy: stronger but less accurate
+  */
+  let damage;
+
+  if (type === "heavy") {
+    damage = randomInt(16, 29);
+    // Heavy attack has a chance to miss.
+    if (Math.random() < 0.25) {
+      floatingText("MISS", enemy.offsetLeft + 35, enemy.offsetTop - 25);
+      return;
+    }
+  } else {
+    damage = randomInt(8, 17);
+  }
+
+  // Critical hit chance.
+  const critical = Math.random() < 0.12;
+
+  if (critical) damage = Math.floor(damage * 1.8);
+
+  state.enemyHP = Math.max(0, state.enemyHP - damage);
+
+  state.combo++;
+  clearTimeout(state.comboTimer);
+
+  /*
+    Combo resets if the player waits too long.
+    This prevents a permanent combo multiplier.
+  */
+  state.comboTimer = setTimeout(() => {
+    state.combo = 0;
+    updateHUD();
+  }, 1600);
+
+  // Score is affected by combo.
+  state.score += damage * Math.max(1, state.combo);
+
+  enemy.classList.add("hit");
+  setTimeout(() => enemy.classList.remove("hit"), 180);
+
+  screenShake();
+
+  floatingText(
+    `-${damage}`,
+    enemy.offsetLeft + 25,
+    enemy.offsetTop - 15,
+    critical
+  );
+
+  updateBars();
+  updateHUD();
+
+  if (state.enemyHP <= 0) {
+    winFight();
+  }
+}
+
+// ------------------------------
+// 9) DODGE
+// ------------------------------
+
+function dodge() {
+  if (!state.running || state.dodging) return;
+
+  state.dodging = true;
+  player.animate(
+    [
+      { transform: "translateX(0) rotate(0)" },
+      { transform: "translateX(55px) rotate(-8deg)" },
+      { transform: "translateX(0) rotate(0)" }
+    ],
+    { duration: 450, easing: "ease-out" }
+  );
+
+  floatingText("DODGE!", player.offsetLeft + 20, player.offsetTop - 20);
+
+  setTimeout(() => {
+    state.dodging = false;
+  }, 600);
+}
+
+// ------------------------------
+// 10) HEAL
+// ------------------------------
+
+function heal() {
+  if (!state.running) return;
+
+  // Healing has a 3-second cooldown so it cannot be spammed.
+  const HEAL_COOLDOWN = 3000;
+  const now = Date.now();
+  if (now - state.lastHeal < HEAL_COOLDOWN) {
+    const wait = Math.ceil((HEAL_COOLDOWN - (now - state.lastHeal)) / 1000);
+    floatingText(`WAIT ${wait}s`, player.offsetLeft + 20, player.offsetTop - 15);
+    return;
+  }
+  state.lastHeal = now;
+  const healBtn = document.querySelector('.control[data-action="heal"]');
+  if (healBtn) {
+    healBtn.classList.add("cooling");
+    setTimeout(() => healBtn.classList.remove("cooling"), HEAL_COOLDOWN);
+  }
+
+  const amount = randomInt(8, 15);
+
+  state.playerHP = Math.min(100, state.playerHP + amount);
+
+  floatingText(
+    `+${amount}`,
+    player.offsetLeft + 30,
+    player.offsetTop - 15
+  );
+
+  updateBars();
+}
+
+// ------------------------------
+// 11) ENEMY AI
+// ------------------------------
+
+/*
+  This is deliberately NOT an unbeatable enemy.
+
+  The AI has:
+  - random reaction time
+  - attacks
+  - occasional misses
+  - occasional heavy attacks
+  - occasional hesitation
+
+  Therefore a human can win OR lose.
+*/
+function enemyAI() {
+  if (!state.running) return;
+
+  const reactionTime = Math.max(
+    350,
+    950 - state.level * 25 + randomInt(-120, 250)
+  );
+
+  state.enemyTimer = setTimeout(() => {
+    if (!state.running) return;
+
+    /*
+      Sometimes the enemy does nothing.
+      This gives the human player a fair chance.
+    */
+    if (Math.random() < 0.18) {
+      enemyAI();
+      return;
+    }
+
+    // If player is dodging, enemy can miss.
+    if (state.dodging) {
+      floatingText("MISS", player.offsetLeft + 30, player.offsetTop - 25);
+      enemyAI();
+      return;
+    }
+
+    let damage = randomInt(6, 13);
+
+    // Higher levels make the enemy somewhat stronger.
+    damage += Math.floor(state.level / 4);
+
+    // Enemy heavy attack.
+    if (Math.random() < 0.12) {
+      damage += randomInt(5, 10);
+    }
+
+    // Enemy can also miss.
+    if (Math.random() < 0.15) {
+      floatingText("MISS", player.offsetLeft + 30, player.offsetTop - 25);
+      enemyAI();
+      return;
+    }
+
+    state.playerHP = Math.max(0, state.playerHP - damage);
+
+    player.classList.add("hit");
+    setTimeout(() => player.classList.remove("hit"), 180);
+
+    floatingText(
+      `-${damage}`,
+      player.offsetLeft + 25,
+      player.offsetTop - 15
+    );
+
+    state.combo = 0;
+    updateBars();
+    updateHUD();
+
+    if (state.playerHP <= 0) {
+      loseFight();
+      return;
+    }
+
+    enemyAI();
+  }, reactionTime);
+}
+
+// ------------------------------
+// 12) BARS
+// ------------------------------
+
+function updateBars() {
+  playerHealth.style.width = `${state.playerHP}%`;
+  enemyHealth.style.width = `${state.enemyHP}%`;
+}
+
+// ------------------------------
+// 13) WIN FIGHT
+// ------------------------------
+
+function winFight() {
+  state.running = false;
+  clearTimeout(state.enemyTimer);
+
+  state.wins++;
+
+  /*
+    Reward increases as the level rises.
+    This creates an endless progression loop.
+  */
+  const xpReward = 100 + state.level * 10;
+  const coinReward = 50 + state.level * 5;
+
+  state.xp += xpReward;
+  state.coins += coinReward;
+
+  state.score += 500 + state.level * 100;
+
+  /*
+    Level up as many times as necessary.
+    This while loop is what makes the level system scalable.
+  */
+  let leveledUp = false;
+
+  while (state.xp >= xpNeeded(state.level)) {
+    state.xp -= xpNeeded(state.level);
+    state.level++;
+    leveledUp = true;
+  }
+
+  saveGame();
+  updateHUD();
+
+  const badge = getBadge(state.level);
+
+  overlayTitle.textContent = leveledUp ? `LEVEL ${state.level} UNLOCKED!` : "VICTORY!";
+  overlayMessage.innerHTML =
+    `You won the fight.<br><br>` +
+    `+${xpReward} XP &nbsp; +${coinReward} Coins<br>` +
+    `Badge: <b>${badge}</b><br><br>` +
+    `Next city: <b>${currentCity()}</b>`;
+
+  startBtn.textContent = "NEXT FIGHT";
+  overlay.style.display = "grid";
+}
+
+// ------------------------------
+// 14) LOSE FIGHT
+// ------------------------------
+
+function loseFight() {
+  state.running = false;
+  clearTimeout(state.enemyTimer);
+
+  state.combo = 0;
+
+  overlayTitle.textContent = "DEFEATED";
+  overlayMessage.innerHTML =
+    `The enemy won this round.<br><br>` +
+    `Your level stays at <b>LEVEL ${state.level}</b>.<br>` +
+    `Try a different attack / dodge strategy.`;
+
+  startBtn.textContent = "TRY AGAIN";
+  overlay.style.display = "grid";
+}
+
+// ------------------------------
+// 15) START / RESET ROUND
+// ------------------------------
+
+function startFight() {
+  state.running = true;
+  state.playerHP = 100;
+  state.enemyHP = Math.min(100, 85 + state.level * 2);
+  state.combo = 0;
+  state.dodging = false;
+
+  /*
+    Every new level changes the city/sector automatically.
+  */
+  player.style.left = "25%";
+  enemy.style.right = "25%";
+
+  updateBars();
+  updateHUD();
+
+  overlay.style.display = "none";
+
+  clearTimeout(state.enemyTimer);
+  enemyAI();
+}
+
+// ------------------------------
+// 16) RANDOM HELPER
+// ------------------------------
+
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// ------------------------------
+// 17) BADGES / AWARDS
+// ------------------------------
+
+function getBadge(level) {
+  if (level >= 100) return "CENTURY LEGEND";
+  if (level >= 50) return "CITY DESTROYER";
+  if (level >= 25) return "NIGHTMARE";
+  if (level >= 10) return "ELITE HUNTER";
+  if (level >= 5) return "RISING CHAMPION";
+  return "FIRST BLOOD";
+}
+
+// ------------------------------
+// 18) BUTTON CONTROLS
+// ------------------------------
+
+document.querySelectorAll(".control").forEach(button => {
+  button.addEventListener("click", () => {
+    const action = button.dataset.action;
+
+    if (action === "attack") playerAttack("normal");
+    if (action === "heavy") playerAttack("heavy");
+    if (action === "dodge") dodge();
+    if (action === "heal") heal();
+  });
+});
+
+// ------------------------------
+// 19) KEYBOARD CONTROLS
+// ------------------------------
+
+document.addEventListener("keydown", event => {
+  /*
+    J = normal attack
+    K = heavy attack
+    L = dodge
+    I = heal
+  */
+  if (event.repeat || event.ctrlKey || event.metaKey || event.altKey) return;
+  const key = event.key.toLowerCase();
+
+  if (key === "j") playerAttack("normal");
+  if (key === "k") playerAttack("heavy");
+  if (key === "l") dodge();
+  if (key === "i") heal();
+});
+
+startBtn.addEventListener("click", startFight);
+
+// ------------------------------
+// 20) INITIAL LOAD
+// ------------------------------
+
+updateHUD();
+updateBars();
+</script>
+</body>
+</html>
