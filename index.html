@@ -718,7 +718,28 @@ html.theming,html.theming *{transition:background-color .45s ease,border-color .
 .cv .ci a{overflow-wrap:anywhere}
 @media (max-width:600px){.feed .piece .cap span,.folio .piece .cap span{display:none}.bdg{white-space:normal}.cta-band .btn{flex:1 1 auto}}
 @media (max-width:380px){.hero .ctas .btn{flex:1 1 auto}.brand span{display:none}}
-body{margin:0}[hidden]{display:none!important}.cms-wait body{opacity:0}body{transition:opacity .2s}</style>
+body{margin:0}[hidden]{display:none!important}.cms-wait body{opacity:0}body{transition:opacity .2s}
+/* ===== compact spacing: less empty space between sections, on every screen ===== */
+.block{padding-block:clamp(36px,5.5vw,76px)}
+.block.tight{padding-block:clamp(28px,4vw,52px)}
+.sec-head{margin-bottom:clamp(18px,2.6vw,30px)}
+.p-head{padding-block:clamp(22px,4vw,52px) 20px}
+.p-head .lead{margin-top:14px}
+.wsec{padding-block:clamp(34px,5vw,64px)}
+.next{margin-top:clamp(32px,5vw,60px)}
+.spec{margin-top:26px}
+.contact-grid{margin-top:24px}
+.marquee{padding-block:16px}
+.hero .lead{margin-top:18px}
+.hero .ctas{margin-top:24px}
+footer{margin-top:28px}
+@media (max-width:700px){
+  .block{padding-block:30px}.block.tight{padding-block:24px}.wsec{padding-block:30px}
+  .p-head{padding-block:18px 14px}
+  .cards,.g,.hl{gap:12px}
+  .timeline .row{gap:6px 14px;padding:16px 18px}
+}
+</style>
 </head>
 <body>
 
@@ -793,7 +814,7 @@ body{margin:0}[hidden]{display:none!important}.cms-wait body{opacity:0}body{tran
     <div class="wrap block tight">
       <div class="sec-head"><div><span class="mono">Highlights</span><h2>Everything at a glance</h2></div><a class="btn" href="#cv">One-page résumé</a></div>
       <div class="hl"><a class="hlc" href="#about"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg></div><h3>Education</h3><div class="big">GPA 5.00 × 2<small>Perfect score in both SSC and HSC</small></div><ul><li>B.Eng Computer Science, UOW Malaysia (2026–2028)</li><li>UOW High Achievers Scholarship</li><li>Honours in English, Tongi Govt College</li><li>IELTS above Band 6</li></ul><span class="more">Academic record →</span></a><a class="hlc" href="#awards"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg></div><h3>Certifications & awards</h3><div class="big">Top 5 · UOW<small>Top Coder Malaysia 2026, qualified for nationals</small></div><ul><li>Top Coder Malaysia 2026 · ID CODE/DSA/G11/UOW/003</li><li>Tableau Fundamentals · ID UOWM/04236</li><li>Python Coder · Data Science Association</li><li>Selected as best presenter</li></ul><span class="more">See every credential →</span></a><a class="hlc" href="#about"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M21 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></div><h3>Co-curricular & leadership</h3><div class="big">Since 2017<small>Founding and leading community projects</small></div><ul><li>Founder, Hidayah Blood Bank (2017–2025)</li><li>Founder, Hidayah United Foundation (non-profit)</li><li>Computer Science Club, UOW Malaysia</li><li>Programming competitions and hackathons</li></ul><span class="more">Leadership story →</span></a><a class="hlc" href="#cv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><h3>Experience</h3><div class="big">Founder · Averroes AI<small>Shipping real apps since Oct 2026</small></div><ul><li>Built Amalnama, Averroes Code and Sunnah Store</li><li>Freelance designer for a US restaurant brand</li><li>Ran Hidayah Shop BD, an online store (2023–2025)</li><li>Internships: Programming Hero, Code Biruni</li></ul><span class="more">One-page résumé →</span></a><a class="hlc" href="#code"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></div><h3>Skills</h3><div class="badges"><span class="bdg">Java</span><span class="bdg">Python</span><span class="bdg">C++</span><span class="bdg">JavaScript</span><span class="bdg">TypeScript</span><span class="bdg">Next.js</span><span class="bdg">Node.js</span><span class="bdg">SQL</span><span class="bdg">Docker</span><span class="bdg">Figma</span><span class="bdg">Photoshop</span><span class="bdg">Premiere Pro</span></div><ul><li>Full-stack web apps, APIs and databases</li><li>Brand identity, menus, social and video</li></ul><span class="more">See code projects →</span></a><a class="hlc" href="#contact"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Why you can trust me</h3><div class="badges"><span class="bdg ok"><b>✓</b>Verified LinkedIn · 500+ connections</span><span class="bdg ok"><b>✓</b>Verified credential IDs</span><span class="bdg ok"><b>✓</b>Live apps you can try</span><span class="bdg ok"><b>✓</b>Public code on GitHub</span><span class="bdg ok"><b>✓</b>Fixed-price quotes</span></div><ul><li>Every certificate shows its issuer, date and ID</li><li>Real client work with full case studies</li><li>Replies within 24 hours</li></ul><span class="more">Get in touch →</span></a></div>
-      <div class="sec-head" style="margin-top:44px;margin-bottom:18px"><div><span class="mono">Connect</span><h2 style="font-size:clamp(1.4rem,2.6vw,2rem)">Find me everywhere</h2></div></div>
+      <div class="sec-head" style="margin-top:28px;margin-bottom:14px"><div><span class="mono">Connect</span><h2 style="font-size:clamp(1.4rem,2.6vw,2rem)">Find me everywhere</h2></div></div>
       <div class="connect">
         <a href="https://www.linkedin.com/in/yeasin-arafat-07269432b" target="_blank" rel="noopener"><i style="background:#0A66C2;color:#fff">in</i><span><b>LinkedIn · 500+ connections</b><small>Verified profile · Open to work</small></span></a>
         <a href="https://github.com/uowyeasin-cyber" target="_blank" rel="noopener"><i style="background:#0B1B33;color:#fff">GH</i><span><b>GitHub</b><small>uowyeasin-cyber</small></span></a>
@@ -860,7 +881,7 @@ body{margin:0}[hidden]{display:none!important}.cms-wait body{opacity:0}body{tran
       <p class="lead">University and personal software projects: games, full-stack prototypes and websites in Java, JavaScript, TypeScript and Next.js. I want to build software that people from every background can actually use.</p>
     </div>
     <div class="wrap"><div class="dev" id="devList"></div>
-      <div class="sec-head" style="margin-top:56px;margin-bottom:22px"><div><span class="mono">More on GitHub</span><h2 style="font-size:clamp(1.5rem,3vw,2.2rem)">Learning projects</h2></div></div>
+      <div class="sec-head" style="margin-top:32px;margin-bottom:16px"><div><span class="mono">More on GitHub</span><h2 style="font-size:clamp(1.5rem,3vw,2.2rem)">Learning projects</h2></div></div>
       <div class="timeline" id="repoList"></div>
       <div class="links" style="margin-top:28px"><a href="https://github.com/uowyeasin-cyber" target="_blank" rel="noopener"><div><b>See the code on GitHub</b><span>github.com/uowyeasin-cyber</span></div><span>↗</span></a><a href="#p-halal-gyro-spot"><div><b>Ordering app UI</b><span>The Halal Gyro Spot app concept</span></div><span>→</span></a></div>
     </div>
@@ -939,7 +960,7 @@ body{margin:0}[hidden]{display:none!important}.cms-wait body{opacity:0}body{tran
     </div>
     <div class="wrap block tight">
       <div class="sec-head"><div><span class="mono">Highlights</span><h2>Key achievements</h2></div></div>
-      <div class="badges" style="margin-bottom:40px"><span class="bdg"><b>5.00</b>SSC GPA</span><span class="bdg"><b>5.00</b>HSC GPA</span><span class="bdg"><b>★</b>UOW High Achievers Scholarship</span><span class="bdg"><b>#5</b>Top Coder Malaysia 2026, UOW</span><span class="bdg"><b>✓</b>Tableau certified</span><span class="bdg"><b>✓</b>Python Coder</span><span class="bdg"><b>★</b>Best presenter</span><span class="bdg"><b>6+</b>IELTS band</span></div>
+      <div class="badges" style="margin-bottom:24px"><span class="bdg"><b>5.00</b>SSC GPA</span><span class="bdg"><b>5.00</b>HSC GPA</span><span class="bdg"><b>★</b>UOW High Achievers Scholarship</span><span class="bdg"><b>#5</b>Top Coder Malaysia 2026, UOW</span><span class="bdg"><b>✓</b>Tableau certified</span><span class="bdg"><b>✓</b>Python Coder</span><span class="bdg"><b>★</b>Best presenter</span><span class="bdg"><b>6+</b>IELTS band</span></div>
       <div class="sec-head"><div><span class="mono">Education</span><h2>Academic record</h2></div></div>
       <div class="timeline" id="edu"></div>
     </div>
