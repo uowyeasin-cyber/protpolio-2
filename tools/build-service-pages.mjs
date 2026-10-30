@@ -70,7 +70,12 @@ ${kw ? `<meta name="keywords" content="${esc(kw)}">\n` : ""}<meta name="author" 
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${url}">
 <meta property="og:image" content="${img || BASE + "/img/og.jpg"}">
+<meta property="og:image:alt" content="${esc(title)}">
+<meta property="og:locale" content="en_US">${(SITE.languages || []).includes("Bengali") ? '\n<meta property="og:locale:alternate" content="bn_BD">' : ""}
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(title)}">
+<meta name="twitter:description" content="${esc(desc)}">
+<meta name="twitter:image" content="${img || BASE + "/img/og.jpg"}">
 <link rel="icon" href="${ICON}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
@@ -90,6 +95,7 @@ ${themeBtn}
 `;
 }
 
+const share = (u, t) => [["WhatsApp", `https://wa.me/?text=${encodeURIComponent(t + " " + u)}`], ["Facebook", `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(u)}`], ["LinkedIn", `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(u)}`], ["X", `https://x.com/intent/post?url=${encodeURIComponent(u)}&text=${encodeURIComponent(t)}`]].map(([n, h]) => `<a class="btn" href="${h}" target="_blank" rel="noopener">${n}</a>`).join("");
 const person = { "@type": "Person", "@id": BASE + "/#person", name: SITE.name, url: BASE + "/" };
 const pkgHTML = (key, svc) => (PACKAGES[key] || []).map((k) => `<article${k.pop ? ' class="pop"' : ""}><span class="mono">${esc(k.d)}</span><h3>${esc(k.t)}</h3><p class="f">${esc(k.f)}</p><b>${esc(k.price || "Custom quote")}</b><ul>${k.l.map((x) => `<li>${esc(x)}</li>`).join("")}</ul><a class="btn" href="${wa(`Hi ${SITE.name.split(" ")[0]}, I'm interested in the ${k.t} package for ${svc}.`)}" target="_blank" rel="noopener">Ask about ${esc(k.t)}</a></article>`).join("");
 
@@ -108,6 +114,7 @@ ${pg.work && pg.work.length ? `<section><span class="mono">Examples</span><h2>Re
 ${PACKAGES[pg.pkg] ? `<section><span class="mono">Packages</span><h2>Pick a starting point</h2><div class="pk">${pkgHTML(pg.pkg, pg.nav.toLowerCase())}</div><p class="mono" style="margin-top:14px">${(PACKAGES[pg.pkg] || []).some((k) => k.price) ? "Estimated starting prices. " : ""}You get a fixed quote within 24 hours and approve it before work starts.</p></section>` : ""}
 ${pg.bn ? `<section lang="bn"><div class="bn"><span class="mono">বাংলায়</span><h2>${esc(pg.bn.h)}</h2><p>${esc(pg.bn.p)}</p><div class="acts"><a class="btn solid" href="${wa("আসসালামু আলাইকুম, আমি " + pg.nav + " নিয়ে কথা বলতে চাই।")}" target="_blank" rel="noopener">WhatsApp এ যোগাযোগ করুন</a></div></div></section>` : ""}
 <section><span class="mono">FAQ</span><h2>Common questions</h2>${faqs.map(([q, a]) => `<details${/[\u0980-\u09FF]/.test(q) ? ' lang="bn"' : ""}><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("")}</section>
+<section><span class="mono">Share</span><h2>Know someone who needs this?</h2><div class="others">${share(url, pg.title)}</div></section>
 <section><span class="mono">Other services</span><h2>Need something else?</h2><div class="others">${others.map((o) => `<a class="btn" href="/services/${o.slug}/">${esc(o.nav)}</a>`).join("")}</div></section>
 <section><div class="cta"><div><h2 style="margin:0 0 6px">Let's talk about your ${esc(pg.nav.toLowerCase())} project</h2><p style="color:var(--mute)">Send a short brief and I'll reply within 24 hours with questions and a fixed quote.</p></div><div class="acts" style="margin:0"><a class="btn solid" href="${wa(waText)}" target="_blank" rel="noopener">WhatsApp</a><a class="btn" href="/#contact">Contact form</a></div></div></section>
 </div>`;
