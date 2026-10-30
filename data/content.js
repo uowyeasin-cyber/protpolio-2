@@ -17,6 +17,7 @@ const SITE = {
   resume: "https://drive.google.com/file/d/1pEi4xJrkY9GgL6H_Nm5rOhIOL7Ktamwk/view?usp=drivesdk",
   url: "https://yeasinarafatbd.vercel.app",   // live address, used by the service pages and sitemap
   areas: ["Malaysia","Bangladesh","United States","Worldwide"],
+  languages: ["English","Bengali"],
 };
 
 // Image sizes [width, height] for every gallery piece (used for layout before images load).

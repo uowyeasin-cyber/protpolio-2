@@ -11,6 +11,8 @@ const { SITE, SERVICE_PAGES, PACKAGES } = new Function(src + ";return {SITE,SERV
 if (!SITE.url) throw new Error("Set SITE.url in data/content.js to your live address first.");
 const BASE = SITE.url.replace(/\/$/, "");
 const today = new Date().toISOString().slice(0, 10);
+const ICON = "/" + (SITE.icon || (SITE.logo ? SITE.logo.replace(/\.(\w+)$/, "-t.$1") : "img/me-ya-logo-t.webp"));
+const AREAS = SITE.areas || ["Worldwide"];
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const abs = (href) => (/^https?:/.test(href) ? href : BASE + href);
@@ -69,7 +71,7 @@ ${kw ? `<meta name="keywords" content="${esc(kw)}">\n` : ""}<meta name="author" 
 <meta property="og:url" content="${url}">
 <meta property="og:image" content="${img || BASE + "/img/og.jpg"}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/img/me-ya-logo-t.webp">
+<link rel="icon" href="${ICON}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
 ${themeInit}
@@ -77,7 +79,7 @@ ${themeInit}
 ${ld(schema)}
 </head>
 <body>
-<header><div class="wrap"><a class="brand" href="/"><img src="/img/me-ya-logo-t.webp" alt="" width="32" height="32">${esc(SITE.name)}</a><nav><a class="btn sm" href="/services/">Services</a><a class="btn sm" href="/#work">Work</a><button class="tb" id="tb" type="button"></button><a class="btn sm solid" href="/#contact">Hire me</a></nav></div></header>
+<header><div class="wrap"><a class="brand" href="/"><img src="${ICON}" alt="" width="32" height="32">${esc(SITE.name)}</a><nav><a class="btn sm" href="/services/">Services</a><a class="btn sm" href="/#work">Work</a><button class="tb" id="tb" type="button"></button><a class="btn sm solid" href="/#contact">Hire me</a></nav></div></header>
 <main>
 ${body}
 </main>
@@ -110,7 +112,7 @@ ${pg.bn ? `<section lang="bn"><div class="bn"><span class="mono">বাংলা
 <section><div class="cta"><div><h2 style="margin:0 0 6px">Let's talk about your ${esc(pg.nav.toLowerCase())} project</h2><p style="color:var(--mute)">Send a short brief and I'll reply within 24 hours with questions and a fixed quote.</p></div><div class="acts" style="margin:0"><a class="btn solid" href="${wa(waText)}" target="_blank" rel="noopener">WhatsApp</a><a class="btn" href="/#contact">Contact form</a></div></div></section>
 </div>`;
   const schema = { "@context": "https://schema.org", "@graph": [
-    { "@type": "Service", "@id": url + "#service", name: pg.title.split(" · ")[0], serviceType: pg.nav, description: pg.desc, url, provider: person, areaServed: SITE.areas || "Worldwide", availableLanguage: ["English", "Bengali"] },
+    { "@type": "Service", "@id": url + "#service", name: pg.title.split(" · ")[0], serviceType: pg.nav, description: pg.desc, url, provider: person, areaServed: AREAS, availableLanguage: SITE.languages || ["English"] },
     { "@type": "WebPage", "@id": url, url, name: pg.title, description: pg.desc, inLanguage: "en", isPartOf: { "@id": BASE + "/#website" }, about: { "@id": url + "#service" } },
     { "@type": "FAQPage", "@id": url + "#faq", mainEntity: faqs.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
     { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: BASE + "/" }, { "@type": "ListItem", position: 2, name: "Services", item: BASE + "/services/" }, { "@type": "ListItem", position: 3, name: pg.nav, item: url }] },
@@ -130,7 +132,7 @@ const hubBody = `<div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a
 <section style="margin-top:32px"><div class="cta"><div><h2 style="margin:0 0 6px">Not sure which one you need?</h2><p style="color:var(--mute)">Tell me about your project and I'll suggest the simplest way to do it.</p></div><a class="btn solid" href="${wa(`Hi ${SITE.name.split(" ")[0]}, I'd like to talk about a project.`)}" target="_blank" rel="noopener">WhatsApp</a></div></section></div>`;
 fs.writeFileSync(path.join(root, "services", "index.html"), shell({
   title: `Services: Websites, Apps, UI/UX & Design | ${SITE.name}`,
-  desc: `${SITE.name} builds websites, online stores, mobile and web apps, portfolio sites, UI/UX and graphic design for clients in ${(SITE.areas || ["your area"]).slice(0, 2).join(" and ")} and worldwide.`,
+  desc: `${SITE.name} builds websites, online stores, mobile and web apps, portfolio sites, UI/UX and graphic design for clients ${SITE.areas ? "in " + AREAS.filter((a) => a !== "Worldwide").slice(0, 2).join(" and ") + " and worldwide" : "worldwide"}.`,
   kw: SERVICE_PAGES.map((p) => p.nav).join(", "), url: hubUrl, body: hubBody,
   schema: { "@context": "https://schema.org", "@type": "CollectionPage", url: hubUrl, name: "Services", hasPart: SERVICE_PAGES.map((p) => ({ "@type": "WebPage", url: `${BASE}/services/${p.slug}/`, name: p.title })) },
 }));
