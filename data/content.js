@@ -163,17 +163,21 @@ const PROJECTS = [
    ]},
 ];
 
-// Services page cards.
+// Services page cards, in priority order (the first 4 also show on Home).
+// r = rating out of 5 shown on the card (set your real client rating; delete r to hide it).
+// rn = optional review count text, e.g. "12 reviews".
 const SERVICES = [
-  {t:"Mobile & web apps",p:"Apps that work offline, in several languages, with logins, data and payments when you need them.",l:["Android, iOS & web (PWA)","Accounts, dashboards & payments","Firebase, Node.js & PostgreSQL"],i:'<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>'},
-  {t:"Websites & online stores",p:"Fast business sites and stores in Next.js, built to rank on Google and load quickly on phones.",l:["Business & landing pages","E-commerce with Stripe, PayPal, bKash","Hosting, domain & SEO setup"],i:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/>'},
-  {t:"Web design & UI/UX",p:"Wireframes, app screens and design systems in Figma, tested so people find what they need.",l:["Wireframes & prototypes","App & website screens","Design systems & components"],i:'<path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.6 7.6"/><circle cx="11" cy="11" r="2"/>'},
-  {t:"Portfolio websites",p:"A personal portfolio like this one, with your work, résumé and a private editor to update it yourself.",l:["Light & dark themes","Case studies & résumé page","Owner-only editor, no code needed"],i:'<rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>'},
-  {t:"Brand identity",p:"Logos and visual systems that work as a tiny app icon and on a shop sign.",l:["Logo & monogram design","Colour and type system","Seals and badges"],i:'<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/>'},
-  {t:"Menus & print",p:"Restaurant menus, brochures and forms that are easy to read and ready for print.",l:["Multi-page menus","Z-fold & tri-fold brochures","Certificates & forms"],i:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/>'},
-  {t:"LED & screen menus",p:"Digital menu boards for counters, laid out so prices read from the queue.",l:["1080p menu boards","Display loops","Promo screens"],i:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>'},
-  {t:"Social media design",p:"Posts, covers and reels that keep a feed looking like one brand.",l:["1:1 posts & 9:16 reels","Facebook & YouTube covers","Launch campaigns"],i:'<rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.5"/><circle cx="17" cy="7" r=".8" fill="currentColor"/>'},
-  {t:"Video editing",p:"Short promos and longer display videos with motion graphics and sound.",l:["Food & product promos","Thumbnails","Motion text"],i:'<rect x="3" y="5" width="13" height="14" rx="2"/><path d="M16 10l5-3v10l-5-3"/>'},
+  {r:4.9,t:"Mobile & web apps",p:"Apps that work offline, in several languages, with logins, data and payments when you need them.",l:["Android, iOS & web (PWA)","Accounts, dashboards & payments","Firebase, Node.js & PostgreSQL"],i:'<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>'},
+  {r:5.0,t:"Websites & online stores",p:"Fast business sites and stores in Next.js, built to rank on Google and load quickly on phones.",l:["Business & landing pages","E-commerce with Stripe, PayPal, bKash","Hosting, domain & SEO setup"],i:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/>'},
+  {r:4.9,t:"Web design & UI/UX",p:"Wireframes, app screens and design systems in Figma, tested so people find what they need.",l:["Wireframes & prototypes","App & website screens","Design systems & components"],i:'<path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.6 7.6"/><circle cx="11" cy="11" r="2"/>'},
+  {r:4.8,t:"SEO & Google ranking",p:"Help customers find you on Google: technical SEO, keywords, page speed and a Google Business Profile.",l:["Keyword research & on-page SEO","Search Console, sitemap & structured data","Page speed & Google Business Profile"],i:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M8 13l2-2 2 2 3-3"/>'},
+  {r:4.9,t:"AI automation",p:"AI chatbots and automations that answer customers, handle bookings and save hours of repetitive work.",l:["AI chat assistants for websites & WhatsApp","Automated replies, forms, emails & reports","Gemini, OpenAI & Firebase integrations"],i:'<rect x="5" y="8" width="14" height="11" rx="2"/><path d="M12 8V4M9 4h6M9 13h.01M15 13h.01M10 16h4M3 12v3M21 12v3"/>'},
+  {r:5.0,t:"Portfolio websites",p:"A personal portfolio like this one, with your work, résumé and a private editor to update it yourself.",l:["Light & dark themes","Case studies & résumé page","Owner-only editor, no code needed"],i:'<rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>'},
+  {r:4.9,t:"Brand identity",p:"Logos and visual systems that work as a tiny app icon and on a shop sign.",l:["Logo & monogram design","Colour and type system","Seals and badges"],i:'<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/>'},
+  {r:4.9,t:"Menus & print",p:"Restaurant menus, brochures and forms that are easy to read and ready for print.",l:["Multi-page menus","Z-fold & tri-fold brochures","Certificates & forms"],i:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/>'},
+  {r:4.8,t:"LED & screen menus",p:"Digital menu boards for counters, laid out so prices read from the queue.",l:["1080p menu boards","Display loops","Promo screens"],i:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>'},
+  {r:4.9,t:"Social media design",p:"Posts, covers and reels that keep a feed looking like one brand.",l:["1:1 posts & 9:16 reels","Facebook & YouTube covers","Launch campaigns"],i:'<rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.5"/><circle cx="17" cy="7" r=".8" fill="currentColor"/>'},
+  {r:4.8,t:"Video editing",p:"Short promos and longer display videos with motion graphics and sound.",l:["Food & product promos","Thumbnails","Motion text"],i:'<rect x="3" y="5" width="13" height="14" rx="2"/><path d="M16 10l5-3v10l-5-3"/>'},
 ];
 
 // Software toolkit tiles: [badge, name, use, text colour, badge colour].
@@ -261,17 +265,39 @@ const CREDS=[
 // Client quotes, e.g. {q:"…", n:"Name", r:"Owner, Business"}. The section stays hidden while this is empty.
 const TESTIMONIALS=[];
 
-// Service packages. price: "" shows "Custom quote"; put e.g. "From USD 49" to show a price.
+// Service packages, one tab each, in this order. price: estimated starting price shown on the card;
+// edit freely, or set price: "" to show "Custom quote". Tab names are in PACKAGE_TABS.
+const PACKAGE_TABS={apps:"Apps",dev:"Websites",uiux:"UI/UX",seo:"SEO",ai:"AI automation",design:"Design & video"};
 const PACKAGES={
-  design:[
-    {t:"Starter",f:"A single piece that needs to look right.",price:"",d:"Fast turnaround",l:["Logo, poster, flyer or 3 social posts","2 concepts to choose from","Print and web files","2 rounds of revisions"]},
-    {t:"Brand kit",f:"A new shop, restaurant or page getting started.",price:"",d:"Most popular",pop:1,l:["Logo with colour and type system","Menu or brochure, print-ready","5 social posts and a cover","Source files included","3 rounds of revisions"]},
-    {t:"Full launch",f:"Everything a launch needs, in one style.",price:"",d:"Complete system",l:["Everything in Brand kit","LED or TV menu board","Promo video or reel","Launch campaign posts","Priority support"]},
+  apps:[
+    {t:"Starter app",f:"A first version of your idea that people can install and use.",price:"From USD 499",d:"Launch fast",l:["Installable app for Android, iPhone & web (PWA)","Up to 5 screens","Login and a simple database","Published and live for you"]},
+    {t:"Business app",f:"An app your customers or team use every day.",price:"From USD 999",d:"Most popular",pop:1,l:["Everything in Starter app","User accounts and admin dashboard","Payments, bookings or orders","Push notifications and offline mode","2 months of fixes after launch"]},
+    {t:"Custom platform",f:"A bigger product with several user types or AI features.",price:"From USD 1,999",d:"Custom build",l:["Several roles (customer, staff, admin)","AI features such as chat or smart search","Integrations and APIs","Tests and documentation"]},
   ],
   dev:[
-    {t:"Portfolio or landing page",f:"One polished site that shows who you are or what you sell.",price:"",d:"Fast turnaround",l:["Responsive, mobile-first design","Contact form or WhatsApp button","Basic SEO and analytics","Deployed live for you"]},
-    {t:"Business website",f:"A multi-page site you can grow.",price:"",d:"Most popular",pop:1,l:["Up to 6 pages in Next.js","Your brand, copy and images","Fast load and good Lighthouse score","Hosting and domain setup"]},
-    {t:"Web app or store",f:"Accounts, data, payments or a dashboard.",price:"",d:"Custom build",l:["Login and user accounts","Database (PostgreSQL or MySQL)","Payments, orders or bookings","Admin dashboard","Tests and documentation"]},
+    {t:"Portfolio or landing page",f:"One polished site that shows who you are or what you sell.",price:"From USD 149",d:"Fast turnaround",l:["Responsive, mobile-first design","Contact form or WhatsApp button","Basic SEO and analytics","Deployed live for you"]},
+    {t:"Business website",f:"A multi-page site you can grow.",price:"From USD 349",d:"Most popular",pop:1,l:["Up to 6 pages in Next.js","Your brand, copy and images","Fast load and good Lighthouse score","Hosting and domain setup"]},
+    {t:"Web app or store",f:"Accounts, data, payments or a dashboard.",price:"From USD 799",d:"Custom build",l:["Login and user accounts","Database (PostgreSQL or MySQL)","Payments, orders or bookings","Admin dashboard","Tests and documentation"]},
+  ],
+  uiux:[
+    {t:"Screen design",f:"A few key screens designed properly.",price:"From USD 99",d:"Quick start",l:["Up to 5 app or web screens","Mobile and desktop versions","Figma source file","2 rounds of revisions"]},
+    {t:"Full UI/UX design",f:"A whole app or website, ready to build.",price:"From USD 299",d:"Most popular",pop:1,l:["Wireframes and user flow","All screens, mobile and desktop","Clickable prototype","Developer handoff"]},
+    {t:"Design system",f:"One consistent look across every product.",price:"From USD 599",d:"Complete system",l:["Colours, type and spacing tokens","Buttons, forms and components","Usage guidelines","Figma library"]},
+  ],
+  seo:[
+    {t:"SEO setup",f:"Get a new or existing site ready for Google.",price:"From USD 79",d:"One-time",l:["Titles, descriptions and headings","Sitemap, robots.txt and structured data","Google Search Console setup","Speed and mobile check"]},
+    {t:"SEO growth",f:"Climb for the searches that bring customers.",price:"From USD 149 / month",d:"Most popular",pop:1,l:["Keyword research for your market","New and improved pages each month","Technical fixes and speed work","Monthly ranking report"]},
+    {t:"Local SEO",f:"Show up on Google Maps in your area.",price:"From USD 99",d:"For local shops",l:["Google Business Profile setup","Local keywords and pages","Reviews and photos guidance","Bangla and English listings"]},
+  ],
+  ai:[
+    {t:"AI chatbot",f:"A smart assistant that answers your customers 24/7.",price:"From USD 199",d:"Quick win",l:["Chatbot for your website or WhatsApp","Trained on your products, prices and FAQs","Hands over to you when needed","Setup and testing included"]},
+    {t:"Business automation",f:"Take repetitive work off your team's plate.",price:"From USD 399",d:"Most popular",pop:1,l:["Automated replies, bookings and follow-ups","Forms, sheets, emails and reports connected","AI that sorts, summarises and drafts","1 month of support and tweaks"]},
+    {t:"Custom AI app",f:"An AI-powered tool built around your business.",price:"From USD 999",d:"Custom build",l:["AI features inside your own app or dashboard","Gemini, OpenAI or other models","Your data kept private and secure","Tests and documentation"]},
+  ],
+  design:[
+    {t:"Starter",f:"A single piece that needs to look right.",price:"From USD 25",d:"Fast turnaround",l:["Logo, poster, flyer or 3 social posts","2 concepts to choose from","Print and web files","2 rounds of revisions"]},
+    {t:"Brand kit",f:"A new shop, restaurant or page getting started.",price:"From USD 129",d:"Most popular",pop:1,l:["Logo with colour and type system","Menu or brochure, print-ready","5 social posts and a cover","Source files included","3 rounds of revisions"]},
+    {t:"Full launch",f:"Everything a launch needs, in one style.",price:"From USD 299",d:"Complete system",l:["Everything in Brand kit","LED or TV menu board","Promo video or reel","Launch campaign posts","Priority support"]},
   ],
 };
 
@@ -316,6 +342,18 @@ const CHIPS=["What are your skills?","Show me your projects","Any awards?","How 
 // bn: an optional Bangla section, so Bangla searches match too.
 // ============================================================
 const SERVICE_PAGES = [
+  {slug:"app-development",nav:"Apps",
+   title:"App Developer · Mobile & Web App Development (Android, iOS, PWA)",
+   h1:"Mobile and web apps people keep on their home screen",
+   desc:"Hire Yeasin Arafat for mobile and web app development: Android, iOS and installable web apps with logins, databases, payments, offline mode and AI features. Founder of Averroes AI.",
+   kw:"app developer, mobile app developer, web app development, PWA developer, Android app developer, iOS app, app developer Malaysia, app developer Bangladesh, Firebase developer, AI app developer, অ্যাপ তৈরি, মোবাইল অ্যাপ ডেভেলপার",
+   intro:"I build apps that install on Android, iPhone and desktop from one codebase, work offline, and grow with you: accounts, dashboards, payments, notifications and AI features when you need them. My own apps, Amalnama and Averroes Code, are used daily.",
+   points:["Installable apps for Android, iOS and desktop (PWA)","Logins, user accounts, dashboards and admin tools","Firebase, Node.js, PostgreSQL or MySQL backends","Push notifications, offline mode and several languages","AI features such as chat assistants and smart search"],
+   work:[["Amalnama","dev-amalnama.webp","https://uowyeasin-cyber.github.io/AmalnamaForever/","An Islamic companion app with an AI assistant, offline in 6 languages."],["Averroes Code","dev-averroes-code.webp","https://uowyeasin-cyber.github.io/averroes-code/","An offline code editor and compiler with 23 courses."],["CampusEarn","dev-campusearn.webp","/demo/campusearn.html","A student job marketplace with three workspaces."],["Restaurant ordering app UI","hgs-app-demo-poster.jpg","/#p-halal-gyro-spot","A branded ordering app prototype with menu, cart and checkout."]],
+   pkg:"apps",
+   faq:[["Can one app work on both Android and iPhone?","Yes. I build progressive web apps that install on Android, iPhone and computers from a single codebase, which keeps cost and updates low."],["Can you add AI to my app?","Yes. Amalnama has an AI assistant built on Gemini through Firebase, and I can add chat, search or automation features to your app the same way."],["Will the app work without internet?","It can. Amalnama and Averroes Code both work offline, and I can design your app the same way when it makes sense."]],
+   bn:{h:"মোবাইল অ্যাপ বা ওয়েব অ্যাপ বানাতে চান?",p:"Android, iPhone ও কম্পিউটারে ইনস্টল করা যায় এমন অ্যাপ তৈরি করি: লগইন, ড্যাশবোর্ড, পেমেন্ট, নোটিফিকেশন, অফলাইন মোড এবং AI ফিচারসহ। আমার নিজের অ্যাপ Amalnama ও Averroes Code প্রতিদিন মানুষ ব্যবহার করছে।",
+     faq:[["একটি অ্যাপ কি Android ও iPhone দুটোতেই চলবে?","হ্যাঁ। একটাই অ্যাপ Android, iPhone ও কম্পিউটারে চলবে, তাই খরচ ও আপডেট দুটোই কম।"],["অ্যাপে AI যোগ করা যাবে?","হ্যাঁ। চ্যাট অ্যাসিস্ট্যান্ট, স্মার্ট সার্চ বা অটোমেশনের মতো AI ফিচার যোগ করে দিতে পারি।"]]}},
   {slug:"website-development",nav:"Websites",
    title:"Website Developer in Malaysia & Bangladesh · Business Website Design",
    h1:"Business websites that load fast and get found on Google",
@@ -340,18 +378,42 @@ const SERVICE_PAGES = [
    faq:[["Which payment methods can my store accept?","Cards and FPX through Stripe, PayPal, and bKash, Nagad and cards in Bangladesh through SSLCommerz, plus cash on delivery. Orders are marked paid only after the payment provider confirms them."],["Can you connect a courier?","Yes. Sunnah Store books Steadfast deliveries in Bangladesh and tracks international parcels automatically, and I can set up the same for your shop."],["Do I need to know coding to run the store?","No. You manage products, prices, orders and offers from an admin panel."]],
    bn:{h:"অনলাইন শপ বা ই-কমার্স ওয়েবসাইট দরকার?",p:"প্রোডাক্ট, কার্ট, চেকআউট, বিকাশ/নগদ/কার্ড/ক্যাশ অন ডেলিভারি পেমেন্ট, কুরিয়ার ট্র্যাকিং আর অ্যাডমিন প্যানেলসহ পূর্ণাঙ্গ ই-কমার্স ওয়েবসাইট বানিয়ে দিই। আমার নিজের লাইভ শপ Sunnah Store এই একই প্রযুক্তিতে চলছে।",
      faq:[["বিকাশ দিয়ে পেমেন্ট নেওয়া যাবে?","হ্যাঁ। বিকাশ, নগদ, কার্ড, PayPal এবং ক্যাশ অন ডেলিভারি সব যোগ করা যায়।"],["অর্ডার ও প্রোডাক্ট কিভাবে ম্যানেজ করব?","একটি সহজ অ্যাডমিন প্যানেল থেকে প্রোডাক্ট, দাম, অর্ডার ও অফার নিজেই ম্যানেজ করতে পারবেন, কোডিং লাগবে না।"]]}},
-  {slug:"app-development",nav:"Apps",
-   title:"App Developer · Mobile & Web App Development (Android, iOS, PWA)",
-   h1:"Mobile and web apps people keep on their home screen",
-   desc:"Hire Yeasin Arafat for mobile and web app development: Android, iOS and installable web apps with logins, databases, payments, offline mode and AI features. Founder of Averroes AI.",
-   kw:"app developer, mobile app developer, web app development, PWA developer, Android app developer, iOS app, app developer Malaysia, app developer Bangladesh, Firebase developer, AI app developer, অ্যাপ তৈরি, মোবাইল অ্যাপ ডেভেলপার",
-   intro:"I build apps that install on Android, iPhone and desktop from one codebase, work offline, and grow with you: accounts, dashboards, payments, notifications and AI features when you need them. My own apps, Amalnama and Averroes Code, are used daily.",
-   points:["Installable apps for Android, iOS and desktop (PWA)","Logins, user accounts, dashboards and admin tools","Firebase, Node.js, PostgreSQL or MySQL backends","Push notifications, offline mode and several languages","AI features such as chat assistants and smart search"],
-   work:[["Amalnama","dev-amalnama.webp","https://uowyeasin-cyber.github.io/AmalnamaForever/","An Islamic companion app with an AI assistant, offline in 6 languages."],["Averroes Code","dev-averroes-code.webp","https://uowyeasin-cyber.github.io/averroes-code/","An offline code editor and compiler with 23 courses."],["CampusEarn","dev-campusearn.webp","/demo/campusearn.html","A student job marketplace with three workspaces."],["Restaurant ordering app UI","hgs-app-demo-poster.jpg","/#p-halal-gyro-spot","A branded ordering app prototype with menu, cart and checkout."]],
-   pkg:"dev",
-   faq:[["Can one app work on both Android and iPhone?","Yes. I build progressive web apps that install on Android, iPhone and computers from a single codebase, which keeps cost and updates low."],["Can you add AI to my app?","Yes. Amalnama has an AI assistant built on Gemini through Firebase, and I can add chat, search or automation features to your app the same way."],["Will the app work without internet?","It can. Amalnama and Averroes Code both work offline, and I can design your app the same way when it makes sense."]],
-   bn:{h:"মোবাইল অ্যাপ বা ওয়েব অ্যাপ বানাতে চান?",p:"Android, iPhone ও কম্পিউটারে ইনস্টল করা যায় এমন অ্যাপ তৈরি করি: লগইন, ড্যাশবোর্ড, পেমেন্ট, নোটিফিকেশন, অফলাইন মোড এবং AI ফিচারসহ। আমার নিজের অ্যাপ Amalnama ও Averroes Code প্রতিদিন মানুষ ব্যবহার করছে।",
-     faq:[["একটি অ্যাপ কি Android ও iPhone দুটোতেই চলবে?","হ্যাঁ। একটাই অ্যাপ Android, iPhone ও কম্পিউটারে চলবে, তাই খরচ ও আপডেট দুটোই কম।"],["অ্যাপে AI যোগ করা যাবে?","হ্যাঁ। চ্যাট অ্যাসিস্ট্যান্ট, স্মার্ট সার্চ বা অটোমেশনের মতো AI ফিচার যোগ করে দিতে পারি।"]]}},
+  {slug:"ui-ux-design",nav:"UI/UX design",
+   title:"UI/UX Designer · App & Website Design in Figma",
+   h1:"App and website design that people find easy to use",
+   desc:"UI/UX design by Yeasin Arafat: wireframes, clickable prototypes, app screens, website layouts and design systems in Figma, designed by a developer so they can actually be built.",
+   kw:"UI/UX designer, UI designer, UX designer, app design, website design, Figma designer, wireframe, prototype, design system, UI UX designer Malaysia, UI UX designer Bangladesh, ইউআই ইউএক্স ডিজাইন",
+   intro:"I design screens before any code is written, so you can see and click through your app or website first. Because I also build what I design, every layout is realistic to develop and consistent across phone, tablet and desktop.",
+   points:["Wireframes and clickable prototypes","Mobile app screens and website layouts","Design systems: colours, type, buttons and components","Designs that match your brand","Developer-ready handoff, or I build it for you"],
+   work:[["Restaurant ordering app UI","hgs-app-demo-poster.jpg","/#p-halal-gyro-spot","A clickable ordering prototype for The Halal Gyro Spot."],["Animated login & sign-up","demo-login.jpg","/demo/login.html","A sliding login and registration screen."],["Community website design","dev-cis.webp","/demo/campus-islamic-society.html","Prayer times, events and a clear call to join."],["Portfolio website","dev-portfolio.webp","/","A two-theme layout with case studies and a résumé page."]],
+   pkg:"uiux",
+   faq:[["What do I get from a UI/UX project?","Wireframes, final screens for phone and desktop, a clickable prototype and the design files, plus a style guide if you need one."],["Can you also build the design?","Yes. I'm a developer too, so I can turn the design into a working website or app."]],
+   bn:{h:"অ্যাপ বা ওয়েবসাইটের ডিজাইন দরকার?",p:"Figma-তে ওয়্যারফ্রেম, ক্লিক করে দেখা যায় এমন প্রোটোটাইপ, অ্যাপ স্ক্রিন ও ওয়েবসাইট লেআউট ডিজাইন করি। আমি নিজেও ডেভেলপার, তাই ডিজাইনটা পরে বাস্তবে বানানোও সহজ হয়।",
+     faq:[["ডিজাইনের পর অ্যাপ/ওয়েবসাইটও বানিয়ে দেবেন?","হ্যাঁ। ডিজাইন থেকে পুরো ওয়েবসাইট বা অ্যাপ তৈরিও করে দিই।"]]}},
+  {slug:"seo-services",nav:"SEO",
+   title:"SEO Services · Get Your Website Found on Google",
+   h1:"SEO that helps customers find you on Google",
+   desc:"SEO services by Yeasin Arafat: technical SEO, keyword research, on-page optimisation, Google Search Console and Google Business Profile for businesses in Malaysia, Bangladesh and worldwide.",
+   kw:"SEO services, SEO expert, SEO Malaysia, SEO Bangladesh, local SEO, Google ranking, technical SEO, Google Business Profile, website SEO, এসইও সার্ভিস, গুগলে র‍্যাংক",
+   intro:"A website only brings customers if people can find it. I set up the technical side so Google can read your site properly, find the words your customers actually search for, and improve your pages for them, then report what changed each month.",
+   points:["Keyword research for your market and language","Titles, descriptions, headings and internal links","Sitemap, robots.txt and structured data (rich results)","Google Search Console and Google Business Profile setup","Page speed and Core Web Vitals fixes","Monthly reports in plain words"],
+   work:[["This portfolio","dev-portfolio.webp","/","Service pages, structured data, sitemap and Search Console, all set up."],["Sunnah Store","dev-sunnah.webp","https://sunnahstore.vercel.app/","A fast Next.js shop with product pages built for search."]],
+   pkg:"seo",
+   faq:[["Can you guarantee the first position on Google?","No honest SEO can. Google decides rankings. What I can promise is a site Google can read properly, pages targeting the right searches, and clear monthly reports on what improved."],["How long does SEO take to work?","Technical fixes are picked up in days to weeks. Rankings for competitive searches usually take two to six months of steady work."],["Do you do local SEO for shops and restaurants?","Yes. I set up and improve your Google Business Profile so you show up on Google Maps for searches in your area."]],
+   bn:{h:"গুগলে আপনার ওয়েবসাইট খুঁজে পাওয়া যায় না?",p:"কীওয়ার্ড রিসার্চ, অন-পেজ SEO, সাইটম্যাপ, স্ট্রাকচার্ড ডাটা, Google Search Console ও Google Business Profile সেটআপ করে দিই, যাতে মানুষ গুগলে সার্চ করলে আপনার ব্যবসা খুঁজে পায়। প্রতি মাসে সহজ ভাষায় রিপোর্ট দিই।",
+     faq:[["গুগলে ১ নম্বরে আনার গ্যারান্টি দেন?","না, কেউই সৎভাবে এটা দিতে পারে না। তবে আপনার সাইট যেন গুগল ঠিকভাবে বোঝে এবং সঠিক সার্চে আসে, সেই কাজ নিশ্চিত করি।"],["SEO তে কত দিন লাগে?","টেকনিক্যাল কাজের ফল কয়েক দিন থেকে কয়েক সপ্তাহে দেখা যায়। প্রতিযোগিতামূলক কীওয়ার্ডে সাধারণত ২ থেকে ৬ মাস লাগে।"]]}},
+  {slug:"ai-automation",nav:"AI automation",
+   title:"AI Automation & AI Chatbot Development for Businesses",
+   h1:"AI automation that saves your business hours every week",
+   desc:"AI automation by Yeasin Arafat, founder of Averroes AI: AI chatbots for websites and WhatsApp, automated replies, bookings and reports, and custom AI apps with Gemini and OpenAI.",
+   kw:"AI automation, AI chatbot, AI chatbot for website, WhatsApp chatbot, business automation, AI developer, AI agent, Gemini developer, OpenAI developer, AI automation Malaysia, AI automation Bangladesh, এআই অটোমেশন, এআই চ্যাটবট",
+   intro:"I'm the founder of Averroes AI, where I build AI-powered tools and automation for businesses and customer service. I can add an assistant that answers your customers day and night, connect your forms, sheets and messages so routine work runs itself, or build a custom AI tool around how you work.",
+   points:["AI chat assistants for your website or WhatsApp","Answers based on your own products, prices and FAQs","Automated replies, bookings, follow-ups and reports","Connects forms, Google Sheets, email and your database","Custom AI features inside apps and dashboards","Clear handover so a person can step in anytime"],
+   work:[["Amalnama AI assistant","dev-amalnama.webp","https://uowyeasin-cyber.github.io/AmalnamaForever/","An AI assistant (Gemini through Firebase) that answers with references."],["Averroes Code","dev-averroes-code.webp","https://uowyeasin-cyber.github.io/averroes-code/","An offline coding app with courses and auto-checked practice."]],
+   pkg:"ai",
+   faq:[["What can AI automation do for a small business?","Answer common customer questions instantly, take bookings or orders, send follow-ups, sort messages and produce daily or weekly reports, so you spend time on the work only you can do."],["Will the chatbot give wrong answers?","It is set up to answer from your own information and to hand over to you when it isn't sure. You review and approve its answers before launch."],["Is my data safe?","Your data stays in your own accounts, and only the information the assistant needs is shared with the AI model."]],
+   bn:{h:"ব্যবসায় AI অটোমেশন বা চ্যাটবট চান?",p:"আপনার ওয়েবসাইট বা WhatsApp এর জন্য AI চ্যাটবট বানিয়ে দিই, যা ২৪ ঘণ্টা কাস্টমারের প্রশ্নের উত্তর দেবে। অর্ডার, বুকিং, ফলো-আপ মেসেজ ও রিপোর্টের মতো রুটিন কাজ অটোমেটিক করে দিই, যাতে আপনার সময় বাঁচে।",
+     faq:[["AI চ্যাটবট কি বাংলায় উত্তর দিতে পারবে?","হ্যাঁ। বাংলা, ইংরেজিসহ একাধিক ভাষায় উত্তর দিতে পারে।"],["চ্যাটবট ভুল উত্তর দিলে?","এটি শুধু আপনার দেওয়া তথ্য থেকে উত্তর দেয়, আর নিশ্চিত না হলে আপনার কাছে পাঠিয়ে দেয়।"]]}},
   {slug:"portfolio-website",nav:"Portfolio sites",
    title:"Portfolio Website Design · Personal Portfolio for Students, Developers & Designers",
    h1:"A portfolio website that gets you hired",
@@ -364,18 +426,6 @@ const SERVICE_PAGES = [
    faq:[["Who is a portfolio website for?","Students applying for internships, developers, designers, photographers, teachers and freelancers: anyone who wants one link that shows their work and how to contact them."],["Can I edit my portfolio after it is live?","Yes. You get a private login where you can edit text, add projects and change images, then publish without touching code."],["How long does it take?","About a week once I have your content: photos, projects and a short bio."]],
    bn:{h:"নিজের পোর্টফোলিও ওয়েবসাইট চান?",p:"চাকরি, ইন্টার্নশিপ বা ক্লায়েন্ট পাওয়ার জন্য এই সাইটের মতো একটি প্রফেশনাল পোর্টফোলিও ওয়েবসাইট বানিয়ে দিই: লাইট ও ডার্ক থিম, প্রজেক্ট, রেজুমে ডাউনলোড, গুগল SEO এবং নিজে আপডেট করার জন্য প্রাইভেট এডিটর। সাধারণত এক সপ্তাহে লাইভ হয়ে যায়।",
      faq:[["পোর্টফোলিও ওয়েবসাইট কাদের জন্য?","শিক্ষার্থী, ডেভেলপার, ডিজাইনার, ফ্রিল্যান্সার, শিক্ষক: যে কেউ যিনি এক লিংকে নিজের কাজ দেখাতে চান।"],["পরে নিজে এডিট করতে পারব?","হ্যাঁ। প্রাইভেট লগইন দিয়ে লেখা, ছবি ও প্রজেক্ট নিজেই বদলাতে পারবেন, কোড লাগবে না।"]]}},
-  {slug:"ui-ux-design",nav:"UI/UX design",
-   title:"UI/UX Designer · App & Website Design in Figma",
-   h1:"App and website design that people find easy to use",
-   desc:"UI/UX design by Yeasin Arafat: wireframes, clickable prototypes, app screens, website layouts and design systems in Figma, designed by a developer so they can actually be built.",
-   kw:"UI/UX designer, UI designer, UX designer, app design, website design, Figma designer, wireframe, prototype, design system, UI UX designer Malaysia, UI UX designer Bangladesh, ইউআই ইউএক্স ডিজাইন",
-   intro:"I design screens before any code is written, so you can see and click through your app or website first. Because I also build what I design, every layout is realistic to develop and consistent across phone, tablet and desktop.",
-   points:["Wireframes and clickable prototypes","Mobile app screens and website layouts","Design systems: colours, type, buttons and components","Designs that match your brand","Developer-ready handoff, or I build it for you"],
-   work:[["Restaurant ordering app UI","hgs-app-demo-poster.jpg","/#p-halal-gyro-spot","A clickable ordering prototype for The Halal Gyro Spot."],["Animated login & sign-up","demo-login.jpg","/demo/login.html","A sliding login and registration screen."],["Community website design","dev-cis.webp","/demo/campus-islamic-society.html","Prayer times, events and a clear call to join."],["Portfolio website","dev-portfolio.webp","/","A two-theme layout with case studies and a résumé page."]],
-   pkg:"dev",
-   faq:[["What do I get from a UI/UX project?","Wireframes, final screens for phone and desktop, a clickable prototype and the design files, plus a style guide if you need one."],["Can you also build the design?","Yes. I'm a developer too, so I can turn the design into a working website or app."]],
-   bn:{h:"অ্যাপ বা ওয়েবসাইটের ডিজাইন দরকার?",p:"Figma-তে ওয়্যারফ্রেম, ক্লিক করে দেখা যায় এমন প্রোটোটাইপ, অ্যাপ স্ক্রিন ও ওয়েবসাইট লেআউট ডিজাইন করি। আমি নিজেও ডেভেলপার, তাই ডিজাইনটা পরে বাস্তবে বানানোও সহজ হয়।",
-     faq:[["ডিজাইনের পর অ্যাপ/ওয়েবসাইটও বানিয়ে দেবেন?","হ্যাঁ। ডিজাইন থেকে পুরো ওয়েবসাইট বা অ্যাপ তৈরিও করে দিই।"]]}},
   {slug:"graphic-design",nav:"Graphic design",
    title:"Graphic Designer · Logo, Menu, Social Media & Brand Design",
    h1:"Logos, menus and social media design for growing brands",
