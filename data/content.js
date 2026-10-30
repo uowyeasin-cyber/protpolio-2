@@ -15,6 +15,8 @@ const SITE = {
   linkedin: "https://www.linkedin.com/in/yeasin-arafat-07269432b",
   github: "https://github.com/uowyeasin-cyber",
   resume: "https://drive.google.com/file/d/1pEi4xJrkY9GgL6H_Nm5rOhIOL7Ktamwk/view?usp=drivesdk",
+  url: "https://yeasinarafatbd.vercel.app",   // live address, used by the service pages and sitemap
+  areas: ["Malaysia","Bangladesh","United States","Worldwide"],
 };
 
 // Image sizes [width, height] for every gallery piece (used for layout before images load).
@@ -306,3 +308,87 @@ const BOT=[
 
 // Suggested chatbot questions.
 const CHIPS=["What are your skills?","Show me your projects","Any awards?","How can I contact you?"];
+
+
+// ============================================================
+// Service pages for Google. Each entry becomes its own page at
+// /services/<slug>/ so a search like "e-commerce website developer"
+// can land straight on the matching service, not just the home page.
+// After editing, run:  node tools/build-service-pages.mjs
+// work: [title, image in /img, link, one line]. pkg: "dev" or "design" (from PACKAGES).
+// bn: an optional Bangla section, so Bangla searches match too.
+// ============================================================
+const SERVICE_PAGES = [
+  {slug:"website-development",nav:"Websites",
+   title:"Website Developer in Malaysia & Bangladesh · Business Website Design",
+   h1:"Business websites that load fast and get found on Google",
+   desc:"Hire Yeasin Arafat to design and build your business website: fast, mobile-first, SEO-ready and deployed on your own domain. Serving Malaysia, Bangladesh and clients worldwide.",
+   kw:"website developer, website design, business website, web developer Malaysia, web developer Bangladesh, website developer Shah Alam, freelance web developer, Next.js developer, landing page design, website banano, ওয়েবসাইট তৈরি",
+   intro:"I design and build websites for shops, restaurants, schools, clubs and small businesses. Every site is mobile-first, loads quickly, is set up for Google search, and goes live on your own domain with hosting sorted for you.",
+   points:["Business sites, landing pages and multi-page company websites","Next.js, React or plain HTML, whichever suits the job","Contact form, WhatsApp button, maps and Google Analytics","SEO setup: titles, sitemap, structured data and Search Console","Hosting, domain and SSL set up for you"],
+   work:[["Sunnah Store","dev-sunnah.webp","https://sunnahstore.vercel.app/","A live online shop with payments, courier tracking and 4 languages."],["Campus Islamic Society website","dev-cis.webp","/demo/campus-islamic-society.html","A community website with a live prayer clock, events and a join form."],["This portfolio","dev-portfolio.webp","/","A two-theme personal site with case studies and a private editor."],["CampusEarn","dev-campusearn.webp","/demo/campusearn.html","A student jobs platform with student, employer and admin areas."]],
+   pkg:"dev",
+   faq:[["How long does a business website take?","A landing page usually takes a few days and a multi-page business site one to three weeks, depending on how quickly content and feedback arrive. You get a fixed timeline with the quote."],["Will my website show up on Google?","Every site is built with SEO basics in place: page titles, descriptions, a sitemap, structured data and Search Console setup. Nobody can promise a number-one ranking, but your site starts with everything Google needs."],["Can I update the website myself?","Yes. I can add a simple editor so you can change text and images without touching code, or hand over the code if you have a developer."]],
+   bn:{h:"আপনার ব্যবসার জন্য ওয়েবসাইট দরকার?",p:"দোকান, রেস্টুরেন্ট, প্রতিষ্ঠান বা ব্যক্তিগত ব্যবসার জন্য দ্রুত, মোবাইল-ফ্রেন্ডলি এবং গুগলে খুঁজে পাওয়ার উপযোগী (SEO) ওয়েবসাইট তৈরি করে দিই। ডোমেইন, হোস্টিং এবং লাইভ করা পর্যন্ত সব কাজ আমি করে দিই। বাংলাদেশ, মালয়েশিয়া এবং বিদেশের ক্লায়েন্টদের সাথে কাজ করি।",
+     faq:[["ওয়েবসাইট বানাতে কত দিন লাগে?","ল্যান্ডিং পেজ সাধারণত কয়েক দিনে, আর কয়েক পেজের বিজনেস ওয়েবসাইট ১ থেকে ৩ সপ্তাহে হয়ে যায়। কোটেশনের সাথেই নির্দিষ্ট সময় জানিয়ে দিই।"],["কিভাবে অর্ডার করব?","WhatsApp বা ইমেইলে আপনার কাজের বিবরণ পাঠান। ২৪ ঘণ্টার মধ্যে উত্তর ও কোটেশন দিই।"]]}},
+  {slug:"ecommerce-website",nav:"E-commerce",
+   title:"E-commerce Website Developer · Online Store with bKash, Stripe & PayPal",
+   h1:"Online stores that take payments and ship orders",
+   desc:"Get a complete e-commerce website: product catalogue, cart, card, PayPal, bKash or Nagad payments, courier tracking and an admin panel. Built by Yeasin Arafat, the developer of Sunnah Store.",
+   kw:"e-commerce website developer, online store developer, ecommerce website Bangladesh, ecommerce website Malaysia, bKash payment website, Stripe integration, Next.js ecommerce, online shop website, ই-কমার্স ওয়েবসাইট, অনলাইন শপ ওয়েবসাইট",
+   intro:"I build online stores from the storefront to the admin panel: products, cart, checkout, payments, orders, delivery tracking and reports. Sunnah Store, my own live shop, runs on the same stack I use for clients.",
+   points:["Storefront, cart and checkout that work well on phones","Payments by card, PayPal, Stripe, bKash, Nagad or cash on delivery","Admin panel for products, orders, offers and stock","Courier booking and order tracking emails","Multi-language shops, including Bangla and Arabic"],
+   work:[["Sunnah Store","dev-sunnah.webp","https://sunnahstore.vercel.app/","Next.js, Prisma and PostgreSQL, with Stripe, PayPal and SSLCommerz."],["CloudEats · Nasi Lemak Paradise","dev-cloudeats.webp","/demo/cloudeats.html","A food ordering storefront on a microservices backend."],["Online Food Ordering System","dev-food-ordering.webp","/demo/food-ordering.html","Menu, cart, checkout and order tracking."],["Restaurant ordering app UI","hgs-app-demo-poster.jpg","/#p-halal-gyro-spot","An ordering prototype in a restaurant's own brand."]],
+   pkg:"dev",
+   faq:[["Which payment methods can my store accept?","Cards and FPX through Stripe, PayPal, and bKash, Nagad and cards in Bangladesh through SSLCommerz, plus cash on delivery. Orders are marked paid only after the payment provider confirms them."],["Can you connect a courier?","Yes. Sunnah Store books Steadfast deliveries in Bangladesh and tracks international parcels automatically, and I can set up the same for your shop."],["Do I need to know coding to run the store?","No. You manage products, prices, orders and offers from an admin panel."]],
+   bn:{h:"অনলাইন শপ বা ই-কমার্স ওয়েবসাইট দরকার?",p:"প্রোডাক্ট, কার্ট, চেকআউট, বিকাশ/নগদ/কার্ড/ক্যাশ অন ডেলিভারি পেমেন্ট, কুরিয়ার ট্র্যাকিং আর অ্যাডমিন প্যানেলসহ পূর্ণাঙ্গ ই-কমার্স ওয়েবসাইট বানিয়ে দিই। আমার নিজের লাইভ শপ Sunnah Store এই একই প্রযুক্তিতে চলছে।",
+     faq:[["বিকাশ দিয়ে পেমেন্ট নেওয়া যাবে?","হ্যাঁ। বিকাশ, নগদ, কার্ড, PayPal এবং ক্যাশ অন ডেলিভারি সব যোগ করা যায়।"],["অর্ডার ও প্রোডাক্ট কিভাবে ম্যানেজ করব?","একটি সহজ অ্যাডমিন প্যানেল থেকে প্রোডাক্ট, দাম, অর্ডার ও অফার নিজেই ম্যানেজ করতে পারবেন, কোডিং লাগবে না।"]]}},
+  {slug:"app-development",nav:"Apps",
+   title:"App Developer · Mobile & Web App Development (Android, iOS, PWA)",
+   h1:"Mobile and web apps people keep on their home screen",
+   desc:"Hire Yeasin Arafat for mobile and web app development: Android, iOS and installable web apps with logins, databases, payments, offline mode and AI features. Founder of Averroes AI.",
+   kw:"app developer, mobile app developer, web app development, PWA developer, Android app developer, iOS app, app developer Malaysia, app developer Bangladesh, Firebase developer, AI app developer, অ্যাপ তৈরি, মোবাইল অ্যাপ ডেভেলপার",
+   intro:"I build apps that install on Android, iPhone and desktop from one codebase, work offline, and grow with you: accounts, dashboards, payments, notifications and AI features when you need them. My own apps, Amalnama and Averroes Code, are used daily.",
+   points:["Installable apps for Android, iOS and desktop (PWA)","Logins, user accounts, dashboards and admin tools","Firebase, Node.js, PostgreSQL or MySQL backends","Push notifications, offline mode and several languages","AI features such as chat assistants and smart search"],
+   work:[["Amalnama","dev-amalnama.webp","https://uowyeasin-cyber.github.io/AmalnamaForever/","An Islamic companion app with an AI assistant, offline in 6 languages."],["Averroes Code","dev-averroes-code.webp","https://uowyeasin-cyber.github.io/averroes-code/","An offline code editor and compiler with 23 courses."],["CampusEarn","dev-campusearn.webp","/demo/campusearn.html","A student job marketplace with three workspaces."],["Restaurant ordering app UI","hgs-app-demo-poster.jpg","/#p-halal-gyro-spot","A branded ordering app prototype with menu, cart and checkout."]],
+   pkg:"dev",
+   faq:[["Can one app work on both Android and iPhone?","Yes. I build progressive web apps that install on Android, iPhone and computers from a single codebase, which keeps cost and updates low."],["Can you add AI to my app?","Yes. Amalnama has an AI assistant built on Gemini through Firebase, and I can add chat, search or automation features to your app the same way."],["Will the app work without internet?","It can. Amalnama and Averroes Code both work offline, and I can design your app the same way when it makes sense."]],
+   bn:{h:"মোবাইল অ্যাপ বা ওয়েব অ্যাপ বানাতে চান?",p:"Android, iPhone ও কম্পিউটারে ইনস্টল করা যায় এমন অ্যাপ তৈরি করি: লগইন, ড্যাশবোর্ড, পেমেন্ট, নোটিফিকেশন, অফলাইন মোড এবং AI ফিচারসহ। আমার নিজের অ্যাপ Amalnama ও Averroes Code প্রতিদিন মানুষ ব্যবহার করছে।",
+     faq:[["একটি অ্যাপ কি Android ও iPhone দুটোতেই চলবে?","হ্যাঁ। একটাই অ্যাপ Android, iPhone ও কম্পিউটারে চলবে, তাই খরচ ও আপডেট দুটোই কম।"],["অ্যাপে AI যোগ করা যাবে?","হ্যাঁ। চ্যাট অ্যাসিস্ট্যান্ট, স্মার্ট সার্চ বা অটোমেশনের মতো AI ফিচার যোগ করে দিতে পারি।"]]}},
+  {slug:"portfolio-website",nav:"Portfolio sites",
+   title:"Portfolio Website Design · Personal Portfolio for Students, Developers & Designers",
+   h1:"A portfolio website that gets you hired",
+   desc:"Get a personal portfolio website like yeasinarafatbd.vercel.app: light and dark themes, case studies, résumé page, Google-ready SEO and a private editor to update it yourself. Ready in about a week.",
+   kw:"portfolio website, portfolio website design, personal website, portfolio for students, developer portfolio, designer portfolio, resume website, CV website, portfolio website developer, পোর্টফোলিও ওয়েবসাইট",
+   intro:"Your portfolio is often the first thing a recruiter or client sees. I build personal sites that show your work properly, explain what you do in plain words, and let you update everything yourself from a private editor.",
+   points:["Light and dark themes that look right on every screen","Case studies, galleries, projects and a one-page résumé with PDF download","Private owner editor: change text and images without code","Google-ready SEO, sitemap and social sharing previews","Your own domain, deployed and live in about a week"],
+   work:[["This portfolio","dev-portfolio.webp","/","The site you are on: two themes, case studies, résumé and an owner editor."],["Community website design","dev-cis.webp","/demo/campus-islamic-society.html","A calm, readable layout for a student society."],["Animated login & sign-up","demo-login.jpg","/demo/login.html","A sliding sign-in screen with smooth CSS transitions."]],
+   pkg:"dev",
+   faq:[["Who is a portfolio website for?","Students applying for internships, developers, designers, photographers, teachers and freelancers: anyone who wants one link that shows their work and how to contact them."],["Can I edit my portfolio after it is live?","Yes. You get a private login where you can edit text, add projects and change images, then publish without touching code."],["How long does it take?","About a week once I have your content: photos, projects and a short bio."]],
+   bn:{h:"নিজের পোর্টফোলিও ওয়েবসাইট চান?",p:"চাকরি, ইন্টার্নশিপ বা ক্লায়েন্ট পাওয়ার জন্য এই সাইটের মতো একটি প্রফেশনাল পোর্টফোলিও ওয়েবসাইট বানিয়ে দিই: লাইট ও ডার্ক থিম, প্রজেক্ট, রেজুমে ডাউনলোড, গুগল SEO এবং নিজে আপডেট করার জন্য প্রাইভেট এডিটর। সাধারণত এক সপ্তাহে লাইভ হয়ে যায়।",
+     faq:[["পোর্টফোলিও ওয়েবসাইট কাদের জন্য?","শিক্ষার্থী, ডেভেলপার, ডিজাইনার, ফ্রিল্যান্সার, শিক্ষক: যে কেউ যিনি এক লিংকে নিজের কাজ দেখাতে চান।"],["পরে নিজে এডিট করতে পারব?","হ্যাঁ। প্রাইভেট লগইন দিয়ে লেখা, ছবি ও প্রজেক্ট নিজেই বদলাতে পারবেন, কোড লাগবে না।"]]}},
+  {slug:"ui-ux-design",nav:"UI/UX design",
+   title:"UI/UX Designer · App & Website Design in Figma",
+   h1:"App and website design that people find easy to use",
+   desc:"UI/UX design by Yeasin Arafat: wireframes, clickable prototypes, app screens, website layouts and design systems in Figma, designed by a developer so they can actually be built.",
+   kw:"UI/UX designer, UI designer, UX designer, app design, website design, Figma designer, wireframe, prototype, design system, UI UX designer Malaysia, UI UX designer Bangladesh, ইউআই ইউএক্স ডিজাইন",
+   intro:"I design screens before any code is written, so you can see and click through your app or website first. Because I also build what I design, every layout is realistic to develop and consistent across phone, tablet and desktop.",
+   points:["Wireframes and clickable prototypes","Mobile app screens and website layouts","Design systems: colours, type, buttons and components","Designs that match your brand","Developer-ready handoff, or I build it for you"],
+   work:[["Restaurant ordering app UI","hgs-app-demo-poster.jpg","/#p-halal-gyro-spot","A clickable ordering prototype for The Halal Gyro Spot."],["Animated login & sign-up","demo-login.jpg","/demo/login.html","A sliding login and registration screen."],["Community website design","dev-cis.webp","/demo/campus-islamic-society.html","Prayer times, events and a clear call to join."],["Portfolio website","dev-portfolio.webp","/","A two-theme layout with case studies and a résumé page."]],
+   pkg:"dev",
+   faq:[["What do I get from a UI/UX project?","Wireframes, final screens for phone and desktop, a clickable prototype and the design files, plus a style guide if you need one."],["Can you also build the design?","Yes. I'm a developer too, so I can turn the design into a working website or app."]],
+   bn:{h:"অ্যাপ বা ওয়েবসাইটের ডিজাইন দরকার?",p:"Figma-তে ওয়্যারফ্রেম, ক্লিক করে দেখা যায় এমন প্রোটোটাইপ, অ্যাপ স্ক্রিন ও ওয়েবসাইট লেআউট ডিজাইন করি। আমি নিজেও ডেভেলপার, তাই ডিজাইনটা পরে বাস্তবে বানানোও সহজ হয়।",
+     faq:[["ডিজাইনের পর অ্যাপ/ওয়েবসাইটও বানিয়ে দেবেন?","হ্যাঁ। ডিজাইন থেকে পুরো ওয়েবসাইট বা অ্যাপ তৈরিও করে দিই।"]]}},
+  {slug:"graphic-design",nav:"Graphic design",
+   title:"Graphic Designer · Logo, Menu, Social Media & Brand Design",
+   h1:"Logos, menus and social media design for growing brands",
+   desc:"Graphic design by Yeasin Arafat: logos, brand identity, restaurant menus, LED menu boards, brochures, social media posts and promo videos for businesses in the USA, Malaysia and Bangladesh.",
+   kw:"graphic designer, logo design, brand identity, restaurant menu design, social media design, LED menu board, brochure design, banner design, freelance graphic designer, লোগো ডিজাইন, গ্রাফিক ডিজাইনার, মেনু ডিজাইন",
+   intro:"I've designed complete brands for restaurants, shops and community groups: the logo, the menu, the shop screen and the social posts, all in one consistent style. Clients include The Halal Gyro Spot in Florida and Spring Hill Deli.",
+   points:["Logo, monogram and full brand identity","Restaurant menus, brochures and print-ready files","LED and TV menu boards","Social media posts, covers and reels","Promo videos and motion graphics"],
+   work:[["The Halal Gyro Spot logo","hgs-badge-logo.webp","/#p-halal-gyro-spot","A badge logo and full brand system for a Florida restaurant."],["Restaurant menu","hgs-menu-cover.webp","/#p-halal-gyro-spot","Multi-page print menu, ready for the printer."],["LED menu board","hgs-led-menu.webp","/#work","A counter screen menu that reads from the queue."],["Social media post","hgs-social-platters.webp","/#work","Feed posts that keep the brand consistent."]],
+   pkg:"design",
+   faq:[["What files will I receive?","Print-ready PDFs, PNG and JPG files for web and social media, and source files when the package includes them."],["How many revisions do I get?","Two or three rounds depending on the package, so you can fine-tune the design until it is right."]],
+   bn:{h:"লোগো, মেনু বা সোশ্যাল মিডিয়া ডিজাইন দরকার?",p:"লোগো, ব্র্যান্ড আইডেন্টিটি, রেস্টুরেন্ট মেনু, LED মেনু বোর্ড, ব্রোশিওর, ফেসবুক পোস্ট/কভার ও প্রোমো ভিডিও ডিজাইন করি। আমেরিকা, মালয়েশিয়া ও বাংলাদেশের ব্যবসার জন্য কাজ করেছি।",
+     faq:[["কী কী ফাইল পাব?","প্রিন্টের জন্য PDF, ওয়েব ও সোশ্যাল মিডিয়ার জন্য PNG/JPG, আর প্যাকেজে থাকলে সোর্স ফাইল।"]]}},
+];
