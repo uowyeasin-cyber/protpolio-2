@@ -85,6 +85,8 @@
         c.dataset.cmsId = op.id;
         el.after(c);
         c.querySelectorAll("[data-anim]").forEach(watch);
+        // The site's own scroll-reveal never sees copies, so show them straight away.
+        [c, ...c.querySelectorAll(".rv")].forEach((n) => n.classList.contains("rv") && n.classList.add("in"));
         break;
       }
       case "ins": {
@@ -93,6 +95,7 @@
         const n = w.firstElementChild;
         if (!n) return false;
         n.dataset.cmsId = op.id;
+        [n, ...n.querySelectorAll(".rv")].forEach((x) => x.classList.contains("rv") && x.classList.add("in"));
         op.where === "append" ? el.append(n) : op.where === "before" ? el.before(n) : el.after(n);
         break;
       }

@@ -516,6 +516,17 @@ footer a:hover{color:var(--cobalt)}
   @page{margin:14mm}
 }
 
+/* résumé PDF export: a light, print-like copy rendered off screen */
+.cv.cv-pdf{background:#fff;color:#111;border:0;box-shadow:none;padding:0;max-width:none;margin:0;width:700px}
+.cv-pdf,.cv-pdf *{border-color:#dcdfe5!important}
+.cv-pdf p,.cv-pdf li,.cv-pdf b,.cv-pdf h1,.cv-pdf a{color:#111!important;text-decoration:none}
+.cv-pdf h1{font-size:2.3rem}
+.cv-pdf h2{color:#1F4FD8!important}
+.cv-pdf .role,.cv-pdf .ci,.cv-pdf .ci a,.cv-pdf .job-h span{color:#444!important}
+.cv-pdf .sk{grid-template-columns:150px 1fr!important;gap:6px 16px!important}.cv-pdf .sk b{margin-top:0!important}
+.cv-pdf .rv{opacity:1!important;transform:none!important}
+.cv-pdf p,.cv-pdf li,.cv-pdf .sk{font-size:.86rem!important}.cv-pdf h2{margin:20px 0 9px}.cv-pdf ul{gap:3px}.cv-pdf .job{margin-top:10px}
+
 /* ===== works by category ===== */
 .wnav{position:sticky;top:calc(env(safe-area-inset-top,0px) + 68px);z-index:40;background:color-mix(in srgb,var(--ink) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-block:1px solid var(--line);margin-top:8px}
 .wnav-in{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
@@ -943,7 +954,7 @@ body{margin:0}[hidden]{display:none!important}.cms-wait body{opacity:0}body{tran
       <p class="lead">A short summary in plain text, easy to scan and friendly to applicant tracking systems. Download it as a PDF or print it.</p>
     </div>
     <div class="wrap">
-      <div class="cv-bar"><a class="btn solid" href="Yeasin-Arafat-Resume.pdf" download="Yeasin-Arafat-Resume.pdf">Download PDF</a><button class="btn" id="printCv">Print</button><a class="btn" href="https://drive.google.com/file/d/1pEi4xJrkY9GgL6H_Nm5rOhIOL7Ktamwk/view?usp=drivesdk" target="_blank" rel="noopener">Original résumé (Google Drive) ↗</a><a class="btn" href="#contact">Contact me</a></div>
+      <div class="cv-bar"><a class="btn solid" id="dlCv" href="Yeasin-Arafat-Resume.pdf" download="Yeasin-Arafat-Resume.pdf">Download PDF</a><button class="btn" id="printCv">Print</button><a class="btn" href="https://drive.google.com/file/d/1pEi4xJrkY9GgL6H_Nm5rOhIOL7Ktamwk/view?usp=drivesdk" target="_blank" rel="noopener">Original résumé (Google Drive) ↗</a><a class="btn" href="#contact">Contact me</a></div>
       <article class="cv" id="cvDoc"></article>
     </div>
   </section>
@@ -1314,6 +1325,22 @@ $("#brief").addEventListener("submit",e=>{e.preventDefault();const f=new FormDat
   <div class="job"><div class="job-h"><b>SSC / Dakhil (Science), Al Manar Dakhil Madrasah, GPA 5.00/5.00</b><span>Until Mar 2023</span></div></div>
   <h2>Certifications & awards</h2><ul><li>Top Coder Malaysia 2026, T-Academy and Data Science Association (credential CODE/DSA/G11/UOW/003)</li><li>Tableau Fundamentals, UOW Malaysia (credential UOWM/04236)</li><li>Python Coder, Data Science Association</li><li>UOW High Achievers Scholarship, 2026</li><li>Selected as best presenter, UOW Malaysia</li></ul>`;
   $("#printCv").onclick=()=>window.print();
+  // Build the PDF from the résumé as it is on the page now, published edits included.
+  // The ready-made file in href is the fallback if this fails.
+  $("#dlCv").onclick=async e=>{
+    e.preventDefault();
+    const a=e.currentTarget,label=a.textContent;
+    if(a.dataset.busy)return;a.dataset.busy=1;a.textContent="Preparing PDF…";
+    try{
+      if(!window.html2pdf)await new Promise((ok,no)=>{const s=document.createElement("script");s.src="vendor/html2pdf.bundle.min.js";s.onload=ok;s.onerror=no;document.head.appendChild(s)});
+      const doc=$("#cvDoc").cloneNode(true);doc.removeAttribute("id");doc.classList.add("cv-pdf");
+      doc.querySelectorAll(".rv").forEach(n=>n.classList.add("in"));
+      await html2pdf().set({margin:[12,12,12,12],filename:a.getAttribute("download"),image:{type:"jpeg",quality:.96},
+        html2canvas:{scale:2,useCORS:true,backgroundColor:"#ffffff",width:700,windowWidth:700},jsPDF:{unit:"mm",format:"a4",orientation:"portrait"},
+        pagebreak:{mode:["css","legacy"],avoid:[".job",".cv-top","h2","li",".sk > *"]}}).from(doc).save();
+    }catch(err){location.href=a.href}
+    a.textContent=label;delete a.dataset.busy;
+  };
 })();
 
 $("#cocur").innerHTML=rows([["2026 – now","Computer Science Club · UOW Malaysia","Member. Programming competitions, hackathons and tech events on campus.",""],["Jul 2026","Top Coder Malaysia 2026","National coding challenge by T-Academy and the Data Science Association, supported by MDEC. 5th at UOW Malaysia, qualified for the national round.","#5"],["University","Presentations","Selected as best presenter for a university presentation.","★"],["2017 – 2025","Hidayah Blood Bank","Founded and ran a donor network that connected patients with nearby blood donors across Bangladesh.",""],["2023 – 2025","Hidayah United Foundation","Founded a non-profit for social services and charity work in Bangladesh.",""],["Teaching","English & IELTS trainer","Trained students in spoken English and IELTS preparation.",""]]);
