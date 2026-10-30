@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CloudEats · Food Ordering Microservices Demo · by Yeasin Arafat</title>
+<meta name="description" content="Nasi Lemak Paradise storefront on CloudEats: see an order travel through the API gateway, user, menu and order services. Built by Yeasin Arafat.">
+<meta name="author" content="Yeasin Arafat">
+<link rel="canonical" href="https://yeasinarafatbd.vercel.app/demo/cloudeats.html">
+<meta property="og:title" content="CloudEats · Food Ordering Microservices Demo · by Yeasin Arafat">
+<meta property="og:description" content="Nasi Lemak Paradise storefront on CloudEats: see an order travel through the API gateway, user, menu and order services. Built by Yeasin Arafat.">
+<meta property="og:url" content="https://yeasinarafatbd.vercel.app/demo/cloudeats.html">
+<meta property="og:image" content="https://yeasinarafatbd.vercel.app/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+:root{--bg:#FFF8EE;--card:#fff;--line:#F0E2CC;--ink:#2B1A0E;--mute:#7A6150;--leaf:#1F7A4D;--chili:#D9381E;--term:#0E1424}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+button{font:inherit;cursor:pointer}
+.note{font-size:.72rem;color:var(--mute);text-align:center;padding:5px;background:#F6EAD6}
+header{background:var(--leaf);color:#fff}
+header .in{max-width:1180px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.logo{font-weight:800;font-size:1.15rem}.logo small{display:block;font-weight:500;font-size:.75rem;opacity:.85}
+.user{display:flex;gap:8px;align-items:center;font-size:.85rem}
+.user button{border:1px solid rgba(255,255,255,.5);background:none;color:#fff;border-radius:999px;padding:6px 12px;font-weight:600}
+.layout{max-width:1180px;margin:0 auto;padding:18px;display:grid;grid-template-columns:1fr 380px;gap:18px}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+h2{font-size:1.15rem;margin-bottom:10px}
+.menu{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.item .em{font-size:2rem;line-height:1}
+.item h3{font-size:.98rem}.item p{color:var(--mute);font-size:.82rem}
+.item .row{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+.add{border:0;background:var(--chili);color:#fff;border-radius:999px;padding:6px 14px;font-weight:700}
+.cart{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:16px}
+.line{display:flex;justify-content:space-between;gap:8px;font-size:.9rem;padding:4px 0}
+.line button{border:1px solid var(--line);background:none;border-radius:6px;width:24px;height:24px;line-height:1}
+.tot{display:flex;justify-content:space-between;font-weight:800;border-top:1px solid var(--line);margin-top:8px;padding-top:8px}
+.go{width:100%;margin-top:10px;border:0;background:var(--leaf);color:#fff;border-radius:10px;padding:11px;font-weight:700}
+.go:disabled{opacity:.5;cursor:default}
+.status{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.status span{font-size:.75rem;padding:4px 9px;border-radius:999px;background:#F3E9DA;color:var(--mute);font-weight:600}
+.status span.on{background:var(--leaf);color:#fff}
+aside{display:flex;flex-direction:column;gap:12px}
+.arch{background:var(--term);color:#C9D4F0;border-radius:14px;padding:14px}
+.arch h2{color:#fff;font-size:1rem}
+.svc{display:grid;grid-template-columns:1fr;gap:6px;margin:10px 0}
+.node{border:1px solid #2A3557;border-radius:8px;padding:7px 10px;font:600 .8rem ui-monospace,Menlo,monospace;display:flex;justify-content:space-between;transition:background .2s,border-color .2s}
+.node small{font-weight:400;color:#7F8BB0}
+.node.hit{background:#1E3A8A;border-color:#60A5FA;color:#fff}
+.stores{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.log{background:#070B16;color:#C9D4F0;border-radius:8px;padding:10px;font:12px/1.5 ui-monospace,Menlo,monospace;height:190px;overflow:auto;white-space:pre-wrap}
+.log .ok{color:#4ADE80}.log .k{color:#60A5FA}.log .w{color:#FBBF24}
+.toast{position:fixed;left:50%;bottom:18px;transform:translate(-50%,120px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-weight:600;font-size:.86rem;transition:transform .3s}
+.toast.on{transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="note">Frontend prototype · the services are simulated in the browser to show how a request travels</div>
+<header><div class="in"><div class="logo">Nasi Lemak Paradise<small>powered by CloudEats</small></div><div class="user"><span id="who">Guest</span><button id="login">Sign in</button></div></div></header>
+<div class="layout">
+<main>
+  <h2>Menu</h2>
+  <div class="menu" id="menu"></div>
+  <div class="cart"><h2>Your order</h2><div id="lines"></div><div class="tot"><span>Total</span><span id="tot">RM 0.00</span></div><button class="go" id="go" disabled>Place order</button><div class="status" id="st"></div></div>
+</main>
+<aside>
+  <div class="arch"><h2>What happens behind the scenes</h2>
+    <div class="svc"><div class="node" id="n-gw">API gateway <small>JWT check · :8000</small></div>
+    <div class="node" id="n-user">user-service <small>:3001</small></div><div class="node" id="n-menu">menu-service <small>:3002</small></div><div class="node" id="n-order">order-service <small>:3003</small></div></div>
+    <div class="stores"><div class="node" id="n-mysql">MySQL</div><div class="node" id="n-redis">Redis</div><div class="node" id="n-mongo">MongoDB</div></div>
+  </div>
+  <div class="log" id="log" aria-live="polite"></div>
+</aside>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const MENU=[["nl","🍛","Nasi lemak ayam goreng","Coconut rice, fried chicken, sambal, egg, peanuts",12.9],["nr","🍚","Nasi lemak rendang","Slow-cooked beef rendang with the classic sides",14.5],["ms","🍜","Mee siam","Spicy fried rice vermicelli with prawns",9.9],["rc","🫓","Roti canai + dhal","Two pieces, crispy outside, soft inside",5.5],["tt","🥤","Teh tarik","Pulled milk tea, hot or iced",3.5],["cd","🍧","Cendol","Shaved ice, coconut milk and gula Melaka",6.0]];
+const $=s=>document.querySelector(s),sleep=ms=>new Promise(r=>setTimeout(r,ms));
+let cart={},user=null,cacheWarm=false;
+const toast=t=>{const el=$("#toast");el.textContent=t;el.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove("on"),2000)};
+function log(html){const l=$("#log");l.innerHTML+=html+"\n";l.scrollTop=l.scrollHeight}
+async function hop(ids,line){for(const id of ids){const n=$("#n-"+id);n.classList.add("hit");await sleep(260);n.classList.remove("hit")}log(line)}
+async function loadMenu(){log('<span class="k">GET</span> /api/menu');
+  if(cacheWarm){await hop(["gw","menu","redis"],'  <span class="ok">200</span> menu-service → Redis cache hit (3 ms)')}
+  else{await hop(["gw","menu","redis","mysql"],'  <span class="w">cache miss</span> → MySQL, then saved to Redis');log('  <span class="ok">200</span> 6 items (41 ms)');cacheWarm=true}
+  $("#menu").innerHTML=MENU.map(([id,em,n,d,p])=>`<div class="item"><div class="em">${em}</div><h3>${n}</h3><p>${d}</p><div class="row"><b>RM ${p.toFixed(2)}</b><button class="add" data-add="${id}">Add</button></div></div>`).join("")}
+function drawCart(){const ids=Object.keys(cart).filter(k=>cart[k]>0);let t=0;
+  $("#lines").innerHTML=ids.length?ids.map(id=>{const m=MENU.find(x=>x[0]===id);t+=m[4]*cart[id];return `<div class="line"><span>${m[2]}</span><span><button data-dec="${id}">−</button> ${cart[id]} <button data-add="${id}">+</button></span></div>`}).join(""):'<p style="color:var(--mute);font-size:.88rem">Nothing yet. Add something tasty.</p>';
+  $("#tot").textContent="RM "+t.toFixed(2);$("#go").disabled=!ids.length}
+document.body.addEventListener("click",e=>{const a=e.target.dataset.add,d=e.target.dataset.dec;
+  if(a){cart[a]=(cart[a]||0)+1;drawCart()}if(d){cart[d]--;drawCart()}});
+$("#login").onclick=async()=>{if(user){user=null;$("#who").textContent="Guest";$("#login").textContent="Sign in";log('<span class="k">POST</span> /api/auth/logout');await hop(["gw","user","redis"],'  <span class="ok">204</span> session removed from Redis');return}
+  log('<span class="k">POST</span> /api/auth/login');await hop(["gw","user","mysql"],'  bcrypt.compare(password, hash) ✓');await hop(["redis"],'  <span class="ok">200</span> JWT issued, session stored in Redis');
+  user="Aisyah";$("#who").textContent="Hi, Aisyah";$("#login").textContent="Sign out";toast("Signed in")};
+$("#go").onclick=async()=>{if(!user){toast("Please sign in first");log('<span class="k">POST</span> /api/orders');await hop(["gw"],'  <span class="w">401</span> gateway: missing or invalid JWT');return}
+  $("#go").disabled=true;const id="ORD-"+Math.floor(1000+Math.random()*9000);
+  log('<span class="k">POST</span> /api/orders');await hop(["gw"],'  gateway: JWT valid for user 42');await hop(["order","menu"],'  order-service: prices checked with menu-service');await hop(["order","mongo"],'  <span class="ok">201</span> '+id+' saved in MongoDB');
+  cart={};drawCart();toast("Order "+id+" placed");
+  const steps=["Placed","Preparing","On the way","Delivered"];
+  for(let i=0;i<steps.length;i++){$("#st").innerHTML=steps.map((s,j)=>`<span class="${j<=i?"on":""}">${s}</span>`).join("");if(i)log('  order-service: '+id+' → <span class="ok">'+steps[i]+'</span>');await sleep(1300)}};
+loadMenu();drawCart();
+setTimeout(()=>{log('\n<span class="k">GET</span> /api/menu (second visit)');hop(["gw","menu","redis"],'  <span class="ok">200</span> served from Redis cache (3 ms)')},4000);
+</script>
+</body>
+</html>
