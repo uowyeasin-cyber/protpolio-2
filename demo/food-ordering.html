@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Online Food Ordering System · Web Prototype · by Yeasin Arafat</title>
+<meta name="description" content="A food ordering website prototype for an object-oriented Java system: menu, cart, checkout and order tracking. By Yeasin Arafat.">
+<meta name="author" content="Yeasin Arafat">
+<link rel="canonical" href="https://yeasinarafatbd.vercel.app/demo/food-ordering.html">
+<meta property="og:title" content="Online Food Ordering System · Web Prototype · by Yeasin Arafat">
+<meta property="og:description" content="A food ordering website prototype for an object-oriented Java system: menu, cart, checkout and order tracking. By Yeasin Arafat.">
+<meta property="og:url" content="https://yeasinarafatbd.vercel.app/demo/food-ordering.html">
+<meta property="og:image" content="https://yeasinarafatbd.vercel.app/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+:root{--bg:#F7F7F5;--card:#fff;--line:#E6E4DF;--ink:#1C1B19;--mute:#6B6760;--acc:#E4572E;--code:#FFF4E8}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+button{font:inherit;cursor:pointer}
+.note{font-size:.72rem;color:var(--mute);text-align:center;padding:5px;background:#EEECE7}
+header{background:var(--card);border-bottom:1px solid var(--line)}
+header .in{max-width:1100px;margin:0 auto;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.logo{font-weight:800}.logo span{color:var(--acc)}
+.cartbtn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 14px;font-weight:700}
+.wrap{max-width:1100px;margin:0 auto;padding:18px;display:grid;grid-template-columns:1fr 340px;gap:18px}
+@media (max-width:860px){.wrap{grid-template-columns:1fr}}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px;font-weight:600;color:var(--mute)}
+.tabs button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.list{display:grid;gap:10px}
+.dish{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;gap:12px;align-items:center}
+.dish .em{font-size:1.8rem}.dish div{flex:1;min-width:0}.dish h3{font-size:.98rem}.dish p{font-size:.82rem;color:var(--mute)}
+.dish button{border:0;background:var(--acc);color:#fff;border-radius:8px;padding:7px 12px;font-weight:700}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;position:sticky;top:12px;align-self:start}
+.panel h2{font-size:1.05rem;margin-bottom:8px}
+.ln{display:flex;justify-content:space-between;font-size:.9rem;padding:3px 0}
+.ln button{border:0;background:none;color:var(--acc);font-weight:700}
+.tot{display:flex;justify-content:space-between;font-weight:800;border-top:1px solid var(--line);margin-top:8px;padding-top:8px}
+.pl{width:100%;margin-top:10px;border:0;background:var(--acc);color:#fff;border-radius:10px;padding:11px;font-weight:700}
+.pl:disabled{opacity:.5;cursor:default}
+.track{margin-top:14px}
+.step{display:flex;gap:10px;align-items:center;font-size:.86rem;color:var(--mute);padding:4px 0}
+.step i{width:12px;height:12px;border-radius:50%;border:2px solid var(--line)}
+.step.on{color:var(--ink);font-weight:600}.step.on i{background:var(--acc);border-color:var(--acc)}
+.uml{margin-top:14px;background:var(--code);border-radius:10px;padding:10px;font:12px/1.5 ui-monospace,Menlo,monospace;color:#5A3A1A;min-height:64px;white-space:pre-wrap}
+.toast{position:fixed;left:50%;bottom:18px;transform:translate(-50%,120px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-weight:600;font-size:.86rem;transition:transform .3s}
+.toast.on{transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="note">Frontend prototype of the university OOSAD project · each action shows the Java method it maps to</div>
+<header><div class="in"><div class="logo">Food<span>Order</span></div><button class="cartbtn" id="cb">Cart · 0</button></div></header>
+<div class="wrap">
+<main><div class="tabs" id="tabs"></div><div class="list" id="list"></div></main>
+<aside class="panel"><h2>Cart</h2><div id="lines"></div><div class="tot"><span>Total</span><span id="tot">RM 0.00</span></div>
+<button class="pl" id="pl" disabled>Place order</button>
+<div class="track" id="track"></div>
+<div class="uml" id="uml">// Java class model: Customer, Menu, MenuItem, Cart, Order, OrderItem, OrderStatus</div></aside>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const M=[["Mains","🍗","Chicken chop","Grilled chicken, black pepper sauce, fries",15.9],["Mains","🍝","Spaghetti bolognese","Beef ragù and parmesan",13.5],["Mains","🍛","Chicken curry rice","Mild curry with white rice",11.0],["Sides","🍟","Cheesy fries","Fries with cheese sauce",6.5],["Sides","🥗","Garden salad","Leaves, cucumber, sesame dressing",5.9],["Drinks","🧋","Iced milk tea","Less sweet on request",4.5],["Drinks","🍋","Lemonade","Freshly squeezed",4.0],["Desserts","🍰","Chocolate cake","A rich slice",7.5]];
+const cats=["All",...new Set(M.map(x=>x[0]))];let cat="All",cart={};
+const $=s=>document.querySelector(s),sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const toast=t=>{const el=$("#toast");el.textContent=t;el.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove("on"),1800)};
+const uml=t=>$("#uml").textContent=t;
+function draw(){$("#tabs").innerHTML=cats.map(c=>`<button class="${c===cat?"on":""}" data-c="${c}">${c}</button>`).join("");
+ $("#list").innerHTML=M.map((d,i)=>[d,i]).filter(([d])=>cat==="All"||d[0]===cat).map(([d,i])=>`<div class="dish"><span class="em">${d[1]}</span><div><h3>${d[2]}</h3><p>${d[3]}</p></div><b>RM ${d[4].toFixed(2)}</b><button data-a="${i}">Add</button></div>`).join("");
+ let t=0,n=0;const ks=Object.keys(cart).filter(k=>cart[k]);
+ $("#lines").innerHTML=ks.length?ks.map(k=>{const d=M[k];t+=d[4]*cart[k];n+=cart[k];return `<div class="ln"><span>${cart[k]} × ${d[2]}</span><button data-r="${k}">Remove</button></div>`}).join(""):'<p style="color:var(--mute);font-size:.86rem">Your cart is empty.</p>';
+ $("#tot").textContent="RM "+t.toFixed(2);$("#cb").textContent="Cart · "+n;$("#pl").disabled=!ks.length}
+document.body.addEventListener("click",e=>{const d=e.target.dataset;
+ if(d.c){cat=d.c;uml(`menu.getItemsByCategory("${cat}")`);draw()}
+ if(d.a){cart[d.a]=(cart[d.a]||0)+1;uml(`cart.addItem(new OrderItem(menuItems[${d.a}], 1));\n// "${M[d.a][2]}" → quantity ${cart[d.a]}`);toast("Added "+M[d.a][2]);draw()}
+ if(d.r){delete cart[d.r];uml(`cart.removeItem(${d.r});`);draw()}});
+$("#pl").onclick=async()=>{const total=$("#tot").textContent;cart={};draw();
+ const S=["PLACED","PREPARING","READY","DELIVERED"];
+ for(let i=0;i<S.length;i++){$("#track").innerHTML="<h2 style='font-size:.95rem;margin-bottom:4px'>Order #"+(1040+i*0)+"</h2>"+S.map((s,j)=>`<div class="step ${j<=i?"on":""}"><i></i>${s[0]+s.slice(1).toLowerCase()}</div>`).join("");
+  uml(i?`order.setStatus(OrderStatus.${S[i]});`:`Order order = customer.checkout(cart);\n// total ${total}, status = OrderStatus.PLACED`);await sleep(1500)}
+ toast("Delivered. Enjoy your meal!")};
+draw();
+</script>
+</body>
+</html>

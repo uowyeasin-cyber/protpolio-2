@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CampusEarn · Student Job Marketplace Prototype · by Yeasin Arafat</title>
+<meta name="description" content="A student part-time job marketplace with student, job-giver and admin workspaces. A web app prototype by Yeasin Arafat.">
+<meta name="author" content="Yeasin Arafat">
+<link rel="canonical" href="https://yeasinarafatbd.vercel.app/demo/campusearn.html">
+<meta property="og:title" content="CampusEarn · Student Job Marketplace Prototype · by Yeasin Arafat">
+<meta property="og:description" content="A student part-time job marketplace with student, job-giver and admin workspaces. A web app prototype by Yeasin Arafat.">
+<meta property="og:url" content="https://yeasinarafatbd.vercel.app/demo/campusearn.html">
+<meta property="og:image" content="https://yeasinarafatbd.vercel.app/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+:root{--bg:#F5F7FB;--card:#fff;--line:#E3E8F1;--ink:#0F1A2E;--mute:#5B6780;--brand:#2563EB;--soft:#E8F0FF;--ok:#15803D}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}
+.top{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:4}
+.top .in{max-width:1080px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{font-weight:800;font-size:1.15rem;letter-spacing:-.02em}.logo span{color:var(--brand)}
+.roles{display:flex;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:3px;margin-left:auto}
+.roles button{border:0;background:none;padding:6px 12px;border-radius:7px;cursor:pointer;color:var(--mute);font-weight:600;font-size:.84rem}
+.roles button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+main{max-width:1080px;margin:0 auto;padding:22px 18px 60px}
+h1{font-size:clamp(1.5rem,4vw,2rem);letter-spacing:-.02em}
+.sub{color:var(--mute);margin-top:4px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.bar input,.bar select{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px}
+.bar input{flex:1;min-width:180px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.card h3{font-size:1.02rem}
+.meta{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:.74rem;background:var(--soft);color:var(--brand);padding:3px 8px;border-radius:999px;font-weight:600}
+.chip.g{background:#E7F6EC;color:var(--ok)}.chip.y{background:#FEF3C7;color:#92400E}
+.pay{font-weight:800;font-size:1.05rem}
+.card p{color:var(--mute);font-size:.88rem}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:9px 14px;font-weight:700;cursor:pointer}
+.btn.p{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn:disabled{opacity:.6;cursor:default}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:auto}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}.stat b{font-size:1.5rem;display:block}.stat span{color:var(--mute);font-size:.82rem}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:.88rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}th{color:var(--mute);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}
+.tw{overflow-x:auto}
+form.post{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;grid-template-columns:1fr 1fr;margin:18px 0}
+form.post label{display:grid;gap:4px;font-size:.8rem;color:var(--mute)}
+form.post input,form.post select,form.post textarea{border:1px solid var(--line);border-radius:8px;padding:9px;color:var(--ink)}
+form.post .full{grid-column:1/-1}
+@media (max-width:560px){form.post{grid-template-columns:1fr}}
+.empty{color:var(--mute);padding:20px;text-align:center;border:1px dashed var(--line);border-radius:14px}
+.toast{position:fixed;left:50%;bottom:18px;transform:translate(-50%,120px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-weight:600;font-size:.86rem;transition:transform .3s}
+.toast.on{transform:translate(-50%,0)}
+.note{font-size:.72rem;color:var(--mute);text-align:center;padding:5px;background:#E9EEF7}
+</style>
+</head>
+<body>
+<div class="note">Frontend prototype · sample data saved in this browser only</div>
+<div class="top"><div class="in"><div class="logo">Campus<span>Earn</span></div>
+<div class="roles" role="tablist"><button data-r="student" class="on">Student</button><button data-r="giver">Job giver</button><button data-r="admin">Admin</button></div></div></div>
+<main id="app"></main>
+<div class="toast" id="toast"></div>
+<script>
+const seed=[
+ {id:1,t:"Library assistant",o:"University Library",pay:12,type:"On campus",hrs:"10 h/week",tag:"Admin",d:"Shelve returns, help at the front desk and keep study rooms tidy.",ok:true},
+ {id:2,t:"Python tutor (first-year)",o:"School of Computing",pay:25,type:"On campus",hrs:"6 h/week",tag:"Tutoring",d:"Run two small-group sessions a week on loops, functions and lists.",ok:true},
+ {id:3,t:"Barista, weekend shift",o:"Campus Café",pay:11,type:"On campus",hrs:"Sat–Sun",tag:"Food & drink",d:"Make drinks, serve customers and keep the counter clean.",ok:true},
+ {id:4,t:"Social media helper",o:"Student Union",pay:15,type:"Remote",hrs:"5 h/week",tag:"Design",d:"Make three posts a week in Canva for union events.",ok:true},
+ {id:5,t:"Event crew",o:"Open Day Office",pay:14,type:"On campus",hrs:"One day",tag:"Events",d:"Guide visitors, hand out leaflets and help set up booths.",ok:false},
+ {id:6,t:"Delivery rider (bicycle)",o:"Nasi Lemak Paradise",pay:13,type:"Near campus",hrs:"Evenings",tag:"Delivery",d:"Deliver lunch and dinner orders to hostels around campus.",ok:true}];
+const K="campusearn-demo";
+let S;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+if(!S||!S.jobs)S={jobs:seed,apps:[],role:"student"};
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const toast=t=>{const el=$("#toast");el.textContent=t;el.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove("on"),2000)};
+let q="",f="all";
+function student(){const live=S.jobs.filter(j=>j.ok);const types=[...new Set(live.map(j=>j.tag))];
+ const list=live.filter(j=>(f==="all"||j.tag===f)&&(j.t+j.o+j.d).toLowerCase().includes(q.toLowerCase()));
+ return `<h1>Find flexible work on campus</h1><p class="sub">${live.length} open jobs · apply in one tap · ${S.apps.length} application${S.apps.length===1?"":"s"} sent</p>
+ <div class="bar"><input id="q" placeholder="Search jobs, e.g. tutor" value="${esc(q)}"><select id="f"><option value="all">All types</option>${types.map(t=>`<option ${t===f?"selected":""}>${esc(t)}</option>`).join("")}</select></div>
+ ${list.length?`<div class="grid">${list.map(j=>{const ap=S.apps.find(a=>a.job===j.id);return `<article class="card"><div class="meta"><span class="chip">${esc(j.tag)}</span><span class="chip g">${esc(j.type)}</span></div><h3>${esc(j.t)}</h3><p>${esc(j.o)} · ${esc(j.hrs)}</p><p>${esc(j.d)}</p><div class="row"><span class="pay">RM ${j.pay}/h</span><button class="btn ${ap?"":"p"}" data-apply="${j.id}" ${ap?"disabled":""}>${ap?(ap.s==="Accepted"?"Accepted ✓":"Applied"):"Apply"}</button></div></article>`}).join("")}</div>`:`<div class="empty">No jobs match. Try another search.</div>`}`}
+function giver(){const mine=S.jobs.filter(j=>j.mine);
+ return `<h1>Post a job for students</h1><p class="sub">Jobs are checked by an admin before students see them.</p>
+ <form class="post" id="post"><label class="full">Job title<input name="t" required placeholder="e.g. Lab assistant"></label><label>Pay (RM per hour)<input name="pay" type="number" min="5" required value="12"></label><label>Type<select name="tag"><option>Admin</option><option>Tutoring</option><option>Events</option><option>Design</option><option>Delivery</option></select></label><label class="full">What they'll do<textarea name="d" rows="2" required></textarea></label><button class="btn p full">Post job</button></form>
+ <h2 style="font-size:1.1rem;margin:8px 0 10px">Your jobs and applicants</h2>${mine.length?`<div class="tw"><table><tr><th>Job</th><th>Status</th><th>Applicants</th><th></th></tr>${mine.map(j=>{const a=S.apps.filter(x=>x.job===j.id);return `<tr><td>${esc(j.t)}</td><td><span class="chip ${j.ok?"g":"y"}">${j.ok?"Live":"Waiting for admin"}</span></td><td>${a.length}</td><td>${a.filter(x=>x.s!=="Accepted").length?`<button class="btn" data-accept="${j.id}">Accept next</button>`:""}</td></tr>`}).join("")}</table></div>`:`<div class="empty">You haven't posted a job yet.</div>`}`}
+function admin(){const pend=S.jobs.filter(j=>!j.ok);const paid=S.apps.filter(a=>a.s==="Accepted").length;
+ return `<h1>Admin workspace</h1><p class="sub">Approve jobs and keep an eye on the marketplace.</p>
+ <div class="stats"><div class="stat"><b>${S.jobs.filter(j=>j.ok).length}</b><span>Live jobs</span></div><div class="stat"><b>${pend.length}</b><span>Waiting for review</span></div><div class="stat"><b>${S.apps.length}</b><span>Applications</span></div><div class="stat"><b>${paid}</b><span>Students hired</span></div></div>
+ <h2 style="font-size:1.1rem;margin:8px 0 10px">Review queue</h2>${pend.length?`<div class="tw"><table><tr><th>Job</th><th>Posted by</th><th>Pay</th><th></th></tr>${pend.map(j=>`<tr><td>${esc(j.t)}</td><td>${esc(j.o)}</td><td>RM ${j.pay}/h</td><td style="white-space:nowrap"><button class="btn p" data-ok="${j.id}">Approve</button> <button class="btn" data-no="${j.id}">Reject</button></td></tr>`).join("")}</table></div>`:`<div class="empty">Nothing to review. All caught up.</div>`}
+ <p style="margin-top:16px"><button class="btn" id="reset">Reset demo data</button></p>`}
+function draw(){document.querySelectorAll(".roles button").forEach(b=>b.classList.toggle("on",b.dataset.r===S.role));
+ $("#app").innerHTML=S.role==="student"?student():S.role==="giver"?giver():admin();
+ const qi=$("#q");if(qi){qi.oninput=e=>{q=e.target.value;draw();const n=$("#q");n.focus();n.setSelectionRange(q.length,q.length)};$("#f").onchange=e=>{f=e.target.value;draw()}}
+ const p=$("#post");if(p)p.onsubmit=e=>{e.preventDefault();const d=Object.fromEntries(new FormData(p));S.jobs.push({id:Date.now(),t:d.t,o:"Your organisation",pay:+d.pay,type:"On campus",hrs:"Flexible",tag:d.tag,d:d.d,ok:false,mine:true});save();toast("Job posted. An admin will review it.");draw()};
+ const r=$("#reset");if(r)r.onclick=()=>{S={jobs:seed,apps:[],role:"admin"};save();draw();toast("Demo data reset")};}
+document.querySelector(".roles").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.role=b.dataset.r;save();draw()};
+$("#app").addEventListener("click",e=>{const t=e.target;
+ if(t.dataset.apply){S.apps.push({job:+t.dataset.apply,s:"Sent"});save();toast("Application sent");draw()}
+ if(t.dataset.ok){S.jobs.find(j=>j.id==t.dataset.ok).ok=true;save();toast("Job approved and live");draw()}
+ if(t.dataset.no){S.jobs=S.jobs.filter(j=>j.id!=t.dataset.no);save();toast("Job rejected");draw()}
+ if(t.dataset.accept){const a=S.apps.find(x=>x.job==t.dataset.accept&&x.s!=="Accepted");if(a){a.s="Accepted";save();toast("Student accepted");draw()}}});
+draw();
+</script>
+</body>
+</html>
