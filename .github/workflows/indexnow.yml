@@ -1,0 +1,17 @@
+# After each successful production deploy on Vercel, tell IndexNow search engines
+# (Bing, Yahoo, DuckDuckGo, Yandex, Naver, Seznam) about every page in sitemap.xml.
+name: IndexNow
+on:
+  deployment_status:
+permissions:
+  contents: read
+jobs:
+  ping:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - run: node tools/indexnow.mjs
