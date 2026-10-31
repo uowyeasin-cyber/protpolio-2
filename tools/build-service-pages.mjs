@@ -20,8 +20,8 @@ const ext = (href) => /^https?:/.test(href) && !href.startsWith(BASE);
 const wa = (text) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
 const ld = (o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, "\\u003c")}</script>`;
 
-const CSS = `:root{--ink:#F6F7F9;--panel:#fff;--raise:#EEF1F6;--line:#E1E6EE;--paper:#0B1B33;--mute:#4B5A73;--faint:#8A95A8;--cobalt:#1F4FD8;--r:8px;--f:"Geist",system-ui,-apple-system,"Segoe UI","Noto Sans Bengali","Nirmala UI",sans-serif;--m:"Geist Mono",ui-monospace,Menlo,monospace;color-scheme:light}
-:root[data-theme="dark"]{--ink:#060C18;--panel:#0C1526;--raise:#131F36;--line:#1D2A43;--paper:#E9EEF8;--mute:#9BA9C2;--faint:#62718D;--cobalt:#5B8CFF;color-scheme:dark}
+const CSS = `:root{--ink:#F6F7F9;--panel:#fff;--raise:#EEF1F6;--line:#E1E6EE;--paper:#0B1B33;--mute:#4B5A73;--faint:#8A95A8;--cobalt:#1F4FD8;--r:8px;--cobalt-soft:rgba(31,79,216,.14);--f-body:var(--f);--f-display:var(--f);--f:"Geist",system-ui,-apple-system,"Segoe UI","Noto Sans Bengali","Nirmala UI",sans-serif;--m:"Geist Mono",ui-monospace,Menlo,monospace;color-scheme:light}
+:root[data-theme="dark"]{--ink:#060C18;--panel:#0C1526;--raise:#131F36;--line:#1D2A43;--paper:#E9EEF8;--mute:#9BA9C2;--faint:#62718D;--cobalt:#5B8CFF;--cobalt-soft:rgba(91,140,255,.18);color-scheme:dark}
 *{box-sizing:border-box}body{margin:0;background:var(--ink);color:var(--paper);font:400 16px/1.65 var(--f);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 [data-theme="dark"] body{background:radial-gradient(1000px 600px at 85% -10%,rgba(91,140,255,.12),transparent 60%),var(--ink)}
 a{color:inherit}img{max-width:100%;display:block}h1,h2,h3{font-weight:600;letter-spacing:-.03em;line-height:1.1;margin:0;text-wrap:balance}p{margin:0}
@@ -39,7 +39,7 @@ section{padding:clamp(26px,4vw,48px) 0;border-top:1px solid var(--line)}section 
 .pts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;padding:0;margin:0;list-style:none}.pts li{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px 14px 40px;position:relative}
 .pts li::before{content:"";position:absolute;left:16px;top:22px;width:10px;height:10px;border-radius:50%;background:var(--cobalt)}
 .work{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}.work a{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;text-decoration:none;transition:border-color .2s,transform .2s}
-.work a:hover{border-color:var(--cobalt);transform:translateY(-2px)}.work img{aspect-ratio:16/10;object-fit:cover;width:100%;background:var(--raise)}.work div{padding:14px 16px}.work h3{font-size:1.02rem;margin-bottom:4px}.work p{font-size:.9rem;color:var(--mute)}
+.work a:hover{border-color:var(--cobalt);transform:translateY(-2px)}.work img{aspect-ratio:16/10;object-fit:contain;width:100%;padding:10px;background:var(--raise);border-bottom:1px solid var(--line)}.work div{padding:14px 16px}.work h3{font-size:1.02rem;margin-bottom:4px}.work p{font-size:.9rem;color:var(--mute)}
 .pk{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.pk article{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:8px}
 .pk article.pop{border-color:var(--cobalt)}.pk h3{font-size:1.15rem}.pk .f{color:var(--mute);font-size:.92rem}.pk b{font-size:1.05rem}.pk ul{margin:4px 0 8px;padding-left:18px;color:var(--mute);font-size:.92rem}.pk .btn{margin-top:auto}
 .bn{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:clamp(18px,3vw,28px)}.bn h2{margin-top:0}.bn p{color:var(--mute);max-width:70ch}
@@ -52,7 +52,7 @@ footer{padding:26px 0 40px;color:var(--faint);font-size:.85rem}footer .wrap{disp
 const themeInit = `<script>try{var t=localStorage.getItem("ya-theme");document.documentElement.dataset.theme=t==="light"?"light":"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>`;
 const themeBtn = `<script>(function(){var b=document.getElementById("tb"),r=document.documentElement;function s(){b.textContent=r.dataset.theme==="dark"?"☀":"☾";b.setAttribute("aria-label",r.dataset.theme==="dark"?"Switch to light theme":"Switch to dark theme")}s();b.onclick=function(){r.dataset.theme=r.dataset.theme==="dark"?"light":"dark";try{localStorage.setItem("ya-theme",r.dataset.theme)}catch(e){}s()}})()</script>`;
 
-function shell({ title, desc, kw, url, body, schema, img }) {
+function shell({ title, desc, kw, url, body, schema, img, key }) {
   return `<!doctype html>
 <html lang="en" data-theme="dark">
 <head>
@@ -84,12 +84,13 @@ ${themeInit}
 ${ld(schema)}
 </head>
 <body>
-<header><div class="wrap"><a class="brand" href="/"><img src="${ICON}" alt="" width="32" height="32">${esc(SITE.name)}</a><nav><a class="btn sm" href="/services/">Services</a><a class="btn sm" href="/#work">Work</a><button class="tb" id="tb" type="button"></button><a class="btn sm solid" href="/#contact">Hire me</a></nav></div></header>
-<main>
+<header id="sp-head"><div class="wrap"><a class="brand" href="/"><img src="${ICON}" alt="" width="32" height="32">${esc(SITE.name)}</a><nav><a class="btn sm" href="/services/">Services</a><a class="btn sm" href="/#work">Work</a><button class="tb" id="tb" type="button"></button><a class="btn sm solid" href="/#contact">Hire me</a></nav></div></header>
+<main id="sp-${key}">
 ${body}
 </main>
-<footer><div class="wrap"><span>© ${new Date().getFullYear()} ${esc(SITE.name)} · ${esc(SITE.location || "")}</span><span>${SERVICE_PAGES.map((p) => `<a href="/services/${p.slug}/">${esc(p.nav)}</a>`).join(" · ")}</span></div></footer>
+<footer id="sp-foot"><div class="wrap"><span>© ${new Date().getFullYear()} ${esc(SITE.name)} · ${esc(SITE.location || "")}</span><span>${SERVICE_PAGES.map((p) => `<a href="/services/${p.slug}/">${esc(p.nav)}</a>`).join(" · ")}</span></div></footer>
 ${themeBtn}
+<script src="/cms.js" defer></script>
 </body>
 </html>
 `;
@@ -127,7 +128,7 @@ ${pg.bn ? `<section lang="bn"><div class="bn"><span class="mono">বাংলা
   const img = pg.work && pg.work[0] ? BASE + "/img/" + pg.work[0][1] : null;
   const dir = path.join(root, "services", pg.slug);
   fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(path.join(dir, "index.html"), shell({ title: `${pg.title} | ${SITE.name}`, desc: pg.desc, kw: pg.kw, url, body, schema, img }));
+  fs.writeFileSync(path.join(dir, "index.html"), shell({ title: `${pg.title} | ${SITE.name}`, desc: pg.desc, kw: pg.kw, url, body, schema, img, key: pg.slug }));
   n++;
 }
 
@@ -140,7 +141,7 @@ const hubBody = `<div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a
 fs.writeFileSync(path.join(root, "services", "index.html"), shell({
   title: `Services: Websites, Apps, UI/UX & Design | ${SITE.name}`,
   desc: `${SITE.name} builds websites, online stores, mobile and web apps, portfolio sites, UI/UX and graphic design for clients ${SITE.areas ? "in " + AREAS.filter((a) => a !== "Worldwide").slice(0, 2).join(" and ") + " and worldwide" : "worldwide"}.`,
-  kw: SERVICE_PAGES.map((p) => p.nav).join(", "), url: hubUrl, body: hubBody,
+  kw: SERVICE_PAGES.map((p) => p.nav).join(", "), url: hubUrl, body: hubBody, key: "hub",
   schema: { "@context": "https://schema.org", "@type": "CollectionPage", url: hubUrl, name: "Services", hasPart: SERVICE_PAGES.map((p) => ({ "@type": "WebPage", url: `${BASE}/services/${p.slug}/`, name: p.title })) },
 }));
 

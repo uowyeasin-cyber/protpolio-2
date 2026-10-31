@@ -138,5 +138,6 @@ const dlg=document.getElementById("dlg");
 document.querySelectorAll("[data-join]").forEach(b=>b.onclick=()=>dlg.showModal());
 dlg.addEventListener("close",()=>{if(dlg.returnValue==="ok"){toast("JazakAllahu khayran! We'll email you soon.");document.getElementById("form").reset()}});
 </script>
+<script src="/cms.js" defer></script>
 </body>
 </html>

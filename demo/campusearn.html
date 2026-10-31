@@ -106,5 +106,6 @@ $("#app").addEventListener("click",e=>{const t=e.target;
  if(t.dataset.accept){const a=S.apps.find(x=>x.job==t.dataset.accept&&x.s!=="Accepted");if(a){a.s="Accepted";save();toast("Student accepted");draw()}}});
 draw();
 </script>
+<script src="/cms.js" defer></script>
 </body>
 </html>

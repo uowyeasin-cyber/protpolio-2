@@ -103,5 +103,6 @@ $("#go").onclick=async()=>{if(!user){toast("Please sign in first");log('<span cl
 loadMenu();drawCart();
 setTimeout(()=>{log('\n<span class="k">GET</span> /api/menu (second visit)');hop(["gw","menu","redis"],'  <span class="ok">200</span> served from Redis cache (3 ms)')},4000);
 </script>
+<script src="/cms.js" defer></script>
 </body>
 </html>
