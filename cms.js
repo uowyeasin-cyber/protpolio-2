@@ -5,6 +5,9 @@
   const OWNER = "yeasinarafat272003@gmail.com";
   const DYNAMIC = ["#projectBody", "#masonry", "#pk", "#devList", "#homeCards"];
   const FONTS_URL = "https://fonts.googleapis.com/css2?display=swap&family=";
+  // Edits made on another page (a service page, a demo) carry that page's path in op.p and apply only there.
+  const PAGE = location.pathname.replace(/\/index\.html$/, "/").replace(/\.html$/, "").replace(/\/+$/, "") || "/";
+  const here = (op) => (op.p || "/") === PAGE;
   const EMPTY = () => ({ v: 1, ops: [], pages: [], hidden: [], theme: {} });
   const ls = {
     get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
@@ -33,10 +36,10 @@
 .cms-page h1{font-size:var(--s1);letter-spacing:-.035em}.cms-page p{color:var(--mute);max-width:70ch;margin-top:18px;font-size:1.1rem}
 .cms-media{max-width:100%;border-radius:var(--r);display:block}.cms-embed{width:100%;aspect-ratio:16/9;border:0;border-radius:var(--r)}
 .cms-login{position:fixed;inset:0;z-index:9999;background:rgba(5,7,12,.82);backdrop-filter:blur(8px);display:grid;place-items:center;padding:16px}
-.cms-login form{width:min(420px,100%);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:30px;display:grid;gap:14px;color:var(--paper);font-family:var(--f-body)}
-.cms-login h2{font-size:1.6rem}.cms-login p{color:var(--mute);font-size:.92rem}
-.cms-login label{display:grid;gap:6px;font-size:.85rem;color:var(--mute)}
-.cms-login input{font:inherit;font-size:1rem;color:var(--paper);background:var(--ink);border:1px solid var(--line);border-radius:6px;padding:12px 14px}
+.cms-login form{width:min(420px,100%);background:var(--panel,#0C1526);border:1px solid var(--line,#1D2A43);border-radius:10px;padding:30px;display:grid;gap:14px;color:var(--paper,#E9EEF8);font-family:var(--f-body,system-ui,sans-serif)}
+.cms-login h2{font-size:1.6rem}.cms-login p{color:var(--mute,#9BA9C2);font-size:.92rem}
+.cms-login label{display:grid;gap:6px;font-size:.85rem;color:var(--mute,#9BA9C2)}
+.cms-login input{font:inherit;font-size:1rem;color:var(--paper,#E9EEF8);background:var(--ink,#060C18);border:1px solid var(--line,#1D2A43);border-radius:6px;padding:12px 14px}
 .cms-login .err{color:#D92D20;min-height:1.2em}.cms-login .row{display:flex;gap:10px;flex-wrap:wrap}`;
   document.head.appendChild(style);
 
@@ -61,6 +64,7 @@
   }
 
   function apply(op) {
+    if (!here(op)) return false;
     const el = find(op.sel);
     if (!el) return false;
     switch (op.t) {
@@ -221,7 +225,7 @@
     document.body.appendChild(wrap);
     const f = wrap.querySelector("form");
     f.email.focus();
-    const close = () => { wrap.remove(); if (location.hash === "#login") location.hash = "home"; };
+    const close = () => { wrap.remove(); if (location.hash === "#login") PAGE === "/" ? (location.hash = "home") : history.replaceState(null, "", location.pathname); };
     wrap.querySelector("[data-x]").onclick = close;
     f.onsubmit = async (e) => {
       e.preventDefault();
@@ -251,11 +255,11 @@
   }
 
   const CMS = (window.CMS = {
-    preview: PREVIEW, owner: OWNER, content: EMPTY(), publishedId: null,
+    preview: PREVIEW, owner: OWNER, page: PAGE, here, content: EMPTY(), publishedId: null,
     apply, applyAll, applyTheme, renderPages, clean, find, watch, api, ls, loadFonts, DYNAMIC,
     async logout() {
       if (PREVIEW) ls.del("cms-preview-owner"); else await api("logout", { method: "POST" }).catch(() => {});
-      location.hash = "home"; location.reload();
+      PAGE === "/" ? (location.hash = "home") : history.replaceState(null, "", location.pathname); location.reload();
     },
   });
 
@@ -278,7 +282,7 @@
     observeDynamic();
     document.documentElement.classList.remove("cms-wait");
     if (owner) startEditor();
-    if (location.hash === "#login") owner ? (location.hash = "home") : showLogin();
+    if (location.hash === "#login") owner ? (PAGE === "/" ? (location.hash = "home") : history.replaceState(null, "", location.pathname)) : showLogin();
   }
 
   addEventListener("hashchange", () => { if (location.hash === "#login") showLogin(); });

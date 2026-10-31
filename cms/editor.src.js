@@ -17,6 +17,8 @@
   const HOVERS = [["", "None"], ["lift", "Lift up"], ["grow", "Grow"], ["shrink", "Shrink"], ["tilt", "Tilt"], ["glow", "Glow"], ["bright", "Brighten"], ["shine", "Shine"]];
   const SHADOWS = { none: "none", soft: "0 8px 30px rgba(0,0,0,.25)", strong: "0 20px 60px rgba(0,0,0,.5)", glow: "0 0 0 4px rgba(94,139,255,.18), 0 12px 40px rgba(94,139,255,.35)" };
   const THEME_COLORS = [["--ink", "Background"], ["--panel", "Cards"], ["--raise", "Raised parts"], ["--line", "Lines & borders"], ["--paper", "Text"], ["--mute", "Soft text"], ["--cobalt", "Accent"], ["--ember", "Highlight"]];
+  // Off the main page (e.g. /services/...), jumping to a section means going back to the home page.
+  const goTo = (slug) => (document.getElementById("app") ? (location.hash = slug) : (location.href = "/#" + slug));
   const BUILTIN = [["home", "Home"], ["work", "Work"], ["code", "Code"], ["awards", "Awards"], ["services", "Services"], ["about", "About"], ["cv", "Résumé"], ["contact", "Contact"]];
   const BLOCKS = {
     heading: () => `<h2 style="margin:28px 0 12px">New heading</h2>`,
@@ -57,9 +59,10 @@
   // Record an edit: apply it now and keep it in the draft. Style/attr edits on the same element merge.
   function commit(op, { snap = true } = {}) {
     if (snap) snapshot();
+    if (CMS.page && CMS.page !== "/") op.p = CMS.page;
     CMS.apply(op);
     const last = content.ops[content.ops.length - 1];
-    if (last && (op.t === "style" || op.t === "attr") && last.t === op.t && last.sel === op.sel) Object.assign(last.v, op.v);
+    if (last && (op.t === "style" || op.t === "attr") && last.t === op.t && last.sel === op.sel && last.p === op.p) Object.assign(last.v, op.v);
     else content.ops.push(op);
     saveDraft();
   }
@@ -458,7 +461,7 @@ body.cx-open{padding-bottom:70px}
   body.addEventListener("click", (e) => {
     const b = e.target.closest("button");
     if (!b) return;
-    if (b.dataset.go) { setEditing(false); location.hash = b.dataset.go; setTimeout(() => setEditing(true), 50); return; }
+    if (b.dataset.go) { setEditing(false); goTo(b.dataset.go); setTimeout(() => setEditing(true), 50); return; }
     if (tab !== "edit") return;
     if (b.dataset.a === "edit") return setEditing(true);
     if (b.dataset.clr) return setStyle({ [b.dataset.clr]: "" }), render();
@@ -504,7 +507,7 @@ body.cx-open{padding-bottom:70px}
     if (x === "reset") {
       const s = selOf(sel);
       snapshot();
-      content.ops = content.ops.filter((o) => o.sel !== s || o.t === "dup" || o.t === "ins");
+      content.ops = content.ops.filter((o) => o.sel !== s || !CMS.here(o) || o.t === "dup" || o.t === "ins");
       return reloadWith(content);
     }
   });
@@ -594,7 +597,7 @@ body.cx-open{padding-bottom:70px}
     const b = e.target.closest("button");
     if (!b) return;
     const pages = (content.pages ||= []);
-    if (b.dataset.open) { location.hash = b.dataset.open; return; }
+    if (b.dataset.open) { goTo(b.dataset.open); return; }
     if (b.dataset.padd !== undefined) {
       const title = $("[data-newtitle]", body).value.trim();
       if (!title) return toast("Type a page name first");
@@ -603,6 +606,7 @@ body.cx-open{padding-bottom:70px}
       for (let i = 2; taken.has(slug); i++) slug = slugify(title) + "-" + i;
       snapshot();
       pages.push({ slug, title, nav: true, html: `<div class="wrap block cms-page"><span class="mono">${esc(title)}</span><h1 style="margin-top:14px">${esc(title)}</h1><p>Write something here. Turn on Edit and click any text to change it, or add photos, videos, buttons and sections.</p><div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px"><a class="btn solid" href="#contact">Get in touch</a></div></div>` });
+      if (!document.getElementById("app")) { saveDraft(); location.href = "/#" + slug; return; }
       location.hash = slug;
       return reloadWith(content);
     }
