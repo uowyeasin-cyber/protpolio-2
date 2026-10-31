@@ -19,6 +19,7 @@ const SITE = {
   location: "Shah Alam, Selangor, Malaysia",
   role: "software developer, web & app developer and UI/UX designer",
   linkedin: "https://www.linkedin.com/in/yeasin-arafat-07269432b",
+  youtube: "https://www.youtube.com/@Yeasin27Arafat",
   github: "https://github.com/uowyeasin-cyber",
   resume: "https://drive.google.com/file/d/1pEi4xJrkY9GgL6H_Nm5rOhIOL7Ktamwk/view?usp=drivesdk",
   url: "https://yeasinarafatbd.vercel.app",   // live address, used by the service pages and sitemap

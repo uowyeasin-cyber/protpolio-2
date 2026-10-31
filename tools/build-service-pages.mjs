@@ -111,7 +111,8 @@ ${langJS}
 }
 
 const share = (u, t) => [["WhatsApp", `https://wa.me/?text=${encodeURIComponent(t + " " + u)}`], ["Facebook", `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(u)}`], ["LinkedIn", `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(u)}`], ["X", `https://x.com/intent/post?url=${encodeURIComponent(u)}&text=${encodeURIComponent(t)}`]].map(([n, h]) => `<a class="btn" href="${h}" target="_blank" rel="noopener">${n}</a>`).join("");
-const person = { "@type": "Person", "@id": BASE + "/#person", name: SITE.name, url: BASE + "/" };
+const SAME_AS = ["linkedin", "github", "youtube", "facebook", "instagram", "tiktok", "x"].map((k) => SITE[k]).filter((u) => /^https:\/\/[^/]+\/./.test(u || ""));
+const person = { "@type": "Person", "@id": BASE + "/#person", name: SITE.name, url: BASE + "/", ...(SAME_AS.length ? { sameAs: SAME_AS } : {}) };
 const pkgHTML = (key, svc) => (PACKAGES[key] || []).map((k) => `<article${k.pop ? ' class="pop"' : ""}><span class="mono">${esc(k.d)}</span><h3>${esc(k.t)}</h3><p class="f">${esc(k.f)}</p><b>${esc(k.price || "Custom quote")}</b><ul>${k.l.map((x) => `<li>${esc(x)}</li>`).join("")}</ul><a class="btn" href="${wa(`Hi ${SITE.name.split(" ")[0]}, I'm interested in the ${k.t} package for ${svc}.`)}" target="_blank" rel="noopener">Ask about ${esc(k.t)}</a></article>`).join("");
 
 // Text for each extra language on one service page.
