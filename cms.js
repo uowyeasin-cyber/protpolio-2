@@ -178,6 +178,7 @@
     if (b.solidBg) css += `.btn.solid{background:${b.solidBg};border-color:${b.solidBg}}`;
     if (b.solidFg) css += `.btn.solid{color:${b.solidFg}}`;
     s.textContent = css + (t.css || "").replace(/<\/?style/gi, "");
+    if (t.icon) document.querySelectorAll('link[rel="icon"],link[rel="apple-touch-icon"]').forEach((l) => (l.href = t.icon));
     const fonts = [t.vars && t.vars["--f-display"], t.vars && t.vars["--f-body"]];
     (c.ops || []).forEach((o) => o.t === "style" && o.v["font-family"] && fonts.push(o.v["font-family"]));
     loadFonts(fonts);
