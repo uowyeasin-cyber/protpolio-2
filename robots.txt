@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Allow: /api/icon
 Disallow: /api/
 
 Sitemap: https://yeasinarafatbd.vercel.app/sitemap.xml

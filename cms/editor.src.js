@@ -520,6 +520,10 @@ body.cx-open{padding-bottom:70px}
     const cs = getComputedStyle(document.documentElement);
     const val = (k) => v[k] || cs.getPropertyValue(k).trim();
     body.innerHTML = `
+    <div class="cx-sec"><h4>Site icon (browser tab & Google results)</h4>
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px"><img src="${esc(t.icon || "/api/icon?default=1")}" alt="" width="48" height="48" style="border-radius:50%;object-fit:cover;background:#fff;border:1px solid var(--cx-line)"><p class="cx-note" style="margin:0">Your photo or logo. It is cut to a square (512 × 512). Google can take a few weeks to show a new icon.</p></div>
+      ${row("Upload", `<input type="file" accept="image/png,image/jpeg,image/webp" data-icon class="cx-in">`)}
+      <div class="cx-btns"><button class="cx-b" data-iconclr>Use the default icon</button></div></div>
     <div class="cx-sec"><h4>Colours</h4>${THEME_COLORS.map(([k, l]) => row(l, color(k, val(k), true))).join("")}
       <div class="cx-btns"><button class="cx-b" data-preset="dark">Navy & white (default)</button><button class="cx-b" data-preset="midnight">Midnight (dark)</button><button class="cx-b" data-preset="light">Warm light</button><button class="cx-b" data-preset="emerald">Emerald</button><button class="cx-b" data-preset="royal">Royal purple</button><button class="cx-b" data-preset="sunset">Sunset</button></div></div>
     <div class="cx-sec"><h4>Fonts</h4>
@@ -569,7 +573,35 @@ body.cx-open{padding-bottom:70px}
     if (t.dataset.btn) { th.btn[t.dataset.btn] = t.type === "checkbox" ? t.checked : t.value; return themeSave(); }
     if (t.dataset.css !== undefined) { th.css = t.value; return themeSave(); }
   }
-  function themeChange(t) { if (t.tagName === "SELECT" || t.type === "checkbox") themeInput(t); }
+  function themeChange(t) {
+    if (t.dataset.icon !== undefined && t.files && t.files[0]) return uploadIcon(t.files[0]);
+    if (t.tagName === "SELECT" || t.type === "checkbox") themeInput(t);
+  }
+  // Site icon: centre-crop to a 512px square PNG, upload, and store its address in theme.icon.
+  // /api/icon serves it to browsers and search engines.
+  async function uploadIcon(f) {
+    try {
+      const img = await createImageBitmap(f);
+      const s = Math.min(img.width, img.height), c = document.createElement("canvas");
+      c.width = c.height = 512;
+      c.getContext("2d").drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, 0, 0, 512, 512);
+      const file = await new Promise((r) => c.toBlob(r, "image/png"));
+      let url;
+      if (CMS.preview) url = c.toDataURL("image/png");
+      else {
+        toast("Uploading…");
+        const r = await fetch("/api/upload?name=site-icon.png", { method: "POST", body: file, headers: { "Content-Type": "image/png" }, credentials: "same-origin" });
+        const j = await r.json();
+        if (!r.ok) throw new Error(j.error);
+        url = j.url;
+      }
+      snapshot();
+      content.theme.icon = url;
+      themeSave();
+      toast("Icon set. Publish to make it live.");
+      render();
+    } catch (x) { toast(x.message || "Upload failed"); }
+  }
   body.addEventListener("click", (e) => {
     if (tab !== "theme") return;
     const b = e.target.closest("button");
@@ -577,6 +609,7 @@ body.cx-open{padding-bottom:70px}
     if (b.dataset.preset) { snapshot(); content.theme.vars = { ...PRESETS[b.dataset.preset] }; return reloadWith(content); }
     if (b.dataset.clrvar) { snapshot(); delete content.theme.vars[b.dataset.clrvar]; document.documentElement.style.removeProperty(b.dataset.clrvar); themeSave(); return render(); }
     if (b.dataset.btnclr !== undefined) { snapshot(); delete content.theme.btn.solidBg; delete content.theme.btn.solidFg; themeSave(); return render(); }
+    if (b.dataset.iconclr !== undefined) { snapshot(); delete content.theme.icon; themeSave(); return render(); }
     if (b.dataset.themereset !== undefined) { if (confirm("Reset all theme colours, fonts and button styles?")) { snapshot(); content.theme = {}; reloadWith(content); } }
   });
 

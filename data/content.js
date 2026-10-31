@@ -8,10 +8,16 @@
 // Your details, used by the WhatsApp buttons, quote buttons and brief form.
 const SITE = {
   name: "Yeasin Arafat",
+  // Name search engines show next to your results (Google "site name").
+  siteName: "Yeasin Arafat | Averroes Solutions",
+  // IndexNow key (any 32 letters/numbers). Lets Bing, Yahoo, DuckDuckGo, Yandex, Naver and Seznam
+  // hear about new pages at once: run `node tools/indexnow.mjs` after you deploy.
+  indexNowKey: "2452c92025b4c51503bc5e69cb00a39d",
   email: "yeasinarafat272003@gmail.com",
   whatsapp: "60178151865",          // country code + number, digits only
   phone: "+60 17 815 1865",
   location: "Shah Alam, Selangor, Malaysia",
+  role: "software developer, web & app developer and UI/UX designer",
   linkedin: "https://www.linkedin.com/in/yeasin-arafat-07269432b",
   github: "https://github.com/uowyeasin-cyber",
   resume: "https://drive.google.com/file/d/1pEi4xJrkY9GgL6H_Nm5rOhIOL7Ktamwk/view?usp=drivesdk",
