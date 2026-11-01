@@ -1529,7 +1529,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-copy]");if
 /* Footer + contact icons from SITE */
 (function(){try{
 const S=typeof SITE!=="undefined"?SITE:{};const ic=(n,c)=>typeof brandSVG=="function"?brandSVG(n,c||"currentColor"):"";
-const hb=document.querySelector("header .brand");const fl=document.querySelector(".ft-logo");if(hb&&fl){const c=hb.cloneNode(true);c.removeAttribute("id");fl.appendChild(c)}
+const hb=document.querySelector("header .brand");const fl=document.querySelector(".ft-logo");if(hb&&fl){const sync=()=>{const c=hb.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));fl.replaceChildren(c)};sync();let t;new MutationObserver(()=>{clearTimeout(t);t=setTimeout(sync,60)}).observe(hb,{subtree:true,childList:true,attributes:true,characterData:true})}
 const wa=S.whatsapp?"https://wa.me/"+String(S.whatsapp).replace(/\D/g,""):"";
 const soc=[["LinkedIn",S.linkedin],["GitHub",S.github],["YouTube",S.youtube],["Facebook",S.facebook],["Instagram",S.instagram],["TikTok",S.tiktok],["WhatsApp",wa],["Email",S.email?"mailto:"+S.email:""]].filter(x=>x[1]);
 const fs=document.querySelector(".ft-social");if(fs)fs.innerHTML=soc.map(([n,u])=>`<a href="${u}" ${u.startsWith("mailto")?"":'target="_blank" rel="noopener"'} aria-label="${n}" title="${n}">${ic(n)}</a>`).join("");
