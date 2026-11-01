@@ -161,7 +161,7 @@ ${tr.length ? `<section><span class="mono">Languages</span><h2>Read this in your
   const img = pg.work && pg.work[0] ? BASE + "/img/" + pg.work[0][1] : null;
   const dir = path.join(root, "services", pg.slug);
   fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(path.join(dir, "index.html"), shell({ title: `${pg.title} | ${SITE.name}`, desc: pg.desc, kw: [pg.kw, ...tr.map((t) => t.n)].filter(Boolean).join(", "), url, body, schema, img, key: pg.slug }));
+  fs.writeFileSync(path.join(dir, "index.html"), shell({ title: `${pg.title} | ${SITE.name}`, desc: pg.meta || pg.desc, kw: [pg.kw, ...tr.map((t) => t.n)].filter(Boolean).join(", "), url, body, schema, img, key: pg.slug }));
   n++;
 }
 
@@ -174,7 +174,7 @@ ${I18N.LANGS.length ? `<section style="margin-top:32px" id="languages"><span cla
 <section style="margin-top:32px"><div class="cta"><div><h2 style="margin:0 0 6px">Not sure which one you need?</h2><p style="color:var(--mute)">Tell me about your project and I'll suggest the simplest way to do it.</p></div><a class="btn solid" href="${wa(`Hi ${SITE.name.split(" ")[0]}, I'd like to talk about a project.`)}" target="_blank" rel="noopener">WhatsApp</a></div></section></div>`;
 fs.writeFileSync(path.join(root, "services", "index.html"), shell({
   title: `Services: Websites, Apps, UI/UX & Design | ${SITE.name}`,
-  desc: `${SITE.name} builds websites, online stores, mobile and web apps, portfolio sites, UI/UX and graphic design for clients ${SITE.areas ? "in " + AREAS.filter((a) => a !== "Worldwide").slice(0, 2).join(" and ") + " and worldwide" : "worldwide"}.`,
+  desc: `${SITE.name} builds websites, online stores, mobile and web apps, UI/UX and graphic design for clients ${SITE.areas ? "in " + AREAS.filter((a) => a !== "Worldwide").slice(0, 2).join(", ") + " and worldwide" : "worldwide"}.`,
   kw: SERVICE_PAGES.map((p) => p.nav).join(", "), url: hubUrl, body: hubBody, key: "hub",
   schema: { "@context": "https://schema.org", "@type": "CollectionPage", url: hubUrl, name: "Services", hasPart: SERVICE_PAGES.map((p) => ({ "@type": "WebPage", url: `${BASE}/services/${p.slug}/`, name: p.title })) },
 }));
