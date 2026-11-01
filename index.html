@@ -459,6 +459,37 @@ footer a:hover{color:var(--cobalt)}
 .pkc ul{list-style:none;padding:0;margin:4px 0 0;display:grid;gap:8px;font-size:.9rem}
 .pkc .btn{margin-top:auto}
 .pk-tabs{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+/* Packages: premium layout */
+.pk-tabs{display:inline-flex;gap:4px;padding:5px;border:1px solid var(--line);border-radius:10px;background:var(--panel);box-shadow:var(--sh1);margin-bottom:30px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.pk-tabs::-webkit-scrollbar{display:none}
+.pk-tabs button{border:0;background:transparent;border-radius:7px;padding:9px 16px;white-space:nowrap}
+.pk-tabs button:hover{background:color-mix(in srgb,var(--paper) 6%,transparent)}
+.pk-tabs button[aria-pressed="true"],[data-theme="dark"] .pk-tabs button[aria-pressed="true"]{background:var(--cobalt);color:#fff;box-shadow:0 6px 18px -8px var(--cobalt)}
+.pk{gap:20px;align-items:stretch}
+.pkc{padding:30px 28px 28px;gap:0;overflow:hidden;background:linear-gradient(180deg,color-mix(in srgb,var(--paper) 3%,var(--panel)),var(--panel))}
+.pkc::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--paper) 18%,transparent),transparent)}
+.pkc:hover{border-color:color-mix(in srgb,var(--cobalt) 40%,var(--line))}
+.pkc .pk-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+.pkc .pk-no{font:500 .72rem var(--f-mono,monospace);letter-spacing:.12em;color:var(--mute);text-transform:uppercase}
+.pkc .badge{position:static;display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 10px;font-size:.66rem;letter-spacing:.08em;background:var(--cobalt);color:#fff}
+.pkc .badge svg{width:11px;height:11px}
+.pkc h3{font-size:1.4rem;letter-spacing:-.03em;margin-bottom:6px}
+.pkc .for{min-height:2.9em;line-height:1.45}
+.pkc .price{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin:22px 0 4px;font-size:inherit}
+.pkc .price .from{font-size:.8rem;color:var(--mute);font-weight:500;align-self:center}
+.pkc .price .cur{font-size:1rem;font-weight:600;color:var(--mute)}
+.pkc .price .amt{font-size:2.6rem;font-weight:600;letter-spacing:-.045em;line-height:1}
+.pkc .price .txt{font-size:1.8rem;font-weight:600;letter-spacing:-.035em}
+.pkc .note{font-size:.78rem;color:var(--mute);margin-bottom:22px}
+.pkc ul{margin:0 0 26px;padding-top:22px;border-top:1px solid var(--line);gap:11px}
+.pkc li::before{width:18px;height:18px;border-radius:50%;background:var(--cobalt-soft);-webkit-mask:none;mask:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B8CFF' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 12.5l3.2 3.2L17 9'/%3E%3C/svg%3E");background-size:14px;background-position:center;background-repeat:no-repeat;margin-top:.1em}
+.pkc .btn{width:100%;justify-content:center}
+.pkc.pop{border-color:color-mix(in srgb,var(--cobalt) 70%,var(--line));background:radial-gradient(120% 60% at 50% 0%,color-mix(in srgb,var(--cobalt) 16%,transparent),transparent 70%),var(--panel);box-shadow:0 0 0 1px color-mix(in srgb,var(--cobalt) 45%,transparent),0 30px 60px -30px color-mix(in srgb,var(--cobalt) 55%,transparent)}
+@media (min-width:821px){.pkc.pop{transform:translateY(-10px)}.pkc.pop:hover{transform:translateY(-14px)}}
+.pk-trust{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-size:.86rem;color:var(--mute)}
+.pk-trust span{display:inline-flex;align-items:center;gap:8px}
+.pk-trust svg{width:16px;height:16px;color:var(--cobalt);flex:none}
+
 .faq{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh1)}
 .faq details{border-top:1px solid var(--line);padding:0 22px}
 .faq details:first-child{border-top:0}
@@ -941,7 +972,7 @@ body.cx-editing .svc .svc-more::after{display:none}
       <div class="sec-head"><div><span class="mono">Packages</span><h2>Pick a starting point</h2></div></div>
       <div class="pk-tabs" id="pkTabs" role="toolbar" aria-label="Package type"></div>
       <div class="pk" id="pk"></div>
-      <p class="mono" style="margin-top:18px">Prices are estimated starting points. You get a fixed quote within 24 hours and approve it before work starts.</p>
+      <div class="pk-trust"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Fixed quote within 24 hours</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>You approve it before work starts</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>Prices are estimated starting points</span></div>
     </div>
     <div class="wrap block tight">
       <div class="sec-head"><div><span class="mono">Process</span><h2>How a project runs</h2></div></div>
@@ -1353,7 +1384,7 @@ let pkType=Object.keys(PK_TABS).find(k=>PACKAGES[k])||Object.keys(PACKAGES)[0];
 function waLink(text){return "https://wa.me/"+WA_NUM+"?text="+encodeURIComponent(text)}
 function renderPk(){
   $("#pkTabs").innerHTML=Object.entries(PK_TABS).filter(([k])=>PACKAGES[k]).map(([k,l])=>`<button type="button" data-pk="${k}" aria-pressed="${k===pkType}">${l}</button>`).join("");
-  $("#pk").innerHTML=PACKAGES[pkType].map(p=>`<article class="pkc${p.pop?" pop":""}">${p.pop?`<span class="badge">Most popular</span>`:""}<span class="mono">${esc(PK_TABS[pkType]||pkType)}</span><h3>${esc(p.t)}</h3><p class="for">${esc(p.f)}</p><div class="price">${esc(p.price||"Custom quote")}<small>${p.price?"Estimated starting price. Final quote depends on scope":"Fixed price, quoted within 24 hours"}</small></div><ul>${p.l.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><a class="btn ${p.pop?"wa":"solid"}" href="${waLink("Hi Yeasin, I'm interested in your "+p.t+" package ("+(PK_TABS[pkType]||pkType)+"). Can you send me a quote?")}" target="_blank" rel="noopener">Get a quote</a></article>`).join("");
+  $("#pk").innerHTML=PACKAGES[pkType].map((p,i)=>{const m=/^(From\s+)?([A-Z]{2,3}|[$€£৳])\s*([\d.,]+\+?)\s*$/i.exec(p.price||"");const pr=m?`${m[1]?'<span class="from">From</span>':""}<span class="cur">${esc(m[2])}</span><span class="amt">${esc(m[3])}</span>`:`<span class="txt">${esc(p.price||"Custom quote")}</span>`;return `<article class="pkc${p.pop?" pop":""}"><div class="pk-top"><span class="pk-no">${String(i+1).padStart(2,"0")} · ${esc(PK_TABS[pkType]||pkType)}</span>${p.pop?`<span class="badge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 21.2l1.6-7L2 9.5l7.1-.6z"/></svg>Most popular</span>`:""}</div><h3>${esc(p.t)}</h3><p class="for">${esc(p.f)}</p><div class="price">${pr}</div><p class="note">${p.price?"Estimated starting price · final quote depends on scope":"Fixed price, quoted within 24 hours"}</p><ul>${p.l.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><a class="btn ${p.pop?"solid":""}" href="${waLink("Hi Yeasin, I'm interested in your "+p.t+" package ("+(PK_TABS[pkType]||pkType)+"). Can you send me a quote?")}" target="_blank" rel="noopener">Get a quote</a></article>`}).join("");
 }
 $("#pkTabs").addEventListener("click",e=>{const b=e.target.closest("[data-pk]");if(!b)return;pkType=b.dataset.pk;renderPk()});
 renderPk();
