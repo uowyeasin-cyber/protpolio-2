@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Agent Front Desk · AI Agents & Automation Prototype · by Yeasin Arafat</title>
+<meta name="description" content="A working prototype of an AI agent that answers customers, takes table bookings and orders, tracks deliveries and runs business automations. Built by Yeasin Arafat.">
+<meta name="author" content="Yeasin Arafat">
+<link rel="canonical" href="https://yeasinarafatbd.vercel.app/demo/ai-agent.html">
+<meta property="og:title" content="AI Agent Front Desk · AI Agents & Automation Prototype">
+<meta property="og:description" content="Chat with an AI agent that books tables, takes orders, tracks deliveries and hands over to staff, and watch every step it takes.">
+<meta property="og:url" content="https://yeasinarafatbd.vercel.app/demo/ai-agent.html">
+<meta property="og:image" content="https://yeasinarafatbd.vercel.app/img/dev-ai-agent.webp">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+:root{--bg:#070C18;--panel:#0D1527;--raise:#121D33;--line:#1F2C47;--ink:#E8EEF9;--mute:#93A3C0;--faint:#6A7A98;--brand:#4F8BFF;--brand2:#7C5CFF;--soft:rgba(79,139,255,.14);--ok:#38BDF8;--warn:#F472B6}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:radial-gradient(1200px 600px at 80% -10%,rgba(124,92,255,.16),transparent 60%),radial-gradient(900px 500px at -10% 10%,rgba(79,139,255,.14),transparent 60%),var(--bg);color:var(--ink);font:14.5px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.top{position:sticky;top:0;z-index:5;background:rgba(7,12,24,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .in{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
+.logo i{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;font-style:normal;font-size:.95rem;box-shadow:0 6px 18px rgba(79,139,255,.35)}
+.logo small{display:block;font-weight:500;color:var(--faint);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase}
+.tabs{display:flex;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:3px;margin-left:auto}
+.tabs button{border:0;background:none;padding:7px 14px;border-radius:7px;cursor:pointer;color:var(--mute);font-weight:600;font-size:.84rem}
+.tabs button.on{background:var(--raise);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+main{max-width:1180px;margin:0 auto;padding:22px 18px 40px}
+.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+h1{font-size:clamp(1.35rem,3.2vw,1.9rem);letter-spacing:-.025em;line-height:1.15}
+h1 span{background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mute);margin-top:6px;max-width:62ch}
+.live{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;color:var(--mute);border:1px solid var(--line);background:var(--panel);padding:6px 10px;border-radius:999px}
+.live b{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(56,189,248,.6);animation:ping 1.8s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 8px rgba(56,189,248,0)}100%{box-shadow:0 0 0 0 rgba(56,189,248,0)}}
+.grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.card h2{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.chat{display:flex;flex-direction:column;height:620px}
+.chat-h{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--raise)}
+.av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#1E3A8A,#4F8BFF);display:grid;place-items:center;font-weight:700;font-size:.85rem;flex:none}
+.chat-h b{display:block;font-size:.95rem}.chat-h span{font-size:.75rem;color:var(--ok)}
+.chat-h .ch{margin-left:auto;display:flex;gap:6px}
+.pill{font-size:.7rem;border:1px solid var(--line);padding:3px 8px;border-radius:999px;color:var(--mute)}
+.msgs{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.m{max-width:82%;padding:9px 12px;border-radius:14px;font-size:.92rem;white-space:pre-line;animation:in .25s ease}
+.m.u{align-self:flex-end;background:linear-gradient(135deg,#2E5BDB,#4F8BFF);border-bottom-right-radius:4px}
+.m.a{align-self:flex-start;background:var(--raise);border:1px solid var(--line);border-bottom-left-radius:4px}
+.m.a .meta{display:block;margin-top:6px;font-size:.7rem;color:var(--faint)}
+.m.sys{align-self:center;font-size:.74rem;color:var(--faint);background:none;padding:2px}
+.m .rc{display:block;margin-top:8px;padding:8px 10px;border-radius:10px;background:rgba(79,139,255,.1);border:1px solid rgba(79,139,255,.3);font-size:.82rem}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.typing{display:inline-flex;gap:4px}.typing i{width:6px;height:6px;border-radius:50%;background:var(--mute);animation:bl 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes bl{50%{opacity:.25}}
+.chips{display:flex;gap:6px;padding:0 14px 10px;overflow-x:auto;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chips button{flex:none;border:1px solid var(--line);background:var(--raise);border-radius:999px;padding:6px 11px;font-size:.8rem;color:var(--mute);cursor:pointer;transition:.2s}
+.chips button:hover{color:var(--ink);border-color:var(--brand)}
+form.send{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line);background:var(--raise)}
+form.send input{flex:1;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;outline:none}
+form.send input:focus{border-color:var(--brand)}
+.btn{border:1px solid var(--line);background:var(--raise);border-radius:10px;padding:9px 14px;font-weight:600;cursor:pointer;transition:.2s}
+.btn.p{background:linear-gradient(135deg,var(--brand),var(--brand2));border-color:transparent;color:#fff}
+.btn:hover{filter:brightness(1.12)}
+.side{display:flex;flex-direction:column;gap:16px;min-width:0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px}
+.stat{background:var(--raise);border:1px solid var(--line);border-radius:10px;padding:10px}
+.stat b{display:block;font-size:1.35rem;letter-spacing:-.02em}.stat span{font-size:.72rem;color:var(--faint)}
+.act{padding:14px;display:flex;flex-direction:column;gap:10px}
+.act-h{display:flex;justify-content:space-between;align-items:center}
+.log{height:330px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-right:4px}
+.empty{color:var(--faint);font-size:.85rem;border:1px dashed var(--line);border-radius:10px;padding:18px;text-align:center}
+.run{border:1px solid var(--line);border-radius:10px;background:var(--raise);padding:10px 12px;animation:in .25s ease}
+.run-h{display:flex;justify-content:space-between;gap:8px;font-size:.78rem;color:var(--mute);margin-bottom:6px}
+.run-h b{color:var(--ink);font-weight:600}
+.step{display:flex;gap:9px;align-items:flex-start;font-size:.8rem;padding:4px 0;color:var(--mute)}
+.step .d{flex:none;width:18px;height:18px;border-radius:50%;border:2px solid var(--line);margin-top:1px;display:grid;place-items:center;font-size:.6rem}
+.step.wait .d{border-color:var(--brand);border-top-color:transparent;animation:spin .7s linear infinite}
+.step.done .d{background:var(--brand);border-color:var(--brand);color:#fff}
+.step.done .d::after{content:"✓"}
+.step code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.74rem;color:#B9CCFF;background:rgba(79,139,255,.1);padding:1px 5px;border-radius:5px;word-break:break-word}
+.step em{font-style:normal;color:var(--ok)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:0 14px 14px}
+.flow span{font-size:.72rem;padding:5px 9px;border-radius:8px;border:1px solid var(--line);background:var(--raise);color:var(--mute);transition:.3s}
+.flow span.on{border-color:var(--brand);color:#fff;background:var(--soft);box-shadow:0 0 0 3px rgba(79,139,255,.15)}
+.flow i{color:var(--faint);font-style:normal;font-size:.7rem}
+.note{margin-top:16px;color:var(--faint);font-size:.8rem;text-align:center}
+.note b{color:var(--mute)}
+/* automations */
+#autoView{display:none}
+.autos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.auto{padding:16px;display:flex;flex-direction:column;gap:12px}
+.auto-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.auto-h b{display:block;font-size:1rem}.auto-h small{color:var(--faint);font-size:.78rem}
+.tg{position:relative;width:40px;height:22px;flex:none;border-radius:999px;background:var(--line);border:0;cursor:pointer;transition:.2s}
+.tg::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s}
+.tg.on{background:var(--brand)}.tg.on::after{left:21px}
+.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chain span{font-size:.75rem;padding:5px 9px;border-radius:8px;background:var(--raise);border:1px solid var(--line);color:var(--mute)}
+.chain span.t{border-color:rgba(124,92,255,.5);color:#CFC2FF}
+.chain i{font-style:normal;color:var(--faint);font-size:.7rem}
+.auto-f{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:.78rem;color:var(--faint)}
+.auto .out{font-size:.78rem;color:var(--mute);border-top:1px solid var(--line);padding-top:10px;display:none}
+.auto .out.show{display:block}
+.toast{visibility:hidden;position:fixed;left:50%;bottom:18px;transform:translate(-50%,140px);background:#fff;color:#0B1220;padding:10px 16px;border-radius:10px;font-weight:600;font-size:.86rem;transition:transform .3s;z-index:9}
+.toast.show{visibility:visible;transform:translate(-50%,0)}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.chat{height:560px}.log{height:auto;max-height:420px}.autos{grid-template-columns:1fr}}
+@media (max-width:520px){.stats{grid-template-columns:repeat(2,1fr)}.tabs{margin-left:0;width:100%}.tabs button{flex:1}.m{max-width:90%}.chat-h .ch{display:none}main{padding:16px 12px 30px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <div class="logo"><i>✦</i><div>Averroes Agent<small>AI front desk · prototype</small></div></div>
+  <div class="tabs" role="tablist"><button class="on" data-v="chat" role="tab">Live agent</button><button data-v="auto" role="tab">Automations</button></div>
+</div></header>
+
+<main>
+  <div class="hero">
+    <div>
+      <h1>An <span>AI agent</span> that runs the front desk of Saffron &amp; Salt</h1>
+      <p class="sub">Chat as a customer. The agent answers questions, books tables, takes orders, tracks deliveries and hands over to a person when it should. The activity panel shows every step and tool it uses.</p>
+    </div>
+    <span class="live"><b></b>Agent online · replies 24/7</span>
+  </div>
+
+  <section id="chatView" class="grid">
+    <div class="card chat">
+      <div class="chat-h"><div class="av">S&amp;S</div><div><b>Saffron &amp; Salt</b><span>● AI assistant · usually replies instantly</span></div><div class="ch"><span class="pill">WhatsApp</span><span class="pill">Website</span></div></div>
+      <div class="msgs" id="msgs" aria-live="polite"></div>
+      <div class="chips" id="chips"></div>
+      <form class="send" id="send"><input id="inp" placeholder="Type a message, e.g. book a table for 4 tonight at 8" autocomplete="off" aria-label="Message"><button class="btn p" type="submit">Send</button></form>
+    </div>
+
+    <div class="side">
+      <div class="card">
+        <div class="stats">
+          <div class="stat"><b id="sMsg">0</b><span>Messages handled</span></div>
+          <div class="stat"><b id="sBook">0</b><span>Bookings made</span></div>
+          <div class="stat"><b id="sOrd">0</b><span>Orders taken</span></div>
+          <div class="stat"><b id="sMin">0m</b><span>Staff time saved</span></div>
+        </div>
+        <div class="flow" id="flow"><span data-f="msg">Message</span><i>→</i><span data-f="think">Understand</span><i>→</i><span data-f="tool">Use tools</span><i>→</i><span data-f="reply">Reply</span><i>→</i><span data-f="log">Log &amp; notify</span></div>
+      </div>
+      <div class="card act">
+        <div class="act-h"><h2>Agent activity</h2><button class="btn" id="reset" type="button" style="padding:5px 10px;font-size:.78rem">Reset demo</button></div>
+        <div class="log" id="log"><div class="empty">Send a message and watch the agent plan, call tools and reply.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="autoView">
+    <div class="autos" id="autos"></div>
+  </section>
+
+  <p class="note"><b>Prototype:</b> a scripted agent that runs in your browser, so nothing you type leaves this page. A client build connects the same flow to Gemini or OpenAI, the WhatsApp Business API, Google Sheets and your booking system.</p>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const MENU=[
+  {n:"Chicken Biryani",k:"biryani",p:22,tags:["rice","spicy","signature"]},
+  {n:"Beef Rendang",k:"rendang",p:26,tags:["spicy","signature"]},
+  {n:"Butter Chicken",k:"butter chicken",p:21,tags:["mild","curry"]},
+  {n:"Paneer Tikka",k:"paneer",p:18,tags:["vegetarian","grill"]},
+  {n:"Vegetable Korma",k:"korma",p:16,tags:["vegetarian","mild","curry"]},
+  {n:"Garlic Naan",k:"naan",p:5,tags:["bread","vegetarian"]},
+  {n:"Mango Lassi",k:"lassi",p:8,tags:["drink","vegetarian"]},
+  {n:"Gulab Jamun",k:"gulab",p:9,tags:["dessert","vegetarian"]}
+];
+const S={msg:0,book:0,ord:0,min:0,ctx:{},busy:false,bookings:[],orders:[]};
+const msgs=$("#msgs"),log=$("#log");
+
+function say(text,who,extra){const d=document.createElement("div");d.className="m "+who;d.textContent=text;if(extra)d.insertAdjacentHTML("beforeend",extra);msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d}
+function typing(){const d=document.createElement("div");d.className="m a";d.innerHTML='<span class="typing"><i></i><i></i><i></i></span>';msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d}
+function flow(f){document.querySelectorAll("#flow span").forEach(s=>s.classList.toggle("on",s.dataset.f===f))}
+function stats(){$("#sMsg").textContent=S.msg;$("#sBook").textContent=S.book;$("#sOrd").textContent=S.ord;$("#sMin").textContent=S.min>=60?(S.min/60).toFixed(1)+"h":S.min+"m"}
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("show"),2200)}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function newRun(title){const e=log.querySelector(".empty");if(e)e.remove();const r=document.createElement("div");r.className="run";const t=new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit",second:"2-digit"});r.innerHTML=`<div class="run-h"><b>${esc(title)}</b><span class="mono">${t}</span></div>`;log.prepend(r);return r}
+async function step(run,html,ms){const s=document.createElement("div");s.className="step wait";s.innerHTML=`<span class="d"></span><span>${html}</span>`;run.appendChild(s);await sleep(ms||450);s.className="step done";return s}
+
+/* ---------- understanding ---------- */
+const BN=/[ঀ-৿]/;
+function intent(t){
+  const s=t.toLowerCase();
+  if(/human|person|staff|manager|complain|refund|bad|cold|rude|angry|wrong order|মানুষ|অভিযোগ/.test(s)){S.ctx={};return "handoff"};
+  if(S.ctx.flow==="booking")return "booking";
+  if(S.ctx.flow==="order"&&!/cancel|stop|never ?mind/.test(s))return "order";
+  if(/where.*order|track|order status|#?\bss-?\d{3,}|delivery status|অর্ডার কোথায়/.test(s))return "track";
+  if(/book|table|reserv|booking|বুক|টেবিল/.test(s))return "booking";
+  if(/\border\b|deliver|delivery|buy|অর্ডার/.test(s)||MENU.some(m=>s.includes(m.k)))return "order";
+  if(/menu|price|cost|how much|recommend|vegetarian|veg\b|spicy|halal|food|eat|মেনু|দাম/.test(s))return "menu";
+  if(/open|close|hour|time.*open|when|address|where are|location|parking|খোলা|ঠিকানা/.test(s))return "info";
+  if(/^(hi|hello|hey|salam|assalam|good (morning|evening|afternoon))|^হাই|সালাম|আসসালামু/.test(s))return "greet";
+  if(/thank|thanks|ধন্যবাদ/.test(s))return "thanks";
+  return "unknown";
+}
+function parseBooking(t,b){
+  const s=t.toLowerCase();
+  const g=s.match(/(\d+)\s*(people|persons|pax|guests|of us|jon|জন)/)||s.match(/for\s+(\d+)/)||s.match(/^\s*(\d{1,2})\s*$/);
+  if(g&&+g[1]>0&&+g[1]<40)b.guests=+g[1];
+  if(/tonight|today|আজ/.test(s))b.day="Today";else if(/tomorrow|কাল/.test(s))b.day="Tomorrow";
+  else{const d=s.match(/\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/);if(d)b.day=d[1][0].toUpperCase()+d[1].slice(1)}
+  const tm=s.match(/\b(\d{1,2})(?::(\d{2}))?\s*(am|pm)\b/)||s.match(/\bat\s+(\d{1,2})(?::(\d{2}))?\b/);
+  if(tm){let h=+tm[1];const m=tm[2]||"00";if(tm[3]==="pm"&&h<12)h+=12;if(!tm[3]&&h<11)h+=12;if(h>=11&&h<=22)b.time=`${String(h).padStart(2,"0")}:${m}`}
+  if(/tonight/.test(s)&&!b.time)b.tonight=true;
+  return b;
+}
+const fmtT=t=>{let [h,m]=t.split(":").map(Number);const ap=h>=12?"pm":"am";h=h%12||12;return `${h}:${String(m).padStart(2,"0")} ${ap}`};
+
+/* ---------- agent ---------- */
+async function handle(text){
+  if(S.busy||!text.trim())return;
+  S.busy=true;S.msg++;stats();
+  say(text,"u");flow("msg");
+  const it=intent(text);const bn=BN.test(text);
+  const run=newRun(`“${text.length>48?text.slice(0,46)+"…":text}”`);
+  await sleep(250);flow("think");
+  const conf=(it==="unknown"?0.41:0.86+Math.random()*0.12).toFixed(2);
+  await step(run,`Understood intent: <code>${it}</code> · confidence <em>${conf}</em>${bn?" · language <code>bn</code>":""}`,500);
+  const ty=typing();const t0=performance.now();
+  let reply="",extra="",mins=2;
+  flow("tool");
+  try{
+  if(it==="greet"){
+    await step(run,`Loaded customer profile <code>get_customer(phone)</code> → <em>returning guest</em>`,400);
+    reply=bn?"আসসালামু আলাইকুম! Saffron & Salt-এ স্বাগতম। টেবিল বুকিং, মেনু, অর্ডার বা ডেলিভারি নিয়ে যেকোনো প্রশ্ন করুন।":"Hi, welcome back to Saffron & Salt! I can book a table, show the menu, take an order or track a delivery. What would you like?";
+  }else if(it==="thanks"){
+    reply=bn?"আপনাকেও ধন্যবাদ! আর কিছু লাগলে জানাবেন।":"You're welcome! Anything else I can do for you?";mins=1;
+  }else if(it==="info"){
+    await step(run,`Tool <code>get_business_info()</code> → hours, address, parking`,450);
+    reply=bn?"আমরা প্রতিদিন দুপুর ১১:৩০ থেকে রাত ১০:৩০ পর্যন্ত খোলা (শুক্রবার দুপুর ২:৩০ থেকে)। ঠিকানা: 12 Jalan Kenari, Shah Alam। ফ্রি পার্কিং আছে।":"We're open every day 11:30 am to 10:30 pm (Fridays from 2:30 pm). You'll find us at 12 Jalan Kenari, Shah Alam, with free parking in front.";
+  }else if(it==="menu"){
+    const s=text.toLowerCase();let list=MENU,label="Full menu";
+    if(/vegetarian|veg\b/.test(s)){list=MENU.filter(m=>m.tags.includes("vegetarian"));label="Vegetarian"}
+    else if(/spicy/.test(s)){list=MENU.filter(m=>m.tags.includes("spicy"));label="Spicy"}
+    else if(/recommend|best|popular|signature/.test(s)){list=MENU.filter(m=>m.tags.includes("signature"));label="Chef's picks"}
+    await step(run,`Tool <code>search_menu({filter:"${label.toLowerCase()}"})</code> → <em>${list.length} items</em>`,500);
+    if(/halal/.test(s))await step(run,`Tool <code>get_business_info("certificates")</code> → <em>JAKIM halal certified</em>`,350);
+    reply=(/halal/.test(s)?"Yes, everything we serve is halal certified. ":"")+(bn?"আমাদের মেনু থেকে:":`${label}:`);
+    extra=`<span class="rc">${list.map(m=>`${esc(m.n)} · RM ${m.p}`).join("<br>")}</span><span class="meta">Reply “order biryani and naan” to order, or “book a table”.</span>`;
+  }else if(it==="booking"){
+    const b=S.ctx.b=parseBooking(text,S.ctx.b||{});S.ctx.flow="booking";
+    if(b.tonight&&!b.time){b.day="Today"}
+    const miss=!b.day?"day":!b.time?"time":!b.guests?"guests":null;
+    await step(run,`Extracted slots <code>${JSON.stringify({day:b.day||null,time:b.time||null,guests:b.guests||null})}</code>`,450);
+    if(miss){
+      await step(run,`Missing <code>${miss}</code> → ask one short question`,250);
+      reply=miss==="day"?"Happy to book you a table. Which day, today or tomorrow?":miss==="time"?`Great, ${b.day.toLowerCase()} it is. What time would you like? We seat from 11:30 am to 9:30 pm.`:"And how many people will be joining?";
+      mins=1;
+    }else{
+      const busy=b.time==="20:00";
+      await step(run,`Tool <code>check_availability("${b.day}","${b.time}",${b.guests})</code> → ${busy?'<em>full at 8:00 pm, 8:30 pm free</em>':'<em>table available</em>'}`,650);
+      if(busy&&!b.alt){b.alt=true;b.time="20:30";S.busy=false;ty.remove();
+        await sleep(200);flow("reply");say(`8:00 pm is fully booked ${b.day.toLowerCase()}, but I can seat ${b.guests} at 8:30 pm. Shall I book 8:30 pm? (yes / no)`,"a");
+        S.ctx.awaitAlt=true;S.min+=1;stats();flow("");return}
+      const id="SS-"+(4100+S.bookings.length*7+Math.floor(Math.random()*6));
+      await step(run,`Tool <code>create_booking()</code> → <em>${id}</em>, table ${b.guests>4?"T12 (window)":"T5"}`,550);
+      flow("log");
+      await step(run,`Tool <code>sheets.append_row("Bookings")</code> → <em>row added</em>`,400);
+      await step(run,`Tool <code>whatsapp.send_template("booking_confirmed")</code> + reminder 2 h before`,450);
+      S.bookings.push({id,...b});S.book++;S.ctx={};mins=5;
+      reply=`You're booked! ✅`;
+      extra=`<span class="rc">Booking ${id}<br>${esc(b.day)} at ${fmtT(b.time)} · ${b.guests} ${b.guests>1?"people":"person"}<br>Table ${b.guests>4?"T12, by the window":"T5"}</span><span class="meta">Confirmation sent on WhatsApp. I'll remind you 2 hours before.</span>`;
+    }
+  }else if(it==="order"){
+    const s=text.toLowerCase();S.ctx.flow="order";const o=S.ctx.o=S.ctx.o||{items:[]};
+    MENU.forEach(m=>{if(!s.includes(m.k))return;const q=(s.match(new RegExp("(\\d+)\\s*(?:x\\s*)?(?:[a-z]+\\s+)?"+m.k))||[])[1];const ex=o.items.find(i=>i.n===m.n);if(ex){if(q)ex.q=+q}else o.items.push({n:m.n,p:m.p,q:+q||1})});
+    if(/yes|confirm|place|done|that'?s all|ok/.test(s)&&o.items.length){
+      const tot=o.items.reduce((a,i)=>a+i.p*i.q,0)+6;const id="SS-"+(9000+S.orders.length*13+Math.floor(Math.random()*9));
+      await step(run,`Tool <code>create_order(${o.items.length} items)</code> → <em>${id}</em>`,550);
+      await step(run,`Tool <code>payments.create_link(RM ${tot})</code> → FPX · card · e-wallet`,450);
+      flow("log");
+      await step(run,`Tool <code>kitchen.print_ticket()</code> + <code>courier.book("Lalamove")</code>`,500);
+      S.orders.push({id,items:o.items,tot});S.ord++;S.ctx={};mins=6;
+      reply=`Order placed! 🛵`;
+      extra=`<span class="rc">Order ${id} · RM ${tot} (incl. RM 6 delivery)<br>Pay here: pay.saffronsalt.my/${id.toLowerCase()}<br>Arrives in about 35 minutes</span><span class="meta">Ask “where is my order” anytime to track it.</span>`;
+    }else if(!o.items.length){
+      await step(run,`Tool <code>search_menu()</code> → waiting for dish names`,350);
+      reply="Sure! What would you like? For example: “1 chicken biryani, 2 garlic naan and a mango lassi”.";mins=1;
+    }else{
+      await step(run,`Matched dishes <code>${esc(o.items.map(i=>i.q+"× "+i.n).join(", "))}</code>`,450);
+      await step(run,`Tool <code>suggest_addon()</code> → ${o.items.some(i=>i.n.includes("Naan"))?"drink":"Garlic Naan"}`,300);
+      const tot=o.items.reduce((a,i)=>a+i.p*i.q,0);
+      reply=`Got it, here's your order so far:`;
+      extra=`<span class="rc">${o.items.map(i=>`${i.q} × ${esc(i.n)} · RM ${i.p*i.q}`).join("<br>")}<br><b>Subtotal RM ${tot}</b> + RM 6 delivery</span><span class="meta">${o.items.some(i=>i.n.includes("Naan"))?"Add a Mango Lassi for RM 8?":"Most people add Garlic Naan (RM 5)."} Reply “confirm” to place it.</span>`;mins=2;
+    }
+  }else if(it==="track"){
+    const last=S.orders[S.orders.length-1];const id=(text.match(/ss-?\d{3,}/i)||[])[0]?.toUpperCase().replace(/^SS-?/,"SS-")||last?.id||"SS-9021";
+    await step(run,`Tool <code>courier.track("${id}")</code> → <em>rider 1.2 km away</em>`,600);
+    reply=`Order ${id} is on the way. 🛵`;extra=`<span class="rc">Rider: Hafiz · Honda EX5<br>About 9 minutes away · 1.2 km</span><span class="meta">I'll message you when the rider arrives.</span>`;
+  }else if(it==="handoff"){
+    await step(run,`Detected sentiment <code>negative</code> → policy: <em>hand over to a person</em>`,450);
+    await step(run,`Tool <code>helpdesk.create_ticket(priority:"high")</code> → <em>#T-218</em>`,450);
+    flow("log");
+    await step(run,`Tool <code>notify_staff("Manager on duty")</code> via WhatsApp`,400);
+    reply=bn?"দুঃখিত! আমি আমাদের ম্যানেজারকে জানিয়ে দিয়েছি, উনি কয়েক মিনিটের মধ্যে আপনার সাথে যোগাযোগ করবেন। টিকেট #T-218।":"I'm sorry about that. I've passed this to our manager on duty, Aina, who will reply here within a few minutes. Your ticket number is #T-218.";mins=3;
+  }else{
+    await step(run,`Searched FAQ knowledge base → <em>no confident answer</em>`,450);
+    await step(run,`Policy: don't guess → offer options and a person`,300);
+    reply="I'm not fully sure about that one. I can book a table, show the menu, take an order or track a delivery, or connect you to our team. Which would help?";mins=1;
+  }
+  }catch(e){reply="Sorry, something went wrong. Let me get a person to help.";console.warn(e)}
+  const ms=Math.max(600,performance.now()-t0);
+  await sleep(250);ty.remove();flow("reply");
+  const d=say(reply,"a",extra+`<span class="meta">AI agent · ${(ms/1000).toFixed(1)} s</span>`);
+  await step(run,`Reply sent in <em>${(ms/1000).toFixed(1)} s</em>`,150);
+  S.min+=mins;stats();setTimeout(()=>flow(""),900);
+  S.busy=false;chips();
+}
+
+async function onSend(text){
+  if(S.ctx.awaitAlt){S.ctx.awaitAlt=false;const s=text.toLowerCase();if(/^(y|yes|ok|sure|book|হ্যাঁ)/.test(s)){S.ctx.flow="booking";return handle(text)}S.ctx={};say(text,"u");say("No problem. Tell me another time that suits you and I'll check it.","a");return}
+  handle(text);
+}
+
+function chips(){
+  let list;
+  if(S.ctx.flow==="booking")list=["Tonight","Tomorrow at 7pm","4 people","8pm"];
+  else if(S.ctx.flow==="order")list=["Confirm","Add a mango lassi","2 garlic naan"];
+  else if(S.ctx.awaitAlt)list=["Yes","No"];
+  else list=["Book a table for 4 tonight at 8pm","What's vegetarian?","Order 1 chicken biryani and 2 garlic naan","Where is my order?","Are you halal?","My food arrived cold","আসসালামু আলাইকুম"];
+  $("#chips").innerHTML=list.map(c=>`<button type="button">${esc(c)}</button>`).join("");
+}
+$("#chips").addEventListener("click",e=>{const b=e.target.closest("button");if(b&&!S.busy)onSend(b.textContent)});
+$("#send").addEventListener("submit",e=>{e.preventDefault();if(S.busy)return;const v=$("#inp").value;$("#inp").value="";onSend(v)});
+$("#reset").addEventListener("click",()=>{Object.assign(S,{msg:0,book:0,ord:0,min:0,ctx:{},busy:false,bookings:[],orders:[]});msgs.innerHTML="";log.innerHTML='<div class="empty">Send a message and watch the agent plan, call tools and reply.</div>';stats();start()});
+function start(){say("Today","sys");say("Hi! I'm the Saffron & Salt assistant. I can book a table, show the menu, take a delivery order or check on your order. How can I help?","a");chips()}
+start();stats();
+
+/* ---------- automations ---------- */
+const AUTOS=[
+  {n:"New booking → confirm and remind",s:"Runs on every booking",c:["New booking","Google Sheets row","WhatsApp confirmation","Reminder 2 h before"],on:1,r:"Ran for booking SS-4107 · sheet updated · 2 WhatsApp messages queued"},
+  {n:"Missed call → WhatsApp reply",s:"Runs when a call is missed",c:["Missed call","AI writes reply","WhatsApp with booking link"],on:1,r:"Replied to +60 12-••• 4410 in 3 s with menu and booking link"},
+  {n:"Nightly sales report",s:"Every day at 11:00 pm",c:["POS + orders","AI summary","Email to owner","Telegram alert if sales drop"],on:1,r:"Report sent: RM 4,280 today, 61 orders, best seller Chicken Biryani"},
+  {n:"Low review → alert the manager",s:"Runs on new Google reviews",c:["New review ≤ 3★","AI drafts a reply","Manager approves","Reply posted"],on:0,r:"Drafted a reply to a 2★ review and sent it to the manager for approval"},
+  {n:"Stock running low → reorder",s:"Every morning at 8:00 am",c:["Inventory sheet","Below minimum?","Purchase order PDF","Email supplier"],on:0,r:"Basmati rice under 10 kg → purchase order PO-311 emailed to supplier"},
+  {n:"Lead from website form → CRM",s:"Runs on every catering enquiry",c:["Website form","AI scores the lead","HubSpot contact","Sales follow-up in 1 h"],on:1,r:"Catering lead for 120 pax scored HOT · added to CRM · follow-up task created"}
+];
+function renderAutos(){
+  $("#autos").innerHTML=AUTOS.map((a,i)=>`<div class="card auto"><div class="auto-h"><div><b>${esc(a.n)}</b><small>${esc(a.s)}</small></div><button class="tg${a.on?" on":""}" data-i="${i}" aria-label="Turn ${esc(a.n)} ${a.on?"off":"on"}"></button></div>
+  <div class="chain">${a.c.map((x,j)=>`<span class="${j===0?"t":""}">${esc(x)}</span>`).join("<i>→</i>")}</div>
+  <div class="auto-f"><span>${a.on?"Active":"Paused"} · ${(i*7+12)%40+8} runs this week</span><button class="btn" data-run="${i}" type="button" style="padding:6px 12px;font-size:.78rem">Run now</button></div>
+  <div class="out" id="out${i}"></div></div>`).join("");
+}
+$("#autos").addEventListener("click",async e=>{
+  const t=e.target.closest(".tg");if(t){const a=AUTOS[t.dataset.i];a.on=!a.on;renderAutos();toast(`${a.n.split(" →")[0]} ${a.on?"turned on":"paused"}`);return}
+  const r=e.target.closest("[data-run]");if(!r)return;const i=+r.dataset.run,a=AUTOS[i],o=$("#out"+i);
+  r.disabled=true;o.classList.add("show");o.innerHTML="";
+  for(const [j,c] of a.c.entries()){o.insertAdjacentHTML("beforeend",`<div class="step wait" id="st${i}${j}"><span class="d"></span><span>${esc(c)}</span></div>`);await sleep(420);$(`#st${i}${j}`).className="step done"}
+  o.insertAdjacentHTML("beforeend",`<div style="margin-top:6px;color:var(--ok)">${esc(a.r)}</div>`);r.disabled=false;toast("Automation finished");
+});
+renderAutos();
+document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));$("#chatView").style.display=b.dataset.v==="chat"?"":"none";$("#autoView").style.display=b.dataset.v==="auto"?"block":"none"}));
+</script>
+</body>
+</html>
