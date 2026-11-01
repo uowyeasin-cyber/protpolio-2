@@ -180,14 +180,17 @@ fs.writeFileSync(path.join(root, "services", "index.html"), shell({
 }));
 
 // sitemap: home, résumé PDF, service pages, demos
-const urls = [[BASE + "/", "weekly", "1.0"], [hubUrl, "monthly", "0.9"]];
-for (const p of SERVICE_PAGES) urls.push([`${BASE}/services/${p.slug}/`, "monthly", "0.9"]);
+// Images per URL (image sitemap) so the photo and work show up in Google Images.
+const imgUrl = (f) => BASE + "/" + String(f).replace(/^\/+/, "");
+const homeImgs = [[SITE.photo || (fs.existsSync(path.join(root, "img/me-headshot.webp")) ? "img/me-headshot.webp" : "img/avatar.webp"), SITE.name], ["img/og.jpg", SITE.name + " portfolio"]];
+const urls = [[BASE + "/", "weekly", "1.0", homeImgs], [hubUrl, "monthly", "0.9", []]];
+for (const p of SERVICE_PAGES) urls.push([`${BASE}/services/${p.slug}/`, "monthly", "0.9", (p.work || []).map(([t, img]) => ["img/" + img, t + " by " + SITE.name])]);
 for (const f of fs.readdirSync(root).filter((f) => f.endsWith(".pdf"))) urls.push([`${BASE}/${f}`, "monthly", "0.7"]);
 const demoDir = path.join(root, "demo");
 if (fs.existsSync(demoDir)) for (const f of fs.readdirSync(demoDir).filter((f) => f.endsWith(".html")).sort()) urls.push([`${BASE}/demo/${f}`, "monthly", "0.6"]);
 fs.writeFileSync(path.join(root, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map(([u, c, p]) => `  <url><loc>${encodeURI(u)}</loc><lastmod>${today}</lastmod><changefreq>${c}</changefreq><priority>${p}</priority></url>`).join("\n")}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+${urls.map(([u, c, p, im]) => `  <url><loc>${encodeURI(u)}</loc><lastmod>${today}</lastmod><changefreq>${c}</changefreq><priority>${p}</priority>${(im || []).filter(([f]) => fs.existsSync(path.join(root, f))).map(([f, t]) => `<image:image><image:loc>${encodeURI(imgUrl(f))}</image:loc><image:title>${esc(t)}</image:title></image:image>`).join("")}</url>`).join("\n")}
 </urlset>
 `);
 // IndexNow key file, and llms.txt (a plain summary that AI search tools such as ChatGPT and Perplexity read).
