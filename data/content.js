@@ -321,7 +321,7 @@ const FAQ=[
 
 // Chatbot answers: k = keywords, a = answer (HTML allowed).
 const BOT=[
-  {k:["skill","language","tech","stack","know"],a:'I work with C++, Java, Python, JavaScript, HTML, CSS and MySQL. For design I use Photoshop, Illustrator, Figma and Canva, and for video Premiere Pro and After Effects. See <a href="#about">About</a>.'},
+  {k:["skill","skills","tech","stack","know","react","next.js","nextjs","typescript","javascript","python","java","node","firebase","database","tools"],a:'I build with React, Next.js, TypeScript, JavaScript, Node.js, Firebase and PostgreSQL, and I also code in C++, Java, Python and SQL. For design I use Photoshop, Illustrator, Figma and Canva, and for video Premiere Pro and After Effects. See <a href="#about">About</a>.'},
   {k:["averroes code","editor","compiler"],a:'Averroes Code is my free offline code editor and compiler for C, C++, Python, Java, JavaScript and more, with 23 courses in 4 languages. <a href="https://uowyeasin-cyber.github.io/averroes-code/" target="_blank" rel="noopener">Download it here</a>.'},
   {k:["store","shop","miswak","e-commerce","ecommerce"],a:'Sunnah Store (sunnahstore.vercel.app) is a live online shop for miswak pens, miswak sticks and attar I built with Next.js, Prisma and PostgreSQL, with card, PayPal, bKash and cash-on-delivery payments, courier tracking and 4 languages. See the <a href="#code">Code</a> page.'},
   {k:["amalnama","islamic app","quran","prayer app","averroes"],a:'Amalnama is my free, ad-free Islamic companion app: prayer times, Quran, hadith, an AI mufti, Qibla, hifz tracker and family budgets. It works offline in 6 languages. <a href="https://uowyeasin-cyber.github.io/AmalnamaForever" target="_blank" rel="noopener">Install it here</a>.'},
@@ -329,17 +329,17 @@ const BOT=[
   {k:["design","logo","menu","brand","graphic","video","work","portfolio"],a:'I\'ve designed full brands, menus, LED boards, social posts and videos for clients like The Halal Gyro Spot and Spring Hill Deli. Browse them on the <a href="#work">Work</a> page.'},
   {k:["resume","résumé","cv"],a:'You can open my résumé here: <a href="https://drive.google.com/file/d/1pEi4xJrkY9GgL6H_Nm5rOhIOL7Ktamwk/view?usp=drivesdk" target="_blank" rel="noopener">Résumé on Google Drive</a>.'},
   {k:["award","achiev","top coder","certif","tableau","scholar","presenter"],a:'I\'m Top Coder Malaysia 2026 (T-Academy) and hold the UOW High Achievers Scholarship. I\'m also certified in Tableau Fundamentals and as a Python Coder. See <a href="#awards">Awards</a>.'},
-  {k:["educat","study","uni","gpa","school","degree","ssc","hsc","ielts"],a:'I\'m studying a Bachelor of Engineering in Computer Science at UOW Malaysia (2026 to 2028) on the High Achievers Scholarship. I scored GPA 5.00 in both SSC and HSC, and I\'m also doing Honours in English at Tongi Govt College.'},
+  {k:["educat","study","uni","university","college","uow","gpa","school","degree","ssc","hsc","ielts","porashona","পড়াশোনা"],a:'I\'m studying a Bachelor of Engineering in Computer Science at UOW Malaysia (2026 to 2028) on the High Achievers Scholarship. I scored GPA 5.00 in both SSC and HSC, and I\'m also doing Honours in English at Tongi Govt College.'},
   {k:["experience","job","intern","barista","teach"],a:'I\'m the founder and application developer at Averroes AI. Before that I was a barista at swich caffe, ran Hidayah Shop BD, founded Hidayah Blood Bank and Hidayah United Foundation, interned at Programming Hero and Code Biruni, and trained students in IELTS.'},
   {k:["hidayah","blood","foundation","volunteer"],a:'I founded Hidayah Blood Bank in 2017 to connect blood donors with patients in Bangladesh, and later the Hidayah United Foundation for community work.'},
   {k:["hire","freelance","service","price","cost","package","available","work with","quote","fiverr","upwork"],a:'Yes, I\'m available for freelance projects, internships and part-time roles. See fixed-price <a href="#services">packages</a>, my <a href="#cv">one-page résumé</a>, or message me on <a href="https://wa.me/60178151865" target="_blank" rel="noopener">WhatsApp</a>.'},
   {k:["contact","email","phone","reach","whatsapp","linkedin"],a:'Email me at yeasinarafat272003@gmail.com or call +60 17 815 1865. All my links are on the <a href="#contact">Contact</a> page.'},
   {k:["where","location","live","based","malaysia"],a:'I\'m based in Shah Alam, Selangor, Malaysia, and I work with clients worldwide.'},
-  {k:["hi","hello","salam","hey"],a:'Hi! Ask me about my skills, projects, awards or how to contact me.'},
+  {k:["hi","hello","salam","assalamu","hey","kemon","কেমন"],a:'Hi! Ask me about my skills, projects, awards or how to contact me.'},
 ];
 
 // Suggested chatbot questions.
-const CHIPS=["What are your skills?","Show me your projects","Any awards?","How can I contact you?"];
+const CHIPS=["What services do you offer?","How much does a website cost?","Show me your projects","How can I contact you?"];
 
 
 // ============================================================

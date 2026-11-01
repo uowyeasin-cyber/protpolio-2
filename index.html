@@ -391,6 +391,39 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 footer nav{display:flex;gap:4px 18px;flex-wrap:wrap}
 footer a{text-decoration:none;color:var(--mute);transition:color .2s}
 footer a:hover{color:var(--cobalt)}
+/* Footer: premium */
+footer{padding-block:64px calc(26px + env(safe-area-inset-bottom,0px))}
+[data-theme="dark"] footer{background:linear-gradient(180deg,var(--panel),color-mix(in srgb,var(--panel) 80%,#000))}
+footer .wrap.ft{display:grid;grid-template-columns:1.5fr 1fr 1.6fr 1.2fr;gap:40px;align-items:start;color:var(--mute);font-size:.9rem}
+.ft b{display:block;color:var(--paper);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:16px}
+.ft-links{display:grid!important;gap:10px!important;width:auto!important;font-size:.9rem!important;opacity:1!important}
+.ft-2{grid-template-columns:1fr 1fr;column-gap:18px!important}
+.ft-2 a[lang]{grid-column:1/-1;font-size:.82rem;color:var(--faint)}
+.ft-logo .brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--paper)}
+.ft-logo .brand span{display:block}
+.ft .ft-logo .brand b{display:block;margin:0;font-size:1rem;letter-spacing:-.01em;text-transform:none;color:var(--paper)}
+.ft-tag{margin:16px 0 20px;max-width:30ch;line-height:1.55;color:var(--mute)}
+.ft-social{display:flex;gap:6px;flex-wrap:wrap}
+.ft-social a{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;color:var(--mute);background:color-mix(in srgb,var(--paper) 3%,transparent);transition:color .2s,border-color .2s,transform .3s var(--ease),background .2s}
+.ft-social a:hover{color:#fff;background:var(--cobalt);border-color:var(--cobalt);transform:translateY(-2px)}
+.ft-social svg{width:16px;height:16px}
+.ft-contact{display:flex;flex-direction:column;gap:10px}
+.ft-contact a,.ft-contact span{overflow-wrap:anywhere}
+.ft-cta{margin-top:8px;align-self:flex-start;color:#fff!important}
+footer .wrap.ft-bar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:48px;padding-top:22px;border-top:1px solid var(--line);font-size:.82rem;color:var(--faint)}
+.ft-avail{display:inline-flex;align-items:center;gap:8px}
+.ft-avail i{width:7px;height:7px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 4px color-mix(in srgb,#22C55E 20%,transparent)}
+@media (max-width:980px){footer .wrap.ft{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){footer .wrap.ft{grid-template-columns:1fr;gap:30px}}
+/* Home app cards with screenshots */
+#homeDev .card.dv .cover{aspect-ratio:16/10}
+#homeDev .card.dv .cover img{object-position:top center}
+#homeDev .card.dv:hover .cover img{transform:scale(1.04)}
+/* Contact links with brand icons */
+.links a>i{width:34px;height:34px;flex:none;border-radius:8px;display:grid;place-items:center;font-style:normal}
+.links a>i svg{width:17px;height:17px}
+.links a>div{flex:1;min-width:0}
+
 
 /* chatbot */
 .bot-fab{position:fixed;right:max(18px,calc(env(safe-area-inset-right,0px) + 12px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:80;display:flex;align-items:center;gap:10px;background:var(--paper);color:var(--panel);border:0;border-radius:var(--r);padding:12px 16px 12px 14px;font:500 .9rem var(--f-body);cursor:pointer;box-shadow:0 14px 34px -14px color-mix(in srgb,var(--paper) 60%,transparent);transition:transform .3s var(--ease),background .25s}
@@ -1087,11 +1120,13 @@ body.cx-editing .svc .svc-more::after{display:none}
 </main>
 
 <footer id="siteFooter">
-  <div class="wrap">
-    <span>© 2026 Yeasin Arafat · Averroes AI</span>
-    <nav><a href="#work">Work</a><a href="#code">Code</a><a href="#awards">Awards</a><a href="#services">Services</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
-    <nav class="svc-foot" aria-label="Services"><a href="/services/app-development/">Apps</a><a href="/services/website-development/">Websites</a><a href="/services/ecommerce-website/">E-commerce</a><a href="/services/ui-ux-design/">UI/UX design</a><a href="/services/seo-services/">SEO</a><a href="/services/ai-automation/">AI automation</a><a href="/services/portfolio-website/">Portfolio sites</a><a href="/services/graphic-design/">Graphic design</a><a href="/services/logo-design/">Logo design</a><a href="/services/menu-design/">Menu design</a><a href="/services/led-menu-board/">LED menu boards</a><a href="/services/social-media-design/">Social media design</a><a href="/services/video-editing/">Video editing</a><a href="/services/#languages" lang="mul">বাংলা · Melayu · Indonesia · العربية · हिन्दी · اردو · 中文 · Español</a></nav>
+  <div class="wrap ft">
+    <div class="ft-brand"><div class="ft-logo"></div><p class="ft-tag">Apps, websites and UI/UX, designed and built by one person, from first sketch to launch.</p><div class="ft-social" aria-label="Social links"></div></div>
+    <div class="ft-col"><b>Explore</b><nav class="ft-links"><a href="#work">Work</a><a href="#code">Code</a><a href="#services">Services</a><a href="#awards">Awards</a><a href="#about">About</a><a href="#cv">Résumé</a><a href="#contact">Contact</a></nav></div>
+    <div class="ft-col ft-svc"><b>Services</b><nav class="svc-foot ft-links ft-2" aria-label="Services"><a href="/services/app-development/">Apps</a><a href="/services/website-development/">Websites</a><a href="/services/ecommerce-website/">E-commerce</a><a href="/services/ui-ux-design/">UI/UX design</a><a href="/services/seo-services/">SEO</a><a href="/services/ai-automation/">AI automation</a><a href="/services/portfolio-website/">Portfolio sites</a><a href="/services/graphic-design/">Graphic design</a><a href="/services/logo-design/">Logo design</a><a href="/services/menu-design/">Menu design</a><a href="/services/led-menu-board/">LED menu boards</a><a href="/services/social-media-design/">Social media design</a><a href="/services/video-editing/">Video editing</a><a href="/services/#languages" lang="mul">বাংলা · Melayu · Indonesia · العربية · हिन्दी · اردو · 中文 · Español</a></nav></div>
+    <div class="ft-col ft-contact"><b>Get in touch</b><a class="ft-mail" href="#contact"></a><a class="ft-wa" href="#contact" target="_blank" rel="noopener"></a><span class="ft-loc"></span><a class="btn solid ft-cta" href="#contact">Start a project</a></div>
   </div>
+  <div class="wrap ft-bar"><span>© <span class="ft-yr">2026</span> <span class="ft-name"></span></span><span class="ft-avail"><i></i>Available for new projects</span></div>
 </footer>
 
 <button class="bot-fab" id="botFab" aria-expanded="false" aria-controls="bot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg><span>Ask about Yeasin</span></button>
@@ -1208,7 +1243,7 @@ $("#exp").innerHTML=EXP.map(([a,b,c,d,l])=>`<div class="row"><span class="mono">
 $("#skills").innerHTML=SKILLS.map(([a,b])=>`<div class="skill"><h3>${esc(a)}</h3><p>${esc(b)}</p></div>`).join("");
 renderHome();renderWork();renderWorks();iconize();
 $("#repoList").innerHTML=[["Java · Spring Boot","java-spring-boot","A Spring Boot REST API with greeting endpoints, built with Maven."],["Kotlin · Android","login-interface","An Android app in Jetpack Compose with Material 3 theming and Robolectric screenshot tests."],["Java","JavaPractice","Java fundamentals practice."],["C++","ytre","Pattern-printing practice, written and uploaded from Averroes Code.",true],["DSA","DSA","Data structures and algorithms practice.",true]].map(([a,b,c,priv])=>`<div class="row"><span class="mono">${a}</span><div><h3>${b}</h3><p>${c}</p></div>${priv?`<span class="mono">Private repo</span>`:`<a class="mono proof" href="https://github.com/uowyeasin-cyber/${b}" target="_blank" rel="noopener">GitHub ↗</a>`}</div>`).join("");
-$("#homeDev").innerHTML=["Amalnama","Averroes Code","Sunnah Store","Campus Islamic Society"].map(n=>DEV.find(d=>d.n.startsWith(n))).filter(Boolean).map(d=>`<a class="card" href="#code"><div class="meta"><div class="row"><span class="mono">${esc(d.k)}</span></div><h3>${esc(d.n)}</h3><p>${esc(d.p.split(". ")[0])}.</p><div class="chips">${d.tags.map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div></div></a>`).join("");
+$("#homeDev").innerHTML=["Amalnama","Averroes Code","Sunnah Store","Campus Islamic Society"].map(n=>DEV.find(d=>d.n.startsWith(n))).filter(Boolean).map(d=>`<a class="card dv" href="#code">${d.img?`<div class="cover"><img src="img/${d.img}.webp" alt="${esc(d.n)}" loading="lazy" width="640" height="400"></div>`:""}<div class="meta"><div class="row"><span class="mono">${esc(d.k)}</span></div><h3>${esc(d.n)}</h3><p>${esc(d.p.split(". ")[0])}.</p><div class="chips">${d.tags.slice(0,3).map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div></div></a>`).join("");
 // Projects with something to see (screenshot, live demo or link) come first; the rest keep their order after them.
 DEV.sort((a,b)=>!!(b.img||b.demo||b.link)-!!(a.img||a.demo||a.link));
 const DEMO_H={"tictactoe":800,"login":600,"campus-islamic-society":760,"campusearn":760,"cloudeats":780,"food-ordering":720};
@@ -1445,7 +1480,23 @@ $("#brief").addEventListener("submit",e=>{e.preventDefault();const f=new FormDat
 
 $("#cocur").innerHTML=rows([["2026 – now","Computer Science Club · UOW Malaysia","Member. Programming competitions, hackathons and tech events on campus.",""],["Jul 2026","Top Coder Malaysia 2026","National coding challenge by T-Academy and the Data Science Association, supported by MDEC. 5th at UOW Malaysia, qualified for the national round.","#5"],["University","Presentations","Selected as best presenter for a university presentation.","★"],["2017 – 2025","Hidayah Blood Bank","Founded and ran a donor network that connected patients with nearby blood donors across Bangladesh.",""],["2023 – 2025","Hidayah United Foundation","Founded a non-profit for social services and charity work in Bangladesh.",""],["Teaching","English & IELTS trainer","Trained students in spoken English and IELTS preparation.",""]]);
 // chatbot
-function botReply(q){q=q.toLowerCase();const m=BOT.find(x=>x.k.some(w=>q.includes(w)));return m?m.a:'I\'m not sure about that one. Try asking about my skills, projects, design work, awards or contact details.'}
+const BOT_EXTRA=[
+  {k:["price","prices","cost","how much","rate","rates","budget","charge","fee","package","packages","dam","koto","taka","টাকা","দাম","খরচ","koto taka"],a:()=>{const T=typeof PK_TABS!=="undefined"?PK_TABS:{};const rows=Object.keys(typeof PACKAGES!=="undefined"?PACKAGES:{}).map(k=>{const f=(PACKAGES[k]||[]).find(p=>p.price);return f?`<li><b>${esc(T[k]||k)}</b>: ${esc(f.price)}</li>`:""}).join("");return rows?`Estimated starting prices:<ul>${rows}</ul>You get a fixed quote within 24 hours and approve it before any work starts. See all <a href="#services">packages</a> or send a brief on <a href="#contact">Contact</a>.`:'Every project gets a fixed quote within 24 hours. See <a href="#services">packages</a>.'}},
+  {k:["service","services","offer","provide","what do you do","what can you","help me","lagbe","korte paren","korben","সেবা","সার্ভিস","লাগবে"],a:()=>{const sp=typeof SERVICE_PAGES!=="undefined"?SERVICE_PAGES:[];return sp.length?`I can help with: ${sp.map(p=>`<a href="/services/${p.slug}/">${esc(p.nav)}</a>`).join(", ")}. Tell me what you need on <a href="#contact">Contact</a> and I\'ll reply within a day.`:'See my <a href="#services">services</a>.'}},
+  {k:["website","web site","landing page","wordpress","ওয়েবসাইট"],a:()=>'Yes, I design and build fast, mobile-first websites and online stores that are ready for Google. See <a href="/services/website-development/">website development</a> for examples and prices.'},
+  {k:["app","apps","mobile app","android","ios","iphone","pwa","অ্যাপ"],a:()=>'Yes, I build mobile and web apps for Android, iPhone and the web, with logins, databases, payments and offline mode. See <a href="/services/app-development/">app development</a> for examples and prices.'},
+  {k:["seo","google ranking","rank","search engine"],a:()=>'I do technical SEO, keyword research, on-page SEO, Search Console and Google Business Profile setup. See <a href="/services/seo-services/">SEO services</a>.'},
+  {k:["ai","chatbot","automation","automate","gemini","openai","gpt"],a:()=>'I build AI chatbots for websites and WhatsApp, automated replies and bookings, and custom AI apps. See <a href="/services/ai-automation/">AI automation</a>.'},
+  {k:["ui","ux","ui/ux","figma","wireframe","prototype"],a:()=>'I design app screens, website layouts, clickable prototypes and design systems in Figma. See <a href="/services/ui-ux-design/">UI/UX design</a>.'},
+  {k:["how long","time","timeline","deadline","deliver","delivery","fast","kotodin","koydin","somoy"],a:()=>'It depends on the size of the project. You get a fixed quote with the timeline within 24 hours. Send your deadline in the brief on <a href="#contact">Contact</a>.'},
+  {k:["youtube","facebook","instagram","tiktok","social","fb"],a:()=>{const S=typeof SITE!=="undefined"?SITE:{};const l=[["YouTube",S.youtube],["Facebook",S.facebook],["Instagram",S.instagram],["TikTok",S.tiktok],["LinkedIn",S.linkedin],["GitHub",S.github]].filter(x=>x[1]);return l.length?"Find me on "+l.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join(", ")+".":'All my links are on <a href="#contact">Contact</a>.'}},
+  {k:["language","languages","speak","bangla","english","bengali"],a:()=>'I work in English and Bangla.'},
+];
+function botScore(q,k){k=k.toLowerCase();if(/[^\x00-\x7f]/.test(k)||k.includes(" "))return q.includes(k)?k.length+3:0;const re=new RegExp("(^|[^a-z0-9])"+k.replace(/[.*+?^${}()|[\]\\\/]/g,"\\$&")+(k.length<=4?"($|[^a-z0-9])":""),"i");return re.test(q)?k.length:0}
+function botReply(q){q=" "+q.toLowerCase().replace(/[?!.,]/g," ")+" ";const all=[...BOT_EXTRA,...BOT];let best=null,bs=0;for(const e of all){const sc=e.k.reduce((t,k)=>t+botScore(q,k),0);if(sc>bs){bs=sc;best=e}}
+if(best){const a=best.a;return typeof a==="function"?a():a}
+const S=typeof SITE!=="undefined"?SITE:{};const wa=S.whatsapp?`https://wa.me/${String(S.whatsapp).replace(/\D/g,"")}`:"#contact";
+return `I don\'t have an answer for that yet. Try asking about skills, projects, services, prices, awards or contact details, or <a href="${wa}" target="_blank" rel="noopener">message me on WhatsApp</a> and I\'ll answer myself.`}
 function say(html,who){const d=document.createElement("div");d.className="msg "+who;if(who==="u")d.textContent=html;else d.innerHTML=html;$("#botLog").appendChild(d);$("#botLog").scrollTop=1e9}
 function ask(q){if(!q.trim())return;say(q,"u");setTimeout(()=>say(botReply(q),"b"),350)}
 $("#botChips").innerHTML=CHIPS.map(c=>`<button type="button">${c}</button>`).join("");
@@ -1464,5 +1515,22 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-copy]");if
 </script>
 
 <script src="/cms.js"></script>
+<script>
+/* Footer + contact icons from SITE */
+(function(){try{
+const S=typeof SITE!=="undefined"?SITE:{};const ic=(n,c)=>typeof brandSVG=="function"?brandSVG(n,c||"currentColor"):"";
+const hb=document.querySelector("header .brand");const fl=document.querySelector(".ft-logo");if(hb&&fl){const c=hb.cloneNode(true);c.removeAttribute("id");fl.appendChild(c)}
+const wa=S.whatsapp?"https://wa.me/"+String(S.whatsapp).replace(/\D/g,""):"";
+const soc=[["LinkedIn",S.linkedin],["GitHub",S.github],["YouTube",S.youtube],["Facebook",S.facebook],["Instagram",S.instagram],["TikTok",S.tiktok],["WhatsApp",wa],["Email",S.email?"mailto:"+S.email:""]].filter(x=>x[1]);
+const fs=document.querySelector(".ft-social");if(fs)fs.innerHTML=soc.map(([n,u])=>`<a href="${u}" ${u.startsWith("mailto")?"":'target="_blank" rel="noopener"'} aria-label="${n}" title="${n}">${ic(n)}</a>`).join("");
+const m=document.querySelector(".ft-mail");if(m){if(S.email){m.textContent=S.email;m.href="mailto:"+S.email}else m.remove()}
+const w=document.querySelector(".ft-wa");if(w){if(wa){w.textContent="WhatsApp "+(S.phone||"");w.href=wa}else w.remove()}
+const l=document.querySelector(".ft-loc");if(l)l.textContent=S.location||"";
+const nm=document.querySelector(".ft-name");if(nm)nm.textContent=S.siteName||S.name||"";
+const y=document.querySelector(".ft-yr");if(y)y.textContent=new Date().getFullYear();
+const map={linkedin:["LinkedIn","#0A66C2"],github:["GitHub","#181717"],youtube:["YouTube","#FF0000"],facebook:["Facebook","#0866FF"],instagram:["Instagram","#E1306C"],tiktok:["TikTok","#000"],"drive.google":["Google Drive","#1A73E8"],canva:["Canva","#00C4CC"]};
+document.querySelectorAll(".links a").forEach(a=>{if(a.querySelector(":scope>i"))return;const h=(a.getAttribute("href")||"")+" "+(a.dataset.siteHref||"");const k=Object.keys(map).find(k=>h.toLowerCase().includes(k));if(!k)return;const [n,c]=map[k];const svg=ic(n,"#fff");if(svg)a.insertAdjacentHTML("afterbegin",`<i style="background:${c}">${svg}</i>`)});
+}catch(e){console.warn(e)}})();
+</script>
 </body>
 </html>
