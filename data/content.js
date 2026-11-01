@@ -194,7 +194,7 @@ const TOOLS = [["Re","React","Web & mobile UI","#61DAFB","#20232A"],["Nx","Next.
 
 // Education rows: [dates, title, detail, score, optional [link label, url]].
 const EDU = [
-  ["Jan 2026 – Dec 2028","Bachelor of Engineering, Computer Science","University of Wollongong Malaysia · UOW High Achievers Scholarship · Computer Science Club, competitions and hackathons.","UOW",["See awards & credentials","#awards"]],
+  ["Jan 2026 – Dec 2028","Bachelor of Engineering, Computer Science","University of Wollongong Malaysia · UOW High Achievers Scholarship (30% tuition fee waiver) · Computer Science Club, competitions and hackathons.","UOW",["See awards & credentials","#awards"]],
   ["May 2024 – Dec 2025","Honours, English Language and Literature","Tongi Govt College.",""],
   ["May 2024 – Dec 2025","Fazil","Tamirul Millat Kamil Madrasah.",""],
   ["Mar 2022 – Sep 2023","Intermediate (HSC), Science","Tamirul Millat Kamil Madrasah. Where I learned leadership.","5.00"],
@@ -271,7 +271,7 @@ const CREDS=[
   {t:"Top Coder Malaysia 2026",iss:"Thulija Technologies (T-Academy) · Data Science Association · supported by MDEC",d:"Issued 29 Jul 2026",id:"CODE/DSA/G11/UOW/003",note:"Placed 5th at university level (UOW Malaysia, Glenmarie) and qualified for the national round.",img:"cert-topcoder"},
   {t:"Tableau Fundamentals",iss:"University of Wollongong Malaysia",d:"Issued 31 Jul 2026",id:"UOWM/04236",note:"Tableau Fundamentals Workshop, UOW Malaysia Glenmarie Campus.",img:"cert-tableau",url:"https://drive.google.com/drive/folders/1nRFZDywj4FXpEXFwWso1p4ujg_jTW9yS"},
   {t:"Python Coder",iss:"Data Science Association",d:"Issued Jul 2026",note:"Python programming certification.",url:"https://www.linkedin.com/company/datascienceassociation/"},
-  {t:"UOW High Achievers Scholarship",iss:"University of Wollongong Malaysia",d:"Awarded 2026",note:"Awarded for outstanding academic performance, including GPA 5.00/5.00 in both SSC and HSC."},
+  {t:"UOW High Achievers Scholarship",iss:"University of Wollongong Malaysia",d:"Awarded 2026",tag:"30% tuition fee waiver",note:"A merit scholarship that covers 30% of my tuition fees, awarded for outstanding academic results including GPA 5.00/5.00 in both SSC and HSC."},
 ];
 
 // Client quotes, e.g. {q:"…", n:"Name", r:"Owner, Business"}. The section stays hidden while this is empty.
@@ -331,7 +331,7 @@ const BOT=[
   {k:["project","build","built","code","app","github","campus","game","tic","next","prayer","islamic","docker","cloud","microservice","devops"],a:'My code projects include Amalnama (an Islamic companion app), Averroes Code (an offline code editor with courses), Sunnah Store (a live e-commerce site), a Campus Islamic Society website in Next.js with live prayer times, CloudEats (a food ordering app I\'m moving to Docker microservices), an unbeatable Tic Tac Toe AI and CampusEarn (a student jobs platform). Try the demos on the <a href="#code">Code</a> page.'},
   {k:["design","logo","menu","brand","graphic","video","work","portfolio"],a:'I\'ve designed full brands, menus, LED boards, social posts and videos for clients like The Halal Gyro Spot and Spring Hill Deli. Browse them on the <a href="#work">Work</a> page.'},
   {k:["resume","résumé","cv"],a:'You can open my résumé here: <a href="https://drive.google.com/file/d/1pEi4xJrkY9GgL6H_Nm5rOhIOL7Ktamwk/view?usp=drivesdk" target="_blank" rel="noopener">Résumé on Google Drive</a>.'},
-  {k:["award","achiev","top coder","certif","tableau","scholar","presenter"],a:'I\'m Top Coder Malaysia 2026 (T-Academy) and hold the UOW High Achievers Scholarship. I\'m also certified in Tableau Fundamentals and as a Python Coder. See <a href="#awards">Awards</a>.'},
+  {k:["award","achiev","top coder","certif","tableau","scholar","presenter"],a:'I\'m Top Coder Malaysia 2026 (T-Academy) and hold the UOW High Achievers Scholarship, which covers 30% of my tuition fees. I\'m also certified in Tableau Fundamentals and as a Python Coder. See <a href="#awards">Awards</a>.'},
   {k:["educat","study","uni","university","college","uow","gpa","school","degree","ssc","hsc","ielts","porashona","পড়াশোনা"],a:'I\'m studying a Bachelor of Engineering in Computer Science at UOW Malaysia (2026 to 2028) on the High Achievers Scholarship. I scored GPA 5.00 in both SSC and HSC, and I\'m also doing Honours in English at Tongi Govt College.'},
   {k:["experience","job","intern","barista","teach"],a:'I\'m the founder and application developer at Averroes AI. Before that I was a barista at swich caffe, ran Hidayah Shop BD, founded Hidayah Blood Bank and Hidayah United Foundation, interned at Programming Hero and Code Biruni, and trained students in IELTS.'},
   {k:["hidayah","blood","foundation","volunteer"],a:'I founded Hidayah Blood Bank in 2017 to connect blood donors with patients in Bangladesh, and later the Hidayah United Foundation for community work.'},
