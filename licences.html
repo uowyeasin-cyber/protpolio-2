@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Licences</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#060C18;--card:#0C1526;--raise:#131F36;--line:#1D2A43;--text:#E9EEF8;--soft:#9BA9C2;--accent:#5B8CFF;--ok:#3DD68C;--warn:#F5B84B;--bad:#FF6B6B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Geist,system-ui,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:1200px;margin:0 auto;padding:28px 16px 64px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+h1{margin:0;font-size:1.7rem;letter-spacing:-.02em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px;margin-bottom:18px}
+.settings{display:flex;gap:18px;flex-wrap:wrap;align-items:end}
+label{display:grid;gap:4px;font-size:.85rem;color:var(--soft)}
+input,select{background:var(--raise);border:1px solid var(--line);border-radius:6px;color:var(--text);font:inherit;padding:8px 10px}
+input[type=number]{width:90px}
+.btn{background:var(--accent);color:#fff;border:0;border-radius:6px;padding:8px 14px;font:600 .9rem Geist,sans-serif;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+.btn.danger{background:transparent;border:1px solid var(--bad);color:var(--bad)}
+.btn:disabled{opacity:.5}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 16px;min-width:120px}
+.stat b{display:block;font-size:1.5rem}
+.stat span{color:var(--soft);font-size:.85rem}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:880px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 .75rem "Geist Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+td .sub{color:var(--soft);font-size:.82rem}
+.key{font-family:"Geist Mono",monospace;font-size:.85rem}
+.pill{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.78rem;font-weight:600;border:1px solid}
+.s-trial{color:var(--accent)}.s-active{color:var(--ok)}.s-expired{color:var(--warn)}.s-blocked{color:var(--bad)}.s-pending{color:var(--soft)}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.msg{color:var(--soft);min-height:1.4em}
+.empty{color:var(--soft);text-align:center;padding:30px}
+dialog{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:8px;max-width:560px;width:calc(100% - 32px)}
+dialog::backdrop{background:#0009}
+textarea{width:100%;min-height:110px;background:var(--raise);border:1px solid var(--line);border-radius:6px;color:var(--text);font:.82rem "Geist Mono",monospace;padding:10px;word-break:break-all}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div><h1>App licences</h1><div class="msg">Free trials and paid licences for Portfolio Studio</div></div>
+    <div class="actions"><a class="btn ghost" href="/trial.html" target="_blank">Open trial page</a><button class="btn ghost" id="refresh">Refresh</button></div>
+  </header>
+
+  <div id="signin" class="card" hidden>You are not signed in. <a href="/#login">Sign in</a> with your owner email and password, then come back to this page.</div>
+
+  <div id="app" hidden>
+    <div class="card">
+      <form class="settings" id="sf">
+        <label>Free runs per trial<input type="number" min="0" max="1000" name="trialLimit"></label>
+        <label>New trials<select name="autoApprove"><option value="1">Start immediately</option><option value="0">Wait for my approval</option></select></label>
+        <button class="btn">Save settings</button>
+        <span class="msg" id="smsg"></span>
+      </form>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div class="card tablewrap">
+      <table>
+        <thead><tr><th>Person</th><th>Key</th><th>Status</th><th>Runs</th><th>Last run</th><th>Actions</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<dialog id="dlg">
+  <h2 style="margin-top:0;font-size:1.2rem">Full licence</h2>
+  <p class="msg" id="dlgFor"></p>
+  <label>Lock to one domain (optional, e.g. client.com)<input id="dom" placeholder="leave empty to allow any domain"></label>
+  <p><button class="btn" id="issue">Create licence</button></p>
+  <div id="tokWrap" hidden>
+    <p class="msg">Send this to the buyer. They put it in <code>LICENCE_KEY</code> (Vercel env or .env) or paste it on the lock screen. It works offline forever.</p>
+    <textarea id="tok" readonly></textarea>
+    <p class="actions"><button class="btn ghost" id="copyTok">Copy</button><a class="btn ghost" id="waTok" target="_blank" rel="noopener">Send on WhatsApp</a></p>
+  </div>
+  <p style="text-align:right;margin-bottom:0"><button class="btn ghost" id="close">Close</button></p>
+</dialog>
+
+<script>
+(function(){
+  var $ = function(s){ return document.querySelector(s); };
+  var esc = function(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return "&#" + c.charCodeAt(0) + ";"; }); };
+  var api = async function(a, body){
+    var r = await fetch("/api/licence?a=" + a, body ? { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : { credentials: "same-origin" });
+    var j = await r.json().catch(function(){ return {}; });
+    if (!r.ok) throw Object.assign(new Error(j.error || "Request failed"), { status: r.status });
+    return j;
+  };
+  var data = null, current = null;
+  var when = function(t){ return t ? new Date(t).toLocaleString() : "never"; };
+
+  async function load(){
+    try { data = await api("list"); }
+    catch (e) { if (e.status === 401 || e.status === 503) { $("#signin").hidden = false; $("#app").hidden = true; return; } alert(e.message); return; }
+    $("#signin").hidden = true; $("#app").hidden = false;
+    var sf = $("#sf"); sf.trialLimit.value = data.settings.trialLimit; sf.autoApprove.value = data.settings.autoApprove ? "1" : "0";
+    var L = data.licences, c = function(s){ return L.filter(function(x){ return x.status === s; }).length; };
+    $("#stats").innerHTML = [["Downloads", L.length], ["On trial", c("trial")], ["Trial ended", c("expired")], ["Paid", c("active")], ["Waiting", c("pending")], ["Blocked", c("blocked")]]
+      .map(function(s){ return '<div class="stat"><b>' + s[1] + '</b><span>' + s[0] + '</span></div>'; }).join("");
+    $("#rows").innerHTML = L.length ? L.map(function(x){
+      var wa = x.whatsapp ? ' · <a href="https://wa.me/' + esc(x.whatsapp.replace(/\D/g, "")) + '" target="_blank" rel="noopener">WhatsApp</a>' : "";
+      var b = [];
+      if (x.status === "pending") b.push('<button class="btn" data-act="approve">Approve</button>');
+      if (x.status !== "active") b.push('<button class="btn" data-act="issue">Issue licence</button>');
+      else b.push('<button class="btn ghost" data-act="issue">Show / re-issue</button>');
+      b.push('<button class="btn ghost" data-act="limit">Set runs</button>');
+      b.push(x.status === "blocked" ? '<button class="btn ghost" data-act="unblock">Unblock</button>' : '<button class="btn danger" data-act="block">Block</button>');
+      return '<tr data-key="' + esc(x.key) + '"><td><b>' + esc(x.name) + '</b><div class="sub">' + esc(x.email) + wa + '</div><div class="sub">Since ' + esc(when(x.created)) + (x.note ? " · " + esc(x.note) : "") + '</div></td>' +
+        '<td class="key">' + esc(x.key) + '</td>' +
+        '<td><span class="pill s-' + esc(x.status) + '">' + esc(x.status === "active" ? "paid" : x.status) + '</span></td>' +
+        '<td>' + (x.status === "active" ? "unlimited" : esc(x.uses) + " / " + esc(x.limit) + (x.limit !== data.settings.trialLimit ? ' <span class="sub">(custom)</span>' : "")) + '</td>' +
+        '<td>' + esc(when(x.lastUse)) + (x.lastHost ? '<div class="sub">' + esc(x.lastHost) + '</div>' : "") + '</td>' +
+        '<td><div class="actions">' + b.join("") + '</div></td></tr>';
+    }).join("") : '<tr><td colspan="6" class="empty">No downloads yet. Share <a href="/trial.html">/trial.html</a> in your ads.</td></tr>';
+  }
+
+  $("#rows").addEventListener("click", async function(e){
+    var btn = e.target.closest("button[data-act]"); if (!btn) return;
+    var key = btn.closest("tr").dataset.key, x = data.licences.find(function(l){ return l.key === key; }), act = btn.dataset.act;
+    try {
+      if (act === "approve") await api("update", { key: key, status: "trial" });
+      if (act === "block") { if (!confirm("Block " + x.name + "? Their app stops on the next check (paid licences keep working offline).")) return; await api("update", { key: key, status: "blocked" }); }
+      if (act === "unblock") await api("update", { key: key, status: x.token ? "active" : "trial" });
+      if (act === "limit") {
+        var v = prompt("Free runs for " + x.name + " (empty = use the default of " + data.settings.trialLimit + "):", x.limit === data.settings.trialLimit ? "" : x.limit);
+        if (v === null) return; await api("update", { key: key, limit: v.trim() === "" ? null : v });
+      }
+      if (act === "issue") { current = x; $("#dlgFor").textContent = x.name + " · " + x.email; $("#dom").value = ""; $("#tokWrap").hidden = !x.token; if (x.token) showTok(x.token); $("#dlg").showModal(); return; }
+      load();
+    } catch (err) { alert(err.message); }
+  });
+
+  function showTok(t){
+    $("#tok").value = t; $("#tokWrap").hidden = false;
+    $("#waTok").href = current.whatsapp ? "https://wa.me/" + current.whatsapp.replace(/\D/g, "") + "?text=" + encodeURIComponent("Thank you for buying Portfolio Studio! Your licence key:\n\n" + t + "\n\nPaste it on the lock screen, or set it as LICENCE_KEY in Vercel / .env.") : "#";
+    $("#waTok").hidden = !current.whatsapp;
+  }
+  $("#issue").onclick = async function(){
+    this.disabled = true;
+    try { var r = await api("issue", { key: current.key, domain: $("#dom").value }); current.token = r.token; showTok(r.token); load(); }
+    catch (err) { alert(err.message); }
+    this.disabled = false;
+  };
+  $("#copyTok").onclick = function(){ navigator.clipboard && navigator.clipboard.writeText($("#tok").value); this.textContent = "Copied"; };
+  $("#close").onclick = function(){ $("#dlg").close(); $("#copyTok").textContent = "Copy"; };
+  $("#sf").addEventListener("submit", async function(e){
+    e.preventDefault();
+    try { await api("settings", { trialLimit: this.trialLimit.value, autoApprove: this.autoApprove.value === "1" }); $("#smsg").textContent = "Saved"; setTimeout(function(){ $("#smsg").textContent = ""; }, 2000); load(); }
+    catch (err) { alert(err.message); }
+  });
+  $("#refresh").onclick = load;
+  load();
+})();
+</script>
+</body>
+</html>

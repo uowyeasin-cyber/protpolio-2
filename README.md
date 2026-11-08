@@ -62,3 +62,11 @@ After changing `cms/editor.src.js`, run `npm run build:editor`.
 - **Fonts and libraries:** Geist and Geist Mono use the SIL Open Font License, which allows commercial use. `@vercel/blob` is Apache-2.0.
 - **Add your own licence.** Include a LICENSE file with the terms you sell under (for example single site or unlimited sites) and a support contact.
 - **Ship no secrets.** Leave out `.env`, `.cms-data/` and `node_modules/`. They are already in `.gitignore`.
+
+## Selling the app: free trials and licences
+
+- `trial.html`: public page for ads. A visitor enters name, email and WhatsApp, gets a trial key (`PST-…`) and downloads `downloads/portfolio-studio-trial.zip`.
+- `licences.html`: owner-only dashboard (sign in at `/#login` first). Set the number of free runs (all trials or per person), require approval for new trials, block keys, and **Issue licence** to create a full licence key (`PSL1.…`) after payment.
+- `api/licence.js`: the licence server. Records live in the Blob store under `licences/`, `licence-uses/` and `licence-settings/`.
+- Vercel environment variable **`LICENCE_PRIVATE_KEY`** (Ed25519 private key, PEM) signs full licences. Its public key is in the app's `api/_licence.config.js`. Never commit the private key.
+- The trial app counts one run per new browser session and needs the internet; a full licence is checked offline and works forever.
