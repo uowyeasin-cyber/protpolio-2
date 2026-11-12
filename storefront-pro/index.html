@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Storefront Pro · Ready-made online store app with 12 themes | Yeasin Arafat</title>
+<meta name="description" content="Start your own online store in a day: shop, admin panel, bKash, Nagad, Stripe, PayPal, couriers, AI chatbot and 12 one-click themes. Monthly, yearly or lifetime license.">
+<link rel="canonical" href="https://yeasinarafatbd.vercel.app/storefront-pro/">
+<meta property="og:title" content="Storefront Pro · Ready-made online store app">
+<meta property="og:description" content="Shop + full admin panel + 12 one-click themes. Free demo, then monthly, yearly or lifetime.">
+<meta property="og:image" content="https://yeasinarafatbd.vercel.app/img/dev-sunnah.webp">
+<meta name="theme-color" content="#060C18">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#060C18;--card:#0C1526;--raise:#131F36;--line:#1D2A43;--text:#E9EEF8;--soft:#9BA9C2;--accent:#5B8CFF;--ok:#3DD68C;--wa:#25D366}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Geist,system-ui,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+nav.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+nav.top a{color:var(--text);text-decoration:none;font-weight:600}
+.mono{font:500 .75rem "Geist Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(2.1rem,5.4vw,3.8rem);line-height:1.05;letter-spacing:-.03em;margin:.3em 0}
+h1 em{font-style:normal;color:var(--accent)}
+h2{font-size:clamp(1.5rem,3vw,2.2rem);letter-spacing:-.02em;margin:0 0 .4em}
+.lead{color:var(--soft);font-size:1.12rem;max-width:62ch}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;padding:30px 0 50px}
+.hero img{width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:0 30px 60px -30px #000}
+@media(max-width:820px){.hero{grid-template-columns:1fr}}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:0;border-radius:8px;padding:12px 18px;font:600 .95rem Geist,sans-serif;text-decoration:none;cursor:pointer}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+.btn.wa{background:var(--wa);color:#05210f}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+section{padding:46px 0;border-top:1px solid var(--line)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px}
+.card h3{margin:.2em 0 .3em;font-size:1.05rem}
+.card p{margin:0;color:var(--soft);font-size:.92rem}
+.tpl{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.tpl div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;font-weight:600}
+.tpl span{display:block;font-size:1.6rem}
+.tpl small{display:block;color:var(--soft);font-weight:400;font-size:.8rem}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.plan.best{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.plan .price{font-size:1.45rem;font-weight:700}
+.plan ul{margin:6px 0 14px;padding-left:18px;color:var(--soft);font-size:.92rem}
+.plan .btn{margin-top:auto;justify-content:center}
+ol.steps{counter-reset:s;list-style:none;padding:0;display:grid;gap:10px}
+ol.steps li{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px 14px 56px;position:relative}
+ol.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:16px;top:13px;width:28px;height:28px;border-radius:50%;background:var(--raise);display:grid;place-items:center;font-weight:700;color:var(--accent)}
+footer{padding:30px 0 50px;color:var(--soft);font-size:.9rem;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="top"><a href="/">← Yeasin Arafat</a><a class="btn ghost" href="#plans">Plans & prices</a></nav>
+
+  <div class="hero">
+    <div>
+      <span class="mono">Ready-made app for sale · Storefront Pro</span>
+      <h1>Your own online store, <em>running today.</em></h1>
+      <p class="lead">The same store app that runs Sunnah Store: a fast shop in 4 languages and a full admin panel for orders, stock, payments, couriers, marketing and an AI co-worker. Pick one of 12 ready-made themes in one click: shop, fashion, beauty, doctor &amp; clinic, restaurant and more.</p>
+      <p class="lead" lang="bn">নিজের ডোমেইনে নিজের অনলাইন দোকান। কোডিং লাগবে না, ধাপে ধাপে বাংলা গাইড সাথে আছে।</p>
+      <div class="acts">
+        <a class="btn" id="dl" href="/downloads/storefront-pro.zip" download>Download free demo</a>
+        <a class="btn wa" id="wa" href="https://wa.me/60178151865?text=Hi%20Yeasin%2C%20I%20want%20to%20buy%20Storefront%20Pro." target="_blank" rel="noopener">Buy on WhatsApp</a>
+        <a class="btn ghost" href="https://sunnahstore.vercel.app/" target="_blank" rel="noopener">See a live store</a>
+      </div>
+      <p class="mono" id="demoNote" style="margin-top:14px;color:var(--soft)">Free demo: 3 sessions in 1 day, then pick a plan</p>
+    </div>
+    <img src="/img/dev-sunnah.webp" alt="Storefront Pro home page" loading="eager">
+  </div>
+</div>
+
+<section><div class="wrap">
+  <span class="mono">12 themes, one click</span>
+  <h2>One app, any kind of business</h2>
+  <p class="lead">Admin → Site templates. One click changes the colours, fonts, texts, menu, home page and adds sample products you then edit.</p>
+  <div class="tpl">
+    <div><span>🛒</span>Online shop<small>Any products</small></div>
+    <div><span>👗</span>Fashion<small>Clothing, boutique, abaya</small></div>
+    <div><span>💄</span>Beauty<small>Skincare, makeup</small></div>
+    <div><span>🩺</span>Doctor &amp; clinic<small>Appointments, checkups</small></div>
+    <div><span>💊</span>Pharmacy<small>Medicine, supplements</small></div>
+    <div><span>🥬</span>Grocery<small>Fresh food, fish, rice</small></div>
+    <div><span>🍔</span>Restaurant<small>Food delivery, cakes</small></div>
+    <div><span>📱</span>Gadgets<small>Phones, accessories</small></div>
+    <div><span>🔥</span>Sale campaign<small>11.11, flash sale, one product</small></div>
+    <div><span>🕌</span>Islamic lifestyle<small>Attar, miswak, prayer</small></div>
+    <div><span>📚</span>Books &amp; courses<small>Bookshop, online courses</small></div>
+    <div><span>🛋️</span>Home &amp; decor<small>Furniture, handicraft</small></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="mono">What's inside</span>
+  <h2>Everything a real shop needs</h2>
+  <div class="cards">
+    <div class="card"><h3>Shop in 4 languages</h3><p>English, Bangla, Arabic, Hindi. USD, MYR and BDT. Guest checkout, coupons, reviews with photos, order tracking.</p></div>
+    <div class="card"><h3>Payments</h3><p>bKash, Nagad, Rocket, bank, SSLCommerz, Stripe, PayPal, Touch 'n Go, Zelle and cash on delivery.</p></div>
+    <div class="card"><h3>Couriers</h3><p>Steadfast, Pathao, RedX auto booking, EasyParcel, Shippo, and tracking for 1,500+ couriers.</p></div>
+    <div class="card"><h3>Full admin panel</h3><p>Orders, stock, returns, customers, staff roles, profit and loss, expenses, CSV export.</p></div>
+    <div class="card"><h3>Marketing</h3><p>Offers with 17 badge styles, loyalty points, store credit, email marketing, social posts with sales tracking, SEO.</p></div>
+    <div class="card"><h3>AI built in</h3><p>Shopping chatbot, AI co-worker, product writer and automation. Works with a free Gemini key.</p></div>
+    <div class="card"><h3>Earn more</h3><p>Ad slots, ad short links and an "Advertise with us" page, each one on or off.</p></div>
+    <div class="card"><h3>Yours to run</h3><p>Runs on your own free Vercel account with a free .vercel.app address, or your own .com.</p></div>
+  </div>
+</div></section>
+
+<section id="plans"><div class="wrap">
+  <span class="mono">Plans & prices</span>
+  <h2>Try free, then pick a plan</h2>
+  <div class="plans">
+    <div class="plan"><span class="mono">Monthly</span><div class="price" data-p="monthly">৳1,500 / $15 a month</div><ul><li>Every feature and all 12 themes</li><li>Updates while active</li><li>Cancel any time</li></ul><a class="btn ghost buy" data-plan="monthly" href="#">Get monthly</a></div>
+    <div class="plan best"><span class="mono">Yearly · best value</span><div class="price" data-p="yearly">৳12,000 / $120 a year (save 33%)</div><ul><li>Everything in monthly</li><li>Two months free or more</li><li>Priority WhatsApp support</li></ul><a class="btn buy" data-plan="yearly" href="#">Get yearly</a></div>
+    <div class="plan"><span class="mono">Lifetime</span><div class="price" data-p="lifetime">৳30,000 / $299 once</div><ul><li>Pay once, use forever on one domain</li><li>Every update</li><li>Setup help included</li></ul><a class="btn ghost buy" data-plan="lifetime" href="#">Get lifetime</a></div>
+  </div>
+  <p class="lead" id="contact" style="margin-top:16px">To buy: WhatsApp +60178151865</p>
+</div></section>
+
+<section><div class="wrap">
+  <span class="mono">How it works</span>
+  <h2>From download to open shop</h2>
+  <ol class="steps">
+    <li>Download the free demo. Inside is <b>START-HERE.md</b>: a step-by-step guide in Bangla (and English) with every link.</li>
+    <li>Make free GitHub and Vercel accounts, upload the files, connect the free database. Your shop opens at <code>yourname.vercel.app</code>.</li>
+    <li>Sign in to the admin, pick a theme, add your products, payments and couriers.</li>
+    <li>Pick a plan and message me. You get a license key; paste it into Vercel as <code>LICENSE_KEY</code>.</li>
+    <li>Optional: buy your own .com and connect it. The guide shows how.</li>
+  </ol>
+</div></section>
+
+<div class="wrap"><footer>Storefront Pro by <a href="/">Yeasin Arafat</a> · Averroes Solutions</footer></div>
+<script>
+(function(){
+  var wa = "60178151865";
+  fetch("/api/license?a=info").then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
+    if (!d) return;
+    ["monthly", "yearly", "lifetime"].forEach(function(p){ var el = document.querySelector('[data-p="' + p + '"]'); if (el && d.prices[p]) el.textContent = d.prices[p]; });
+    if (d.contact) document.getElementById("contact").textContent = "To buy: " + d.contact;
+    if (d.download) document.getElementById("dl").href = d.download;
+    document.getElementById("demoNote").textContent = d.on ? "Free demo: " + d.opens + " session" + (d.opens === 1 ? "" : "s") + " in " + d.days + " day" + (d.days === 1 ? "" : "s") + ", then pick a plan" : "Free to use";
+    var m = String(d.contact || "").replace(/[^\d]/g, ""); if (m.length >= 8) wa = m;
+    document.getElementById("wa").href = "https://wa.me/" + wa + "?text=" + encodeURIComponent("Hi Yeasin, I want to buy Storefront Pro.");
+  }).catch(function(){});
+  document.querySelectorAll(".buy").forEach(function(a){
+    a.addEventListener("click", function(e){ e.preventDefault(); window.open("https://wa.me/" + wa + "?text=" + encodeURIComponent("Hi Yeasin, I want the " + a.dataset.plan + " plan of Storefront Pro."), "_blank", "noopener"); });
+  });
+})();
+</script>
+</body>
+</html>

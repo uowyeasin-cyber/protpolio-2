@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Store app licenses</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#060C18;--card:#0C1526;--raise:#131F36;--line:#1D2A43;--text:#E9EEF8;--soft:#9BA9C2;--accent:#5B8CFF;--ok:#3DD68C;--warn:#F5B84B;--bad:#FF6B6B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Geist,system-ui,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:1200px;margin:0 auto;padding:28px 16px 64px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+h1{margin:0;font-size:1.7rem;letter-spacing:-.02em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px;margin-bottom:18px}
+.settings{display:flex;gap:18px;flex-wrap:wrap;align-items:end}
+label{display:grid;gap:4px;font-size:.85rem;color:var(--soft)}
+input,select{background:var(--raise);border:1px solid var(--line);border-radius:6px;color:var(--text);font:inherit;padding:8px 10px}
+input[type=number]{width:90px}
+.btn{background:var(--accent);color:#fff;border:0;border-radius:6px;padding:8px 14px;font:600 .9rem Geist,sans-serif;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+.btn.danger{background:transparent;border:1px solid var(--bad);color:var(--bad)}
+.btn:disabled{opacity:.5}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 16px;min-width:120px}
+.stat b{display:block;font-size:1.5rem}
+.stat span{color:var(--soft);font-size:.85rem}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:880px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 .75rem "Geist Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+td .sub{color:var(--soft);font-size:.82rem}
+.key{font-family:"Geist Mono",monospace;font-size:.85rem}
+.pill{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.78rem;font-weight:600;border:1px solid}
+.s-trial{color:var(--accent)}.s-active{color:var(--ok)}.s-expired{color:var(--warn)}.s-blocked{color:var(--bad)}.s-pending{color:var(--soft)}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.msg{color:var(--soft);min-height:1.4em}
+.empty{color:var(--soft);text-align:center;padding:30px}
+dialog{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:8px;max-width:560px;width:calc(100% - 32px)}
+dialog::backdrop{background:#0009}
+textarea{width:100%;min-height:110px;background:var(--raise);border:1px solid var(--line);border-radius:6px;color:var(--text);font:.82rem "Geist Mono",monospace;padding:10px;word-break:break-all}
+</style>
+</head>
+<body>
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.grid label input{width:100%}
+.row{display:grid;grid-template-columns:1.6fr .9fr 1.3fr .8fr 1fr 1.2fr auto;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.row input,.row select{width:100%;padding:6px 8px}
+@media(max-width:860px){.row{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div><h1>Storefront Pro licenses</h1><div class="msg">Copies of the online store app you sell. Demo copies, keys, monthly / yearly / lifetime plans.</div></div>
+    <div class="actions"><a class="btn ghost" href="/storefront-pro/" target="_blank">Open sales page</a><button class="btn ghost" id="refresh">Refresh</button></div>
+  </header>
+
+  <div id="signin" class="card" hidden>You are not signed in. <a href="/#login">Sign in</a> with your owner email and password, then come back to this page.</div>
+
+  <div id="app" hidden>
+    <form class="card" id="sf">
+      <h2 style="margin-top:0;font-size:1.1rem">Lock, demo and prices</h2>
+      <label style="display:flex;gap:8px;align-items:center;color:var(--text)"><input type="checkbox" name="on"> <b>License lock on</b> <span class="sub">(off: every sold copy runs freely)</span></label>
+      <div class="grid" style="margin-top:12px">
+        <label>Demo sessions<input type="number" min="0" name="opens"></label>
+        <label>Demo days<input type="number" min="0" name="days"></label>
+        <label>Extra days after a plan ends<input type="number" min="0" name="grace"></label>
+        <label>Monthly price<input name="p-monthly"></label>
+        <label>Yearly price<input name="p-yearly"></label>
+        <label>Lifetime price<input name="p-lifetime"></label>
+        <label>How buyers contact you<input name="contact"></label>
+        <label>Download file<input name="download"></label>
+      </div>
+      <p><button class="btn">Save</button> <span class="msg" id="smsg"></span></p>
+    </form>
+
+    <form class="card" id="cf">
+      <h2 style="margin-top:0;font-size:1.1rem">Make a license key (after the client pays)</h2>
+      <div class="grid">
+        <label>Client name / note<input name="note" placeholder="e.g. Rahim Traders, paid 1,500 tk"></label>
+        <label>Client web address (optional)<input name="host" placeholder="clientshop.com"></label>
+        <label>Plan<select name="plan"><option value="monthly">Monthly</option><option value="yearly">Yearly</option><option value="lifetime">Lifetime</option></select></label>
+      </div>
+      <p><button class="btn">Make key</button> <span class="msg" id="cmsg"></span></p>
+      <p class="msg">The client puts the key in Vercel as <code>LICENSE_KEY</code> and redeploys. Monthly and yearly keys stop on the end date (plus the extra days) until you press Renew. For your own businesses, make a Lifetime key.</p>
+    </form>
+
+    <div class="card"><h2 style="margin-top:0;font-size:1.1rem">License keys</h2><div id="keys"></div></div>
+    <div class="card"><h2 style="margin-top:0;font-size:1.1rem">Demo copies (downloads)</h2><div id="trials"></div></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var $ = function(s){ return document.querySelector(s); };
+  var esc = function(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return "&#" + c.charCodeAt(0) + ";"; }); };
+  var api = async function(a, body){
+    var r = await fetch("/api/license?a=" + a, body ? { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : { credentials: "same-origin" });
+    var j = await r.json().catch(function(){ return {}; });
+    if (!r.ok) throw Object.assign(new Error(j.error || "Request failed"), { status: r.status });
+    return j;
+  };
+  var when = function(t){ return t ? new Date(t).toLocaleString() : "never"; };
+  var today = new Date().toISOString().slice(0, 10);
+  var opt = function(v, list){ return list.map(function(o){ return '<option value="' + o[0] + '"' + (o[0] === v ? " selected" : "") + ">" + o[1] + "</option>"; }).join(""); };
+
+  function row(s){
+    var plan = s.plan || "lifetime";
+    var ended = s.expires && s.expires < today;
+    return '<form class="row" data-id="' + s.id + '">' +
+      '<div>' + (s.key ? '<div class="key">' + esc(s.key) + '</div><input name="host" value="' + esc(s.host) + '" placeholder="any address (first use)">' : "<b>" + esc(s.host) + '</b><div class="sub">' + s.opens + " / <input type=number name=maxOpens min=0 value=" + s.maxOpens + ' style="width:70px"> sessions, <input type=number name=maxDays min=0 value=' + s.maxDays + ' style="width:60px"> days</div>') + "</div>" +
+      '<select name="status">' + opt(s.status, [["trial", "Demo"], ["active", "Allowed"], ["blocked", "Blocked"]]) + "</select>" +
+      '<div><select name="plan">' + opt(plan, [["lifetime", "Lifetime"], ["monthly", "Monthly"], ["yearly", "Yearly"]]) + "</select>" +
+        (plan !== "lifetime" ? '<input type="date" name="expires" value="' + esc(s.expires) + '"' + (ended ? ' style="color:var(--bad)"' : "") + ">" : "") + "</div>" +
+      '<div class="sub">Last seen<br>' + when(s.last) + "</div>" +
+      '<input name="note" value="' + esc(s.note) + '" placeholder="note">' +
+      '<div class="sub">' + (ended ? '<span class="pill s-blocked">Ended ' + esc(s.expires) + "</span>" : plan !== "lifetime" && s.expires ? "Ends " + esc(s.expires) : "") + "</div>" +
+      '<div class="actions"><button class="btn" name="save">Save</button>' +
+        (plan !== "lifetime" ? '<button class="btn ghost" name="renew">Renew +1 ' + (plan === "monthly" ? "month" : "year") + "</button>" : "") +
+        (!s.key ? '<button class="btn ghost" name="reset">Restart demo</button>' : "") +
+        '<button class="btn danger" name="delete">Delete</button></div>' +
+    "</form>";
+  }
+
+  function render(d){
+    var f = $("#sf");
+    f.on.checked = d.on; f.opens.value = d.opens; f.days.value = d.days; f.grace.value = d.grace;
+    f["p-monthly"].value = d.prices.monthly; f["p-yearly"].value = d.prices.yearly; f["p-lifetime"].value = d.prices.lifetime;
+    f.contact.value = d.contact; f.download.value = d.download;
+    var keys = d.sites.filter(function(s){ return s.key; }), trials = d.sites.filter(function(s){ return !s.key; });
+    $("#keys").innerHTML = keys.length ? keys.map(row).join("") : '<p class="empty">None yet.</p>';
+    $("#trials").innerHTML = trials.length ? trials.map(row).join("") : '<p class="empty">None yet.</p>';
+  }
+
+  async function load(){
+    try { var d = await api("list"); $("#app").hidden = false; $("#signin").hidden = true; render(d); }
+    catch (e) { if (e.status === 401 || e.status === 503) { $("#signin").hidden = false; $("#app").hidden = true; } else alert(e.message); }
+  }
+
+  $("#sf").addEventListener("submit", async function(e){
+    e.preventDefault(); var f = e.target;
+    try {
+      render(await api("settings", { on: f.on.checked, opens: f.opens.value, days: f.days.value, grace: f.grace.value, contact: f.contact.value, download: f.download.value,
+        prices: { monthly: f["p-monthly"].value, yearly: f["p-yearly"].value, lifetime: f["p-lifetime"].value } }));
+      $("#smsg").textContent = "Saved.";
+    } catch (err) { $("#smsg").textContent = err.message; }
+  });
+  $("#cf").addEventListener("submit", async function(e){
+    e.preventDefault(); var f = e.target;
+    try { render(await api("create", { note: f.note.value, host: f.host.value, plan: f.plan.value })); f.reset(); $("#cmsg").textContent = "Key made. It is at the top of the list below."; }
+    catch (err) { $("#cmsg").textContent = err.message; }
+  });
+  document.addEventListener("submit", async function(e){
+    var f = e.target; if (!f.classList.contains("row")) return;
+    e.preventDefault();
+    var act = e.submitter ? e.submitter.name : "save";
+    if (act === "delete" && !confirm("Delete this entry?")) return;
+    var b = { id: f.dataset.id, status: f.status.value, plan: f.plan.value, note: f.note.value };
+    if (f.expires) b.expires = f.expires.value;
+    if (f.host) b.host = f.host.value;
+    if (f.maxOpens) { b.maxOpens = f.maxOpens.value; b.maxDays = f.maxDays.value; }
+    if (act !== "save") b[act] = true;
+    try { render(await api("site", b)); } catch (err) { alert(err.message); }
+  });
+  $("#refresh").addEventListener("click", load);
+  load();
+})();
+</script>
+</body>
+</html>
