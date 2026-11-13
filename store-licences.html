@@ -55,8 +55,9 @@ textarea{width:100%;min-height:110px;background:var(--raise);border:1px solid va
 <body>
 <div class="wrap">
   <header>
-    <div><h1>Storefront Pro licenses</h1><div class="msg">Copies of the online store app you sell. Demo copies, keys, monthly / yearly / lifetime plans.</div></div>
-    <div class="actions"><a class="btn ghost" href="/storefront-pro/" target="_blank">Open sales page</a><button class="btn ghost" id="refresh">Refresh</button></div>
+    <div class="actions" style="width:100%"><a class="btn ghost" id="t-sp" href="/store-licences.html">Storefront Pro</a><a class="btn ghost" id="t-sn" href="/store-licences.html?app=easylife">Easy Life</a></div>
+    <div><h1 id="title">Storefront Pro licenses</h1><div class="msg" id="subtitle">Copies of the online store app you sell. Demo copies, keys, monthly / yearly / lifetime plans.</div></div>
+    <div class="actions"><a class="btn ghost" id="sales" href="/storefront-pro/" target="_blank">Open sales page</a><button class="btn ghost" id="refresh">Refresh</button></div>
   </header>
 
   <div id="signin" class="card" hidden>You are not signed in. <a href="/#login">Sign in</a> with your owner email and password, then come back to this page.</div>
@@ -82,24 +83,36 @@ textarea{width:100%;min-height:110px;background:var(--raise);border:1px solid va
       <h2 style="margin-top:0;font-size:1.1rem">Make a license key (after the client pays)</h2>
       <div class="grid">
         <label>Client name / note<input name="note" placeholder="e.g. Rahim Traders, paid 1,500 tk"></label>
-        <label>Client web address (optional)<input name="host" placeholder="clientshop.com"></label>
+        <label id="hostlabel">Client web address (optional)<input name="host" placeholder="clientshop.com"></label>
         <label>Plan<select name="plan"><option value="monthly">Monthly</option><option value="yearly">Yearly</option><option value="lifetime">Lifetime</option></select></label>
       </div>
       <p><button class="btn">Make key</button> <span class="msg" id="cmsg"></span></p>
-      <p class="msg">The client puts the key in Vercel as <code>LICENSE_KEY</code> and redeploys. Monthly and yearly keys stop on the end date (plus the extra days) until you press Renew. For your own businesses, make a Lifetime key.</p>
+      <p class="msg" id="keyhelp">The client puts the key in Vercel as <code>LICENSE_KEY</code> and redeploys. Monthly and yearly keys stop on the end date (plus the extra days) until you press Renew. For your own businesses, make a Lifetime key.</p>
     </form>
 
     <div class="card"><h2 style="margin-top:0;font-size:1.1rem">License keys</h2><div id="keys"></div></div>
-    <div class="card"><h2 style="margin-top:0;font-size:1.1rem">Demo copies (downloads)</h2><div id="trials"></div></div>
+    <div class="card"><h2 style="margin-top:0;font-size:1.1rem" id="trialtitle">Demo copies (downloads)</h2><div id="trials"></div></div>
   </div>
 </div>
 
 <script>
 (function(){
   var $ = function(s){ return document.querySelector(s); };
+  var APP = new URLSearchParams(location.search).get("app") === "easylife" ? "easylife" : "";
+  if (APP) {
+    document.title = "Easy Life licenses";
+    $("#title").textContent = "Easy Life licenses";
+    $("#subtitle").textContent = "Phones using the Easy Life app. Free trial, Pro keys, monthly / yearly / lifetime plans. Without Pro a phone keeps the free plan.";
+    $("#sales").href = "/easy-life/";
+    $("#hostlabel").firstChild.textContent = "Phone code (optional, shown in the app)";
+    $("#cf").host.placeholder = "e.g. 3f9a1c2b";
+    $("#keyhelp").textContent = "The buyer opens Easy Life, Settings, Upgrade, and types the key. It works on one phone: the first phone that uses it, or the phone code you fill in. Monthly and yearly keys go back to the free plan after the end date (plus the extra days) until you press Renew.";
+    $("#trialtitle").textContent = "Phones on the free trial";
+    $("#t-sn").className = "btn";
+  } else $("#t-sp").className = "btn";
   var esc = function(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return "&#" + c.charCodeAt(0) + ";"; }); };
   var api = async function(a, body){
-    var r = await fetch("/api/license?a=" + a, body ? { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : { credentials: "same-origin" });
+    var r = await fetch("/api/license?" + (APP ? "app=" + APP + "&" : "") + "a=" + a, body ? { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : { credentials: "same-origin" });
     var j = await r.json().catch(function(){ return {}; });
     if (!r.ok) throw Object.assign(new Error(j.error || "Request failed"), { status: r.status });
     return j;
