@@ -196,7 +196,7 @@ const SHOWCASE = [
 
 // Products that already have their own sales page. Listed on the /projects/ hub too.
 const SHOWCASE_LINKED = [
-  {n:"Easy Life",href:"/easy-life/",accent:"#5B8CFF",shot:"dev-super-note.webp",en:{kicker:"New app · Android",p:"Say it once, the AI does the rest: voice notes, reminders, money tracking and messages in Bangla and English."},bn:{kicker:"নতুন অ্যাপ · অ্যান্ড্রয়েড",p:"একবার বলুন, বাকিটা AI করবে: বাংলা ও ইংরেজিতে ভয়েস নোট, রিমাইন্ডার, টাকার হিসাব আর মেসেজ।"}},
+  {n:"Easy Life",href:"/easy-life/",accent:"#5B8CFF",shot:"dev-easy-life.webp",en:{kicker:"New app · Android",p:"Say it once, the AI does the rest: voice notes, reminders, money tracking and messages in Bangla and English."},bn:{kicker:"নতুন অ্যাপ · অ্যান্ড্রয়েড",p:"একবার বলুন, বাকিটা AI করবে: বাংলা ও ইংরেজিতে ভয়েস নোট, রিমাইন্ডার, টাকার হিসাব আর মেসেজ।"}},
   {n:"Storefront Pro",href:"/storefront-pro/",accent:"#E8B04A",shot:"dev-sunnah.webp",en:{kicker:"Ready-made store app",p:"The Sunnah Store app for your business: shop, admin panel, payments, couriers and 12 themes."},bn:{kicker:"রেডিমেড স্টোর অ্যাপ",p:"আপনার ব্যবসার জন্য Sunnah Store অ্যাপ: শপ, অ্যাডমিন, পেমেন্ট, কুরিয়ার আর ১২টি থিম।"}},
 ];
 
