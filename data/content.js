@@ -29,7 +29,7 @@ const SITE = {
   languages: ["English","Bengali"],
   // Agency website (Averroes Solutions). Leave "" to hide every agency link; set the address
   // (for example "https://averroes-solutions.vercel.app") once the agency site is live.
-  agency: "",
+  agency: "https://averroessolutions.vercel.app",
 };
 
 // Image sizes [width, height] for every gallery piece (used for layout before images load).
