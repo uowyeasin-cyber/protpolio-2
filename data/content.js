@@ -27,6 +27,9 @@ const SITE = {
   url: "https://yeasinarafatbd.vercel.app",   // live address, used by the service pages and sitemap
   areas: ["Malaysia","Bangladesh","United States","Worldwide"],
   languages: ["English","Bengali"],
+  // Agency website (Averroes Solutions). Leave "" to hide every agency link; set the address
+  // (for example "https://averroes-solutions.vercel.app") once the agency site is live.
+  agency: "",
 };
 
 // Image sizes [width, height] for every gallery piece (used for layout before images load).

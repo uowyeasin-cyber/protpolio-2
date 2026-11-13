@@ -857,6 +857,7 @@ body.cx-editing .svc .svc-more::after{display:none}
     <nav class="main" id="mainNav">
       <a href="#home" data-r="home">Home</a>
       <a href="#work" data-r="work">Work</a>
+      <a href="/projects/">Live demos</a>
       <a href="#about" data-r="about">About</a>
       <a href="#cv" data-r="cv">Résumé</a>
       <a href="#services" data-r="services">Services</a>
@@ -921,7 +922,7 @@ body.cx-editing .svc .svc-more::after{display:none}
     </div>
 
     <div class="wrap block">
-      <div class="sec-head"><div><span class="mono">Apps & websites</span><h2>Apps and websites I've built</h2></div><a class="btn" href="#work">See all apps & websites</a></div>
+      <div class="sec-head"><div><span class="mono">Apps & websites</span><h2>Apps and websites I've built</h2></div><div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn solid" href="/projects/">Try every project live</a><a class="btn" href="#work">See all apps & websites</a></div></div>
       <div class="cards" id="homeDev"></div>
     </div>
 
@@ -1156,6 +1157,15 @@ body.cx-editing .svc .svc-more::after{display:none}
 </div>
 
 <script src="data/content.js"></script>
+<script src="data/showcase.js"></script>
+<script>
+// Links to the agency site, shown only when SITE.agency is set in data/content.js.
+(function(){var u=SITE.agency;if(!u)return;
+function a(t,c){var e=document.createElement("a");e.href=u;e.target="_blank";e.rel="noopener";e.textContent=t;if(c)e.className=c;return e}
+var nav=document.getElementById("mainNav"),hire=nav&&nav.querySelector(".hire");if(nav)nav.insertBefore(a("Agency ↗"),hire);
+var ft=document.querySelector(".ft-col .ft-links");if(ft)ft.appendChild(a("Averroes Solutions ↗"));
+var sp=document.querySelector("#v-services .lead");if(sp){var p=document.createElement("p");p.className="lead";p.style.marginTop="10px";p.append("Bigger project? ");p.appendChild(a("Hire the team · Averroes Solutions ↗"));sp.after(p)}})();
+</script>
 <script src="data/icons.js"></script>
 <script>
 
@@ -1281,12 +1291,12 @@ $("#devList").innerHTML=DEV.map(d=>`<article class="dproj${d.demo?' has-demo':''
 <g stroke="var(--line)"><rect x="20" y="292" width="150" height="46" rx="23" fill="var(--panel)"/><rect x="185" y="292" width="150" height="46" rx="23" fill="var(--panel)"/><rect x="350" y="292" width="150" height="46" rx="23" fill="var(--panel)"/></g>
 <g text-anchor="middle" fill="var(--paper)"><text x="95" y="319">MySQL 8</text><text x="260" y="319">Redis 7</text><text x="425" y="319">MongoDB 6</text></g>
 <text x="260" y="378" text-anchor="middle" fill="var(--faint)">docker compose · healthchecks · named volumes · bridge network</text>
-</svg></div>`:d.img?`<button class="dshot piece" data-id="${d.full||d.img+"-full"}" data-list="dev-${d.img}"><img src="img/${d.img}.webp" alt="${esc(d.n)} home page" loading="lazy"></button>`:`<div class="term"><div class="dots"><i></i><i></i><i></i></div><pre>${d.code}</pre></div>`}<div class="body"><span class="mono">${esc(d.k)}</span><h2>${esc(d.n)}</h2><p>${esc(d.p)}</p><ul>${d.l.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><div class="chips">${d.tags.map(t=>`<span class="chip">${esc(t)}</span>`).join("")}</div>${d.link||d.gh?`<div class="dlinks">${d.link?`<a class="btn solid" href="${d.link[1]}" target="_blank" rel="noopener">${esc(d.link[0])} ↗</a>`:""}${d.gh?`<a class="btn" href="https://github.com/uowyeasin-cyber/${d.gh}" target="_blank" rel="noopener">View code on GitHub ↗</a>`:""}</div>`:""}</div></article>`).join("");
+</svg></div>`:d.img?`<button class="dshot piece" data-id="${d.full||d.img+"-full"}" data-list="dev-${d.img}"><img src="img/${d.img}.webp" alt="${esc(d.n)} home page" loading="lazy"></button>`:`<div class="term"><div class="dots"><i></i><i></i><i></i></div><pre>${d.code}</pre></div>`}<div class="body"><span class="mono">${esc(d.k)}</span><h2>${esc(d.n)}</h2><p>${esc(d.p)}</p><ul>${d.l.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><div class="chips">${d.tags.map(t=>`<span class="chip">${esc(t)}</span>`).join("")}</div>${d.link||d.gh||showcasePage(d.n)?`<div class="dlinks">${showcasePage(d.n)?`<a class="btn solid" href="${showcasePage(d.n)}">Project page & live demo</a>`:""}${d.link?`<a class="btn" href="${d.link[1]}" target="_blank" rel="noopener">${esc(d.link[0])} ↗</a>`:""}${d.gh?`<a class="btn" href="https://github.com/uowyeasin-cyber/${d.gh}" target="_blank" rel="noopener">View code on GitHub ↗</a>`:""}</div>`:""}</div></article>`).join("");
 
 // WORKS by category
 function renderWorks(){
   const byN=n=>DEV.find(d=>d.n.startsWith(n));
-  const ghBtn=d=>d.gh?`<a class="btn" href="https://github.com/uowyeasin-cyber/${d.gh}" target="_blank" rel="noopener">Code ↗</a>`:"";
+  const ghBtn=d=>(showcasePage(d.n)?`<a class="btn" href="${showcasePage(d.n)}">Project page</a>`:"")+(d.gh?`<a class="btn" href="https://github.com/uowyeasin-cyber/${d.gh}" target="_blank" rel="noopener">Code ↗</a>`:"");
   const liveBtn=d=>d.link?`<a class="btn solid" href="${d.link[1]}" target="_blank" rel="noopener">${esc(d.link[0])} ↗</a>`:"";
   const host=u=>{try{return new URL(u).host+new URL(u).pathname.replace(/\/$/,"")}catch(_){return u}};
   const pieces=c=>Object.keys(P).filter(k=>P[k][1]===c&&!k.startsWith("me-portrait")&&META[k]);

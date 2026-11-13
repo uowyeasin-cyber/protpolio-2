@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Amalnama · Your daily record of good deeds. | Yeasin Arafat</title>
+<meta name="description" content="A free, ad-free Islamic companion app: prayer times, the full Quran, authentic hadith, an AI mufti, Qibla, a hifz tracker and family budgets, in one installable app.">
+<link rel="canonical" href="https://yeasinarafatbd.vercel.app/projects/amalnama/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Amalnama · Your daily record of good deeds. | Yeasin Arafat">
+<meta property="og:description" content="A free, ad-free Islamic companion app: prayer times, the full Quran, authentic hadith, an AI mufti, Qibla, a hifz tracker and family budgets, in one installable app.">
+<meta property="og:url" content="https://yeasinarafatbd.vercel.app/projects/amalnama/">
+<meta property="og:image" content="https://yeasinarafatbd.vercel.app/img/cover-amalnama.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#060C18">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Hind+Siliguri:wght@400;500;600&display=swap">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Amalnama","url":"https://yeasinarafatbd.vercel.app/projects/amalnama/","image":"https://yeasinarafatbd.vercel.app/img/cover-amalnama.webp","description":"A free, ad-free Islamic companion app: prayer times, the full Quran, authentic hadith, an AI mufti, Qibla, a hifz tracker and family budgets, in one installable app.","applicationCategory":"WebApplication","operatingSystem":"Web, Android, iOS","keywords":"PWA, Vanilla JS, Gemini AI, Web Push, 6 languages","creator":{"@id":"https://yeasinarafatbd.vercel.app/#person"}}</script>
+<style>:root{--accent:#2FBF8F;--glow:rgba(47,191,143,0.16);--glow2:rgba(47,191,143,0.38)}
+:root{--bg:#060C18;--card:#0C1526;--raise:#131F36;--line:#1D2A43;--text:#E9EEF8;--soft:#9BA9C2;--faint:#62718D;--wa:#25D366;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1100px 620px at 85% -8%,var(--glow),transparent 62%),radial-gradient(800px 500px at -10% 30%,rgba(91,140,255,.07),transparent 60%),var(--bg);color:var(--text);font:16px/1.6 Geist,system-ui,-apple-system,"Segoe UI","Hind Siliguri","Noto Sans Bengali",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+[lang="bn"]{font-family:"Hind Siliguri","Noto Sans Bengali",Geist,system-ui,sans-serif}
+html[data-lang="bn"] .en,html:not([data-lang="bn"]) .bn{display:none}
+a{color:var(--accent)}img{max-width:100%;display:block}
+.wrap{max-width:1160px;margin:0 auto;padding:0 16px}
+nav.top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:18px 0}
+nav.top>a{color:var(--text);text-decoration:none;font-weight:600}
+.navr{display:flex;gap:8px;align-items:center}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--card)}
+.lang button{border:0;background:none;color:var(--soft);font:600 .8rem Geist,"Hind Siliguri",sans-serif;padding:6px 11px;border-radius:999px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);color:#06101f}
+.mono{font:500 .74rem "Geist Mono",ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(2.1rem,5.4vw,3.9rem);line-height:1.04;letter-spacing:-.035em;margin:.3em 0;text-wrap:balance}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--accent),#fff 140%);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:clamp(1.5rem,3vw,2.2rem);letter-spacing:-.02em;margin:.2em 0 .6em;line-height:1.15}
+.lead{color:var(--soft);font-size:1.12rem;max-width:62ch}
+.hero{display:grid;gap:36px;align-items:center;padding:24px 0 40px}
+.hero.phone-hero{grid-template-columns:1.15fr .85fr}
+.hero.wide{grid-template-columns:1fr}.hero.wide .copy{max-width:780px}
+@media(max-width:860px){.hero.phone-hero{grid-template-columns:1fr}}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#06101f;border:1px solid transparent;border-radius:9px;padding:12px 18px;font:600 .95rem Geist,"Hind Siliguri",sans-serif;text-decoration:none;cursor:pointer;transition:transform .15s,filter .15s}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.08)}
+.btn.ghost{background:transparent;border-color:var(--line);color:var(--text)}
+.btn.wa{background:var(--wa);color:#05210f}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.status{display:inline-flex;gap:8px;align-items:center;margin-top:18px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:.85rem;color:var(--soft);background:rgba(12,21,38,.6)}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--ok,#3DD68C);box-shadow:0 0 0 4px rgba(61,214,140,.15)}
+.phone{justify-self:center;width:min(300px,100%);aspect-ratio:300/620;border-radius:44px;padding:10px;background:#0b0f17;border:1px solid #2a3550;box-shadow:0 40px 80px -30px #000,0 0 120px -20px var(--glow2);position:relative}
+.phone::before{content:"";position:absolute;top:19px;left:50%;transform:translateX(-50%);width:84px;height:22px;border-radius:20px;background:#0b0f17;z-index:2}
+.phone .gate{background-position:82% center}.phone .scr{width:100%;height:100%;border-radius:35px;overflow:hidden;background:#f5f6f8;position:relative}
+.phone iframe{width:100%;height:100%;border:0}
+.win{border:1px solid #26334f;border-radius:14px;overflow:hidden;background:#0b111e;box-shadow:0 50px 100px -40px #000,0 0 140px -30px var(--glow2)}
+.win .bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#0f1828;border-bottom:1px solid #1d2a43}
+.win .bar i{width:11px;height:11px;border-radius:50%;background:#2a3753}.win .bar i:nth-child(1){background:#ff5f57}.win .bar i:nth-child(2){background:#febc2e}.win .bar i:nth-child(3){background:#28c840}
+.win .bar span{flex:1;margin:0 8px;background:#0a1220;border:1px solid #1d2a43;border-radius:7px;padding:4px 12px;font:500 .78rem "Geist Mono",monospace;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.win .bar a{font-size:.8rem;color:var(--soft);text-decoration:none;white-space:nowrap}.win .bar a:hover{color:var(--text)}
+.win .scr{position:relative;aspect-ratio:16/10;overflow:hidden;background:#fff}@media(max-width:700px){.win .scr{aspect-ratio:3/4}}
+.win .scr iframe{position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform-origin:0 0}
+.gate{position:absolute;inset:0;display:grid;place-items:center;background:#0b111e center/cover no-repeat;cursor:pointer}
+.gate::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,12,24,.15),rgba(6,12,24,.75))}
+.gate .btn{position:relative;z-index:1;box-shadow:0 10px 30px -8px #000}
+.cap{text-align:center;color:var(--soft);font-size:.85rem;margin-top:12px}
+section{padding:52px 0;border-top:1px solid var(--line)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.card{background:linear-gradient(180deg,var(--card),rgba(12,21,38,.6));border:1px solid var(--line);border-radius:12px;padding:20px;transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card .ic{width:44px;height:44px;display:grid;place-items:center;border-radius:11px;background:var(--glow);font-size:1.35rem}
+.card h3{margin:.7em 0 .3em;font-size:1.06rem}.card p{margin:0;color:var(--soft);font-size:.94rem}
+.built{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}@media(max-width:820px){.built{grid-template-columns:1fr}}
+.built ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.built li{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 16px 13px 42px;position:relative}
+.built li::before{content:"";position:absolute;left:17px;top:21px;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--glow)}
+.stack{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;align-self:start}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.chip{border:1px solid var(--line);background:var(--raise);border-radius:999px;padding:5px 12px;font:500 .82rem "Geist Mono",monospace;color:var(--text)}
+.cta{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--glow),rgba(12,21,38,.9) 55%);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,4vw,40px);display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+.cta p{color:var(--soft);margin:.2em 0 0;max-width:56ch}
+.more{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.pc{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--text);transition:border-color .2s,transform .2s}
+.pc:hover{border-color:var(--c,var(--accent));transform:translateY(-3px)}
+.pc img{aspect-ratio:16/9;object-fit:cover;object-position:top;width:100%;height:auto;border-bottom:1px solid var(--line)}
+.pc div{padding:14px 16px 16px}.pc .mono{color:var(--c,var(--accent));font-size:.68rem}.pc h3{margin:.3em 0 .25em;font-size:1.05rem}.pc p{margin:0;color:var(--soft);font-size:.9rem}
+.pcm{position:relative;display:block}.badge{position:absolute;top:10px;left:10px;z-index:1;font:600 .72rem Geist,"Hind Siliguri",sans-serif;padding:5px 10px;border-radius:999px;backdrop-filter:blur(6px)}
+.badge.ok{background:rgba(61,214,140,.92);color:#04210f}.badge.wip{background:rgba(242,165,74,.92);color:#2a1700}
+.status.wip i{background:#f2a54a;box-shadow:0 0 0 4px rgba(242,165,74,.15)}
+.buy{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:start}@media(max-width:820px){.buy{grid-template-columns:1fr}}
+.price{background:linear-gradient(160deg,var(--glow),var(--card) 60%);border:1px solid var(--accent);border-radius:14px;padding:22px}.price b{display:block;font-size:1.5rem;letter-spacing:-.02em;margin:.2em 0}.price p{color:var(--soft);margin:0 0 16px}
+.note{background:rgba(242,165,74,.08);border:1px solid rgba(242,165,74,.35);border-radius:12px;padding:16px 18px;color:var(--text)}.note b{color:#f2a54a}
+.grouphead{margin:40px 0 14px}.grouphead h2{margin:.2em 0 .2em}.grouphead p{color:var(--soft);margin:0}
+.hubhead{padding:20px 0 34px}
+footer{padding:30px 0 46px;color:var(--faint);font-size:.88rem;display:flex;flex-wrap:wrap;gap:10px 18px;justify-content:space-between}footer a{color:var(--soft);text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="top"><a href="/projects/">← <span class="en">All projects</span><span class="bn" lang="bn">সব প্রজেক্ট</span></a><div class="navr"><div class="lang" role="group" aria-label="Language"><button data-l="en" aria-pressed="true">EN</button><button data-l="bn" aria-pressed="false">বাংলা</button></div></div></nav>
+  <div class="hero phone-hero" id="demo"><div class="copy"><span class="mono"><span class="en">Flagship app · Averroes AI</span><span class="bn" lang="bn">ফ্ল্যাগশিপ অ্যাপ · Averroes AI</span></span>
+      <h1><span class="en">Your daily record of <em>good deeds.</em></span><span class="bn" lang="bn">আপনার প্রতিদিনের <em>আমলের হিসাব।</em></span></h1>
+      <p class="lead"><span class="en">A free, ad-free Islamic companion app: prayer times, the full Quran, authentic hadith, an AI mufti, Qibla, a hifz tracker and family budgets, in one installable app.</span><span class="bn" lang="bn">ফ্রি, বিজ্ঞাপন ছাড়া একটি ইসলামিক অ্যাপ: নামাজের সময়, পুরো কুরআন, সহিহ হাদিস, AI মুফতি, কিবলা, হিফজ ট্র্যাকার আর পরিবারের বাজেট, সব এক অ্যাপে।</span></p>
+      <div class="acts">
+        <a class="btn" href="https://uowyeasin-cyber.github.io/AmalnamaForever/" target="_blank" rel="noopener"><span class="en">Install Amalnama ↗</span><span class="bn" lang="bn">লাইভ অ্যাপ খুলুন ↗</span></a>
+        <a class="btn wa" href="https://wa.me/60178151865?text=Hi%20Yeasin%2C%20I%20want%20to%20buy%20Amalnama.%20Please%20send%20me%20the%20price%20and%20details." target="_blank" rel="noopener"><span class="en">Buy this</span><span class="bn" lang="bn">এটি কিনুন</span></a>
+        <a class="btn ghost" href="https://github.com/uowyeasin-cyber/AmalnamaForever" target="_blank" rel="noopener"><span class="en">Code on GitHub ↗</span><span class="bn" lang="bn">GitHub-এ কোড ↗</span></a>
+        
+      </div>
+      <span class="status"><i></i><span class="en">Live · free for everyone · installable on any phone</span><span class="bn" lang="bn">লাইভ · সবার জন্য ফ্রি · যেকোনো ফোনে ইনস্টল করা যায়</span></span></div><div><div class="phone"><div class="scr"><div class="gate" data-src="https://uowyeasin-cyber.github.io/AmalnamaForever/" data-title="Amalnama live demo" style="background-image:url('/img/dev-amalnama.webp')"><span class="btn">▶ <span class="en">Load the live app here</span><span class="bn" lang="bn">লাইভ অ্যাপ এখানে চালু করুন</span></span></div></div></div><p class="cap"><span class="en">Live app. Tap around.</span><span class="bn" lang="bn">লাইভ অ্যাপ। চাপ দিয়ে দেখুন।</span></p></div></div>
+</div>
+
+<section><div class="wrap">
+  <span class="mono"><span class="en">What's inside</span><span class="bn" lang="bn">ভেতরে যা আছে</span></span>
+  <h2><span class="en">Built to be used every day</span><span class="bn" lang="bn">প্রতিদিন ব্যবহারের জন্য বানানো</span></h2>
+  <div class="cards"><div class="card"><div class="ic">🕌</div><h3><span class="en">Prayer times &amp; azan</span><span class="bn" lang="bn">নামাজের সময় ও আজান</span></h3><p><span class="en">Accurate times for your location, azan alerts and a countdown to the next prayer.</span><span class="bn" lang="bn">আপনার এলাকার সঠিক সময়, আজানের অ্যালার্ট আর পরের নামাজের কাউন্টডাউন।</span></p></div><div class="card"><div class="ic">📖</div><h3><span class="en">Quran &amp; hadith</span><span class="bn" lang="bn">কুরআন ও হাদিস</span></h3><p><span class="en">All 114 surahs and the six authentic hadith collections, readable offline.</span><span class="bn" lang="bn">১১৪টি সূরা আর ছয়টি সহিহ হাদিস গ্রন্থ, ইন্টারনেট ছাড়াও পড়া যায়।</span></p></div><div class="card"><div class="ic">🤖</div><h3><span class="en">AI mufti</span><span class="bn" lang="bn">AI মুফতি</span></h3><p><span class="en">Ask a question and get an answer with Quran and hadith references.</span><span class="bn" lang="bn">প্রশ্ন করুন, কুরআন-হাদিসের রেফারেন্সসহ উত্তর পান।</span></p></div><div class="card"><div class="ic">💬</div><h3><span class="en">Chats &amp; calls</span><span class="bn" lang="bn">চ্যাট ও কল</span></h3><p><span class="en">WhatsApp-style chats, groups and group calls that ring even when the app is closed.</span><span class="bn" lang="bn">হোয়াটসঅ্যাপের মতো চ্যাট, গ্রুপ আর গ্রুপ কল, অ্যাপ বন্ধ থাকলেও রিং হয়।</span></p></div><div class="card"><div class="ic">💰</div><h3><span class="en">Halal finance</span><span class="bn" lang="bn">হালাল ফাইন্যান্স</span></h3><p><span class="en">A family budget planner and a zakat calculator.</span><span class="bn" lang="bn">পরিবারের বাজেট প্ল্যানার আর যাকাত ক্যালকুলেটর।</span></p></div><div class="card"><div class="ic">🧠</div><h3><span class="en">Hifz &amp; routine</span><span class="bn" lang="bn">হিফজ ও রুটিন</span></h3><p><span class="en">Track memorisation and build a daily routine of good habits.</span><span class="bn" lang="bn">মুখস্থের অগ্রগতি আর প্রতিদিনের ভালো অভ্যাসের রুটিন।</span></p></div></div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="mono"><span class="en">Under the hood</span><span class="bn" lang="bn">কীভাবে বানানো</span></span>
+  <h2><span class="en">How it's built</span><span class="bn" lang="bn">প্রযুক্তি ও কাঠামো</span></h2>
+  <div class="built"><ul><li><span class="en">Installable PWA in vanilla JavaScript with no build step</span><span class="bn" lang="bn">ভ্যানিলা জাভাস্ক্রিপ্টে বানানো ইনস্টলযোগ্য PWA, কোনো বিল্ড স্টেপ নেই</span></li><li><span class="en">AI answers through Gemini (Firebase AI Logic)</span><span class="bn" lang="bn">Gemini (Firebase AI Logic) দিয়ে AI উত্তর</span></li><li><span class="en">Web Push for calls and reminders</span><span class="bn" lang="bn">কল ও রিমাইন্ডারের জন্য Web Push</span></li><li><span class="en">GitHub Actions run checks and refresh the video feed every 6 hours</span><span class="bn" lang="bn">GitHub Actions প্রতি ৬ ঘণ্টায় চেক চালায় ও ভিডিও ফিড আপডেট করে</span></li><li><span class="en">Six languages</span><span class="bn" lang="bn">ছয়টি ভাষা</span></li></ul>
+  <div class="stack"><span class="mono"><span class="en">Tech stack</span><span class="bn" lang="bn">টেক স্ট্যাক</span></span><div class="chips"><span class="chip">PWA</span><span class="chip">Vanilla JS</span><span class="chip">Gemini AI</span><span class="chip">Web Push</span><span class="chip">6 languages</span></div></div></div>
+</div></section>
+
+<section id="buy"><div class="wrap">
+  <span class="mono"><span class="en">Ready to buy</span><span class="bn" lang="bn">কেনার জন্য তৈরি</span></span>
+  <h2><span class="en">Get Amalnama for your business</span><span class="bn" lang="bn">আপনার ব্যবসার জন্য Amalnama নিন</span></h2>
+  <div class="buy"><div class="built"><ul style="grid-column:1/-1"><li><span class="en">The complete, working project, set up with your name, logo and colours</span><span class="bn" lang="bn">সম্পূর্ণ, চালু প্রজেক্ট, আপনার নাম, লোগো আর রঙে সাজানো</span></li><li><span class="en">Installed on your own domain, hosting or app account</span><span class="bn" lang="bn">আপনার নিজের ডোমেইন, হোস্টিং বা অ্যাপ অ্যাকাউন্টে বসিয়ে দেওয়া</span></li><li><span class="en">A short walkthrough on how to use and update it</span><span class="bn" lang="bn">কীভাবে ব্যবহার ও আপডেট করবেন, তার ছোট গাইড</span></li><li><span class="en">30 days of free fixes and support</span><span class="bn" lang="bn">৩০ দিন ফ্রি ঠিকঠাক ও সাপোর্ট</span></li></ul></div>
+  <div class="price"><span class="mono"><span class="en">Price</span><span class="bn" lang="bn">দাম</span></span><b><span class="en">Based on what you need</span><span class="bn" lang="bn">আপনার প্রয়োজন অনুযায়ী</span></b><p><span class="en">Tell me your business and what you need on WhatsApp, and I'll send you a clear price before any work starts.</span><span class="bn" lang="bn">হোয়াটসঅ্যাপে আপনার ব্যবসা আর কী দরকার জানান, কাজ শুরুর আগেই পরিষ্কার দাম জানিয়ে দেব।</span></p><a class="btn wa" href="https://wa.me/60178151865?text=Hi%20Yeasin%2C%20I%20want%20to%20buy%20Amalnama.%20Please%20send%20me%20the%20price%20and%20details." target="_blank" rel="noopener"><span class="en">Buy this</span><span class="bn" lang="bn">এটি কিনুন</span></a></div></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="cta"><div><h2 style="margin:0"><span class="en">Want an app like Amalnama?</span><span class="bn" lang="bn">Amalnama-র মতো একটি অ্যাপ চান?</span></h2><p><span class="en">I build installable, offline-first apps for communities, mosques, schools and businesses.</span><span class="bn" lang="bn">কমিউনিটি, মসজিদ, স্কুল আর ব্যবসার জন্য অফলাইনেও চলে এমন অ্যাপ বানিয়ে দিই।</span></p></div>
+  <div class="acts" style="margin:0"><a class="btn wa" href="https://wa.me/60178151865?text=Hi%20Yeasin%2C%20I%20saw%20Amalnama%20on%20your%20portfolio%20and%20I%20want%20something%20like%20it." target="_blank" rel="noopener"><span class="en">Talk on WhatsApp</span><span class="bn" lang="bn">হোয়াটসঅ্যাপে কথা বলুন</span></a><a class="btn ghost" href="/services/"><span class="en">See services</span><span class="bn" lang="bn">সার্ভিস দেখুন</span></a></div></div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="mono"><span class="en">Keep exploring</span><span class="bn" lang="bn">আরও দেখুন</span></span>
+  <h2><span class="en">More projects</span><span class="bn" lang="bn">আরও প্রজেক্ট</span></h2>
+  <div class="more"><a class="pc" href="/easy-life/" style="--c:#5B8CFF"><span class="pcm"><span class="badge wip"><span class="en">Running project · in progress</span><span class="bn" lang="bn">চলমান প্রজেক্ট</span></span><img src="/img/dev-easy-life.webp" alt="Easy Life cover" loading="lazy" width="1600" height="900"></span><div><span class="mono"><span class="en">New app · Android</span><span class="bn" lang="bn">নতুন অ্যাপ · অ্যান্ড্রয়েড</span></span><h3>Easy Life</h3><p><span class="en">Say it once, the AI does the rest: voice notes, reminders, money tracking and messages in Bangla and English.</span><span class="bn" lang="bn">একবার বলুন, বাকিটা AI করবে: বাংলা ও ইংরেজিতে ভয়েস নোট, রিমাইন্ডার, টাকার হিসাব আর মেসেজ।</span></p></div></a><a class="pc" href="/storefront-pro/" style="--c:#E8B04A"><span class="pcm"><span class="badge ok"><span class="en">Ready to buy</span><span class="bn" lang="bn">কেনার জন্য তৈরি</span></span><img src="/img/dev-sunnah.webp" alt="Storefront Pro cover" loading="lazy" width="1600" height="900"></span><div><span class="mono"><span class="en">Ready-made store app</span><span class="bn" lang="bn">রেডিমেড স্টোর অ্যাপ</span></span><h3>Storefront Pro</h3><p><span class="en">The Sunnah Store app for your business: shop, admin panel, payments, couriers and 12 themes.</span><span class="bn" lang="bn">আপনার ব্যবসার জন্য Sunnah Store অ্যাপ: শপ, অ্যাডমিন, পেমেন্ট, কুরিয়ার আর ১২টি থিম।</span></p></div></a><a class="pc" href="/projects/averroes-code/" style="--c:#8B7CFF"><span class="pcm"><span class="badge ok"><span class="en">Ready to buy</span><span class="bn" lang="bn">কেনার জন্য তৈরি</span></span><img src="/img/cover-averroes-code.webp" alt="Averroes Code cover" loading="lazy" width="1600" height="900"></span><div><span class="mono"><span class="en">Desktop &amp; mobile app · Averroes AI</span><span class="bn" lang="bn">ডেস্কটপ ও মোবাইল অ্যাপ · Averroes AI</span></span><h3>Averroes Code</h3><p><span class="en">A free code editor and compiler that works without internet on Windows, Mac, Linux and phones, with 23 video courses in English, Bangla, Hindi and Arabic.</span><span class="bn" lang="bn">ফ্রি কোড এডিটর ও কম্পাইলার, উইন্ডোজ, ম্যাক, লিনাক্স আর ফোনে ইন্টারনেট ছাড়াই চলে।</span></p></div></a><a class="pc" href="/projects/sunnah-store/" style="--c:#E8B04A"><span class="pcm"><span class="badge ok"><span class="en">Ready to buy</span><span class="bn" lang="bn">কেনার জন্য তৈরি</span></span><img src="/img/cover-sunnah-store.webp" alt="Sunnah Store cover" loading="lazy" width="1600" height="900"></span><div><span class="mono"><span class="en">Full-stack e-commerce · live</span><span class="bn" lang="bn">ফুল-স্ট্যাক ই-কমার্স · লাইভ</span></span><h3>Sunnah Store</h3><p><span class="en">A storefront and an admin panel. Customers pay by card, PayPal, bKash, Nagad or cash on delivery, and every order is booked with a courier automatically.</span><span class="bn" lang="bn">স্টোরফ্রন্ট আর অ্যাডমিন প্যানেল। গ্রাহক কার্ড, PayPal, বিকাশ, নগদ বা ক্যাশ অন ডেলিভারিতে দিতে পারে, আর প্রতিটি অর্ডার নিজে থেকেই কুরিয়ারে বুক হয়।</span></p></div></a><a class="pc" href="/projects/ai-agent-front-desk/" style="--c:#22C3E6"><span class="pcm"><span class="badge wip"><span class="en">Running project · in progress</span><span class="bn" lang="bn">চলমান প্রজেক্ট</span></span><img src="/img/cover-ai-agent-front-desk.webp" alt="AI Agent Front Desk cover" loading="lazy" width="1600" height="900"></span><div><span class="mono"><span class="en">AI agents &amp; automation · live prototype</span><span class="bn" lang="bn">AI এজেন্ট ও অটোমেশন · লাইভ প্রোটোটাইপ</span></span><h3>AI Agent Front Desk</h3><p><span class="en">It answers questions, books tables, takes delivery orders, tracks riders and hands angry customers to a manager, while a live panel shows every step and tool it uses.</span><span class="bn" lang="bn">প্রশ্নের উত্তর দেয়, টেবিল বুক করে, ডেলিভারি অর্ডার নেয়, রাইডার ট্র্যাক করে আর রাগী গ্রাহককে ম্যানেজারের কাছে দেয়।</span></p></div></a><a class="pc" href="/projects/campus-islamic-society/" style="--c:#D9A441"><span class="pcm"><span class="badge wip"><span class="en">Running project · in progress</span><span class="bn" lang="bn">চলমান প্রজেক্ট</span></span><img src="/img/cover-campus-islamic-society.webp" alt="Campus Islamic Society website cover" loading="lazy" width="1600" height="900"></span><div><span class="mono"><span class="en">Next.js community site · live prototype</span><span class="bn" lang="bn">Next.js কমিউনিটি সাইট · লাইভ প্রোটোটাইপ</span></span><h3>Campus Islamic Society website</h3><p><span class="en">A starter website for a university Islamic society. The night-sky and brass theme reads as well after Maghrib as at noon.</span><span class="bn" lang="bn">বিশ্ববিদ্যালয়ের ইসলামিক সোসাইটির জন্য একটি স্টার্টার ওয়েবসাইট।</span></p></div></a></div>
+</div></section>
+<div class="wrap"><footer><span>Amalnama · <a href="/">Yeasin Arafat</a> · Averroes AI</span><span><a href="/projects/"><span class="en">All projects</span><span class="bn" lang="bn">সব প্রজেক্ট</span></a> · <a href="/services/"><span class="en">Services</span><span class="bn" lang="bn">সার্ভিস</span></a> · <a href="/#contact"><span class="en">Contact</span><span class="bn" lang="bn">যোগাযোগ</span></a></span></footer></div>
+<script>(function(){var h=document.documentElement,q=new URLSearchParams(location.search).get("lang"),s;try{s=localStorage.getItem("sc-lang")}catch(e){}
+function set(l){h.setAttribute("data-lang",l);h.lang=l==="bn"?"bn":"en";document.querySelectorAll(".lang button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.l===l)});try{localStorage.setItem("sc-lang",l)}catch(e){}}
+set(q==="bn"||q==="en"?q:s==="bn"?"bn":"en");document.querySelectorAll(".lang button").forEach(function(b){b.onclick=function(){set(b.dataset.l)}});
+function fit(){document.querySelectorAll(".win .scr").forEach(function(s){var f=s.querySelector("iframe");if(!f)return;var w=s.clientWidth<700?Math.max(s.clientWidth,360):1280,k=s.clientWidth/w;f.style.width=w+"px";f.style.transform="scale("+k+")";f.style.height=(s.clientHeight/k)+"px"})}
+addEventListener("resize",fit);fit();
+document.querySelectorAll(".gate").forEach(function(g){g.onclick=function(){var f=document.createElement("iframe");f.src=g.dataset.src;f.title=g.dataset.title;f.setAttribute("allow","clipboard-write");g.replaceWith(f);fit()}});})();</script>
+</body>
+</html>
