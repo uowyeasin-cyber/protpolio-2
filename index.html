@@ -1158,6 +1158,14 @@ body.cx-editing .svc .svc-more::after{display:none}
 
 <script src="data/content.js"></script>
 <script src="data/showcase.js"></script>
+<script>
+// Links to the agency site, shown only when SITE.agency is set in data/content.js.
+(function(){var u=SITE.agency;if(!u)return;
+function a(t,c){var e=document.createElement("a");e.href=u;e.target="_blank";e.rel="noopener";e.textContent=t;if(c)e.className=c;return e}
+var nav=document.getElementById("mainNav"),hire=nav&&nav.querySelector(".hire");if(nav)nav.insertBefore(a("Agency ↗"),hire);
+var ft=document.querySelector(".ft-col .ft-links");if(ft)ft.appendChild(a("Averroes Solutions ↗"));
+var sp=document.querySelector("#v-services .lead");if(sp){var p=document.createElement("p");p.className="lead";p.style.marginTop="10px";p.append("Bigger project? ");p.appendChild(a("Hire the team · Averroes Solutions ↗"));sp.after(p)}})();
+</script>
 <script src="data/icons.js"></script>
 <script>
 

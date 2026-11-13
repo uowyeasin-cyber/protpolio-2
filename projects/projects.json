@@ -5,6 +5,7 @@
     {
       "slug": "amalnama",
       "name": "Amalnama",
+      "stage": "ready",
       "url": "https://yeasinarafatbd.vercel.app/projects/amalnama/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-amalnama.webp",
       "demo": "https://uowyeasin-cyber.github.io/AmalnamaForever/",
@@ -127,6 +128,7 @@
     {
       "slug": "averroes-code",
       "name": "Averroes Code",
+      "stage": "ready",
       "url": "https://yeasinarafatbd.vercel.app/projects/averroes-code/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-averroes-code.webp",
       "demo": "https://uowyeasin-cyber.github.io/averroes-code/",
@@ -227,6 +229,7 @@
     {
       "slug": "sunnah-store",
       "name": "Sunnah Store",
+      "stage": "ready",
       "url": "https://yeasinarafatbd.vercel.app/projects/sunnah-store/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-sunnah-store.webp",
       "demo": "https://sunnahstore.vercel.app/",
@@ -340,6 +343,7 @@
     {
       "slug": "ai-agent-front-desk",
       "name": "AI Agent Front Desk",
+      "stage": "progress",
       "url": "https://yeasinarafatbd.vercel.app/projects/ai-agent-front-desk/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-ai-agent-front-desk.webp",
       "demo": "https://yeasinarafatbd.vercel.app/demo/ai-agent.html",
@@ -361,7 +365,7 @@
         "title": "An AI that runs",
         "em": "your front desk.",
         "lead": "It answers questions, books tables, takes delivery orders, tracks riders and hands angry customers to a manager, while a live panel shows every step and tool it uses.",
-        "status": "Live prototype · try it right here",
+        "status": "In progress · working prototype, try it here",
         "feats": [
           [
             "🗓️",
@@ -405,7 +409,7 @@
         "title": "একটি AI যে চালায়",
         "em": "আপনার ফ্রন্ট ডেস্ক।",
         "lead": "প্রশ্নের উত্তর দেয়, টেবিল বুক করে, ডেলিভারি অর্ডার নেয়, রাইডার ট্র্যাক করে আর রাগী গ্রাহককে ম্যানেজারের কাছে দেয়। লাইভ প্যানেলে প্রতিটি ধাপ দেখা যায়।",
-        "status": "লাইভ প্রোটোটাইপ · এখানেই চালিয়ে দেখুন",
+        "status": "কাজ চলছে · চালু প্রোটোটাইপ, এখানেই দেখুন",
         "feats": [
           [
             "🗓️",
@@ -448,6 +452,7 @@
     {
       "slug": "campus-islamic-society",
       "name": "Campus Islamic Society website",
+      "stage": "progress",
       "url": "https://yeasinarafatbd.vercel.app/projects/campus-islamic-society/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-campus-islamic-society.webp",
       "demo": "https://yeasinarafatbd.vercel.app/demo/campus-islamic-society.html",
@@ -469,7 +474,7 @@
         "title": "A society website with",
         "em": "a live prayer clock.",
         "lead": "A starter website for a university Islamic society. The night-sky and brass theme reads as well after Maghrib as at noon.",
-        "status": "Live prototype · try it right here",
+        "status": "In progress · working prototype, try it here",
         "feats": [
           [
             "🕰️",
@@ -508,7 +513,7 @@
         "title": "সোসাইটির ওয়েবসাইট,",
         "em": "লাইভ নামাজের ঘড়িসহ।",
         "lead": "বিশ্ববিদ্যালয়ের ইসলামিক সোসাইটির জন্য একটি স্টার্টার ওয়েবসাইট। রাতের আকাশ আর পিতলের থিম, মাগরিবের পরেও দুপুরের মতোই পড়া যায়।",
-        "status": "লাইভ প্রোটোটাইপ · এখানেই চালিয়ে দেখুন",
+        "status": "কাজ চলছে · চালু প্রোটোটাইপ, এখানেই দেখুন",
         "feats": [
           [
             "🕰️",
@@ -546,6 +551,7 @@
     {
       "slug": "campusearn",
       "name": "CampusEarn",
+      "stage": "progress",
       "url": "https://yeasinarafatbd.vercel.app/projects/campusearn/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-campusearn.webp",
       "demo": "https://yeasinarafatbd.vercel.app/demo/campusearn.html",
@@ -567,7 +573,7 @@
         "title": "Part-time jobs for students,",
         "em": "right on campus.",
         "lead": "A student job marketplace that connects university students with flexible work on and around campus, with separate student, job-giver and admin workspaces.",
-        "status": "Live prototype · try it right here",
+        "status": "In progress · working prototype, try it here",
         "feats": [
           [
             "🎒",
@@ -605,7 +611,7 @@
         "title": "শিক্ষার্থীদের পার্ট-টাইম কাজ,",
         "em": "ক্যাম্পাসেই।",
         "lead": "বিশ্ববিদ্যালয়ের শিক্ষার্থীদের ক্যাম্পাসের ভেতরে ও আশেপাশে ফ্লেক্সিবল কাজের সাথে যুক্ত করে। শিক্ষার্থী, কাজদাতা আর অ্যাডমিনের আলাদা ওয়ার্কস্পেস।",
-        "status": "লাইভ প্রোটোটাইপ · এখানেই চালিয়ে দেখুন",
+        "status": "কাজ চলছে · চালু প্রোটোটাইপ, এখানেই দেখুন",
         "feats": [
           [
             "🎒",
@@ -642,6 +648,7 @@
     {
       "slug": "cloudeats",
       "name": "CloudEats",
+      "stage": "progress",
       "url": "https://yeasinarafatbd.vercel.app/projects/cloudeats/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-cloudeats.webp",
       "demo": "https://yeasinarafatbd.vercel.app/demo/cloudeats.html",
@@ -665,7 +672,7 @@
         "title": "From one server",
         "em": "to microservices.",
         "lead": "A food ordering platform split from one Express server into separate services, with a demo storefront, Nasi Lemak Paradise, in front of it.",
-        "status": "Live demo · try it right here",
+        "status": "In progress · services being split out",
         "feats": [
           [
             "🧱",
@@ -704,7 +711,7 @@
         "title": "একটি সার্ভার থেকে",
         "em": "মাইক্রোসার্ভিসে।",
         "lead": "একটি ফুড অর্ডারিং প্ল্যাটফর্ম, একটি Express সার্ভার থেকে আলাদা আলাদা সার্ভিসে ভাগ করা। সামনে ডেমো শপ Nasi Lemak Paradise।",
-        "status": "লাইভ ডেমো · এখানেই চালিয়ে দেখুন",
+        "status": "কাজ চলছে · সার্ভিসগুলো আলাদা করা হচ্ছে",
         "feats": [
           [
             "🧱",
@@ -742,6 +749,7 @@
     {
       "slug": "online-food-ordering",
       "name": "Online Food Ordering System",
+      "stage": "progress",
       "url": "https://yeasinarafatbd.vercel.app/projects/online-food-ordering/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-online-food-ordering.webp",
       "demo": "https://yeasinarafatbd.vercel.app/demo/food-ordering.html",
@@ -764,7 +772,7 @@
         "title": "Food ordering,",
         "em": "designed the right way.",
         "lead": "A food ordering system analysed and designed the object-oriented way, with full UML documentation, a Java console app and a companion web frontend.",
-        "status": "Live demo · try it right here",
+        "status": "University project · design and prototype",
         "feats": [
           [
             "📐",
@@ -797,7 +805,7 @@
         "title": "ফুড অর্ডারিং,",
         "em": "সঠিক নিয়মে ডিজাইন করা।",
         "lead": "অবজেক্ট-ওরিয়েন্টেড পদ্ধতিতে বিশ্লেষণ ও ডিজাইন করা ফুড অর্ডারিং সিস্টেম, পুরো UML ডকুমেন্টেশন, জাভা কনসোল অ্যাপ আর একটি ওয়েব ফ্রন্টএন্ডসহ।",
-        "status": "লাইভ ডেমো · এখানেই চালিয়ে দেখুন",
+        "status": "বিশ্ববিদ্যালয়ের প্রজেক্ট · ডিজাইন ও প্রোটোটাইপ",
         "feats": [
           [
             "📐",
@@ -829,6 +837,7 @@
     {
       "slug": "tic-tac-toe",
       "name": "Tic Tac Toe: Unbeatable AI",
+      "stage": "ready",
       "url": "https://yeasinarafatbd.vercel.app/projects/tic-tac-toe/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-tic-tac-toe.webp",
       "demo": "https://yeasinarafatbd.vercel.app/demo/tictactoe.html",
@@ -924,6 +933,7 @@
     {
       "slug": "animated-login",
       "name": "Animated login & sign-up",
+      "stage": "ready",
       "url": "https://yeasinarafatbd.vercel.app/projects/animated-login/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-animated-login.webp",
       "demo": "https://yeasinarafatbd.vercel.app/demo/login.html",
@@ -944,7 +954,7 @@
         "title": "A login screen people",
         "em": "enjoy using.",
         "lead": "A login and registration screen where a curved panel slides across to swap between the two forms.",
-        "status": "Live demo · try it right here",
+        "status": "Complete · ready to use",
         "feats": [
           [
             "🎞️",
@@ -977,7 +987,7 @@
         "title": "এমন লগইন স্ক্রিন যা",
         "em": "ব্যবহার করতে ভালো লাগে।",
         "lead": "লগইন আর রেজিস্ট্রেশন স্ক্রিন, যেখানে একটি বাঁকা প্যানেল সরে গিয়ে দুই ফর্মের মধ্যে বদলায়।",
-        "status": "লাইভ ডেমো · এখানেই চালিয়ে দেখুন",
+        "status": "সম্পূর্ণ · ব্যবহারের জন্য তৈরি",
         "feats": [
           [
             "🎞️",
@@ -1009,6 +1019,7 @@
     {
       "slug": "portfolio-studio",
       "name": "Portfolio Studio",
+      "stage": "ready",
       "url": "https://yeasinarafatbd.vercel.app/projects/portfolio-studio/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-portfolio-studio.webp",
       "demo": "https://yeasinarafatbd.vercel.app/",
@@ -1108,6 +1119,7 @@
   "products": [
     {
       "name": "Easy Life",
+      "stage": "progress",
       "url": "https://yeasinarafatbd.vercel.app/easy-life/",
       "cover": "https://yeasinarafatbd.vercel.app/img/dev-easy-life.webp",
       "en": {
@@ -1121,6 +1133,7 @@
     },
     {
       "name": "Storefront Pro",
+      "stage": "ready",
       "url": "https://yeasinarafatbd.vercel.app/storefront-pro/",
       "cover": "https://yeasinarafatbd.vercel.app/img/dev-sunnah.webp",
       "en": {
