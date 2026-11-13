@@ -26,7 +26,7 @@ const APPS = {
 };
 const DAY = 864e5, SESSION_GAP = 30 * 60e3;
 const PLANS = { lifetime: 0, monthly: 1, yearly: 12 };
-const EL_DEFAULTS = { on: true, opens: 100000, days: 14, grace: 3, download: "https://github.com/uowyeasin-cyber/super-note/releases/latest/download/super-note-beta.apk", prices: { monthly: "৳149 a month", yearly: "৳1,490 a year", lifetime: "৳596 once" }, contact: "WhatsApp +60178151865", sites: [] };
+const EL_DEFAULTS = { on: true, opens: 100000, days: 14, grace: 3, download: "https://github.com/uowyeasin-cyber/easy-life/releases/latest/download/easy-life-beta.apk", prices: { monthly: "৳149 a month", yearly: "৳1,490 a year", lifetime: "৳596 once" }, contact: "WhatsApp +60178151865", sites: [] };
 const DEFAULTS = { on: true, opens: 3, days: 1, grace: 3, download: "/downloads/storefront-pro.zip", prices: { monthly: "৳1,500 / $15 a month", yearly: "৳12,000 / $120 a year (save 33%)", lifetime: "৳30,000 / $299 once" }, contact: "WhatsApp +60178151865", sites: [] };
 
 const stamp = () => new Date().toISOString().replace(/[:.]/g, "-") + "-" + crypto.randomBytes(2).toString("hex");
