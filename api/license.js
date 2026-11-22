@@ -99,22 +99,31 @@ async function check(rawKey, rawHost, APP) {
 
 // Easy Life Pro reads notes with the site owner's Gemini key (GEMINI_API_KEY), so buyers need no key of their own.
 const AREAS = ["academic", "business", "skills", "social", "family", "personal"];
-async function aiRead(text, nowIso, weekday) {
-  const key = process.env.GEMINI_API_KEY;
-  if (!key) return { error: "AI is not set up on the server yet." };
+async function aiRead(text, nowIso, weekday, files = []) {
   const prompt = `You organise a personal note app. The user may speak Bangla, English or both.
 Now is ${nowIso} (${weekday}).
 Read the note and return JSON only:
 {"area": one of ${JSON.stringify(AREAS)}, "title": short title in the note's own language (max 8 words),
+ "topic": the exact file inside that area (course code, subject, teacher like "Rahim sir", family member, friend, client or business); reuse one of these existing files when it fits, spelled exactly: ${JSON.stringify(files)}; otherwise a short new name, or "General",
+ "important": true if it needs attention (deadline, exam, money, medicine, bills), else false,
  "tasks": [{"title": short action in the note's language, "at": ISO 8601 local time with offset or null, "repeat": "none"|"daily"|"weekly", "level": "normal"|"urgent"|"critical"}]}
 Rules: one task per separate thing to do that has a time or day; if only a day is given use 09:00; bare hours 1-6 mean PM;
 medicine and bills are "urgent"; "must/অবশ্যই/wake me" is "critical"; ideas and plain notes have no tasks.
 Note: ${JSON.stringify(text)}`;
+  return gemini(prompt, null, 0.1);
+}
+
+async function gemini(prompt, image, temperature = 0.2) {
+  const key = process.env.GEMINI_API_KEY;
+  if (!key) return { error: "AI is not set up on the server yet." };
+  if (!prompt) return { error: "Nothing to read." };
+  const parts = [{ text: prompt }];
+  if (image) parts.push({ inline_data: { mime_type: image.mime, data: image.base64 } });
   const model = process.env.GEMINI_MODEL || "gemini-2.5-flash";
   const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
     method: "POST",
     headers: { "Content-Type": "application/json", "x-goog-api-key": key },
-    body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }], generationConfig: { responseMimeType: "application/json", temperature: 0.1 } }),
+    body: JSON.stringify({ contents: [{ role: "user", parts }], generationConfig: { responseMimeType: "application/json", temperature } }),
   });
   if (!r.ok) return { error: "AI is busy. Try again." };
   const j = await r.json();
@@ -140,10 +149,14 @@ export default async function handler(req, res) {
     }
     if (a === "ai" && APP === APPS.easylife) {
       if (req.method !== "POST") return send(res, 405, { error: "POST only." });
-      const b = await readJSON(req, 8_000);
+      // "raw" carries the app's own prompt (photos, links, study help, messages), with an optional photo.
+      const b = await readJSON(req, 4_000_000);
       const r = await check(b.key, b.host, APP);
       if (r.status === "locked") return send(res, 402, { error: "AI needs Easy Life Pro." });
-      const out = await aiRead(clean(b.text, 2000), clean(b.now, 40), clean(b.weekday, 12));
+      const files = Array.isArray(b.files) ? b.files.slice(0, 80).map((f) => clean(f, 60)).filter(Boolean) : [];
+      const out = b.task === "raw"
+        ? await gemini(String(b.prompt || "").slice(0, 20000), b.image && typeof b.image.base64 === "string" ? { mime: clean(b.image.mime, 30) || "image/jpeg", base64: b.image.base64.slice(0, 3_500_000) } : null)
+        : await aiRead(clean(b.text, 2000), clean(b.now, 40), clean(b.weekday, 12), files);
       return send(res, out.error ? 503 : 200, out);
     }
     if (a === "info") {
