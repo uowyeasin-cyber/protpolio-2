@@ -130,15 +130,16 @@ async function viaGemini(k, prompt, image, temperature) {
 const modelLists = new Map();
 async function chatModels(base, k, vision) {
   if (k.model) return [k.model];
-  if (!modelLists.has(base)) {
+  const id = base + "|" + k.key; // model access differs per account
+  if (!modelLists.has(id)) {
     const r = await fetch(`${base}/models`, { headers: { Authorization: `Bearer ${k.key}`, "x-api-key": k.key, "anthropic-version": "2023-06-01" }, signal: AbortSignal.timeout(left(8e3)) }).catch(() => null);
     const j = r && r.ok ? await r.json().catch(() => null) : null;
     const ids = (j?.data || []).filter((m) => m.active !== false).map((m) => m.id);
     if (!ids.length) return [];
-    modelLists.set(base, ids);
+    modelLists.set(id, ids);
   }
   const prefer = PROVIDERS[k.provider]?.prefer || [];
-  const chat = modelLists.get(base).filter((id) => !/embed|whisper|tts|speech|audio|image|dall-e|moderation|guard|realtime|transcribe|search|rerank|ocr|orpheus|compound/i.test(id) && (!vision || VISION.test(id)));
+  const chat = modelLists.get(id).filter((m) => !/embed|whisper|tts|speech|audio|image|dall-e|moderation|guard|realtime|transcribe|search|rerank|ocr|orpheus|compound/i.test(m) && (!vision || VISION.test(m)));
   const out = [];
   for (const re of prefer) for (const id of chat) if (re.test(id) && !out.includes(id)) out.push(id);
   for (const id of chat) if (!out.includes(id)) out.push(id);
@@ -150,8 +151,9 @@ async function viaChat(k, prompt, image, temperature) {
   if (!base) return null;
   const content = image ? [{ type: "text", text: prompt }, { type: "image_url", image_url: { url: `data:${image.mime};base64,${image.base64}` } }] : prompt;
   for (const model of await chatModels(base, k, !!image)) {
-    const body = { model, temperature, messages: [{ role: "user", content }] };
-    if (k.provider !== "anthropic") body.response_format = { type: "json_object" };
+    const body = { model, messages: [{ role: "user", content }] };
+    // Newer Claude models reject low temperatures, so Claude keeps its default.
+    if (k.provider !== "anthropic") { body.temperature = temperature; body.response_format = { type: "json_object" }; }
     const r = await fetch(`${base}/chat/completions`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${k.key}` },
