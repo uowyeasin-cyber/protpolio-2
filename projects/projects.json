@@ -251,8 +251,8 @@
         ],
         "gh": "sunnah-store",
         "more": [
-          "Buy this store app: Storefront Pro",
-          "/storefront-pro/"
+          "Buy this store app: E-commerce Studio",
+          "/ecommerce-studio/"
         ]
       },
       "en": {
@@ -296,7 +296,7 @@
         ],
         "cta": [
           "Want a store like this?",
-          "Buy the same app as Storefront Pro, with 12 one-click themes, or get a custom store built."
+          "Buy the same app as E-commerce Studio, with 12 one-click themes, or get a custom store built."
         ]
       },
       "bn": {
@@ -340,7 +340,7 @@
         ],
         "cta": [
           "এমন একটি স্টোর চান?",
-          "Storefront Pro হিসেবে একই অ্যাপ ১২টি থিমসহ কিনুন, অথবা কাস্টম স্টোর বানিয়ে নিন।"
+          "ই-কমার্স স্টুডিও (E-commerce Studio) হিসেবে একই অ্যাপ ১২টি থিমসহ কিনুন, অথবা কাস্টম স্টোর বানিয়ে নিন।"
         ]
       }
     },
@@ -1144,9 +1144,9 @@
       }
     },
     {
-      "name": "Storefront Pro",
+      "name": "E-commerce Studio",
       "stage": "ready",
-      "url": "https://yeasinarafatbd.vercel.app/storefront-pro/",
+      "url": "https://yeasinarafatbd.vercel.app/ecommerce-studio/",
       "cover": "https://yeasinarafatbd.vercel.app/img/dev-sunnah.webp",
       "en": {
         "kicker": "Ready-made store app",

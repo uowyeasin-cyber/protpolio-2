@@ -57,21 +57,21 @@ const SHOWCASE = [
      built:["Pyodide (WebAssembly) দিয়ে ব্রাউজারেই Python চলে","C++ ও JavaScript চলে ওয়েব ওয়ার্কারে","ডেস্কটপ আর ফোনের জন্য একটাই কোডবেস","পাবলিক যাচাইসহ সার্টিফিকেট"],
      cta:["লার্নিং প্ল্যাটফর্ম বা অনলাইন টুল দরকার?","কোর্স প্ল্যাটফর্ম, কোডিং টুল আর অফলাইনে চলা ওয়েব অ্যাপ বানিয়ে দিই।"]}},
 
-  {slug:"sunnah-store",agencyProduct:"storefront-pro",stage:"ready",buyHref:"/storefront-pro/",n:"Sunnah Store",accent:"#E8B04A",frame:"browser",demo:"https://sunnahstore.vercel.app/",external:true,shot:"dev-sunnah.webp",
+  {slug:"sunnah-store",agencyProduct:"storefront-pro",stage:"ready",buyHref:"/ecommerce-studio/",n:"Sunnah Store",accent:"#E8B04A",frame:"browser",demo:"https://sunnahstore.vercel.app/",external:true,shot:"dev-sunnah.webp",
    tags:["Next.js 16","Prisma 6","PostgreSQL","Stripe · PayPal · SSLCommerz"],
-   links:{live:["Visit Sunnah Store","https://sunnahstore.vercel.app/"],gh:"sunnah-store",more:["Buy this store app: Storefront Pro","/storefront-pro/"]},
+   links:{live:["Visit Sunnah Store","https://sunnahstore.vercel.app/"],gh:"sunnah-store",more:["Buy this store app: E-commerce Studio","/ecommerce-studio/"]},
    en:{kicker:"Full-stack e-commerce · live",title:"A complete online shop,",em:"ready to sell.",
      lead:"A storefront and an admin panel. Customers pay by card, PayPal, bKash, Nagad or cash on delivery, and every order is booked with a courier automatically.",
      status:"Live · taking real orders",
      feats:[["🛍️","Storefront & admin","A fast shop plus a full admin panel for products, orders, offers and reports."],["💳","Every way to pay","Stripe cards and FPX, PayPal and SSLCommerz (bKash, Nagad), confirmed on the server."],["🚚","Courier on autopilot","Steadfast booking and tracking in Bangladesh, Ship24 everywhere else, with email updates."],["🌍","Four languages","English, Bangla, Hindi and right-to-left Arabic."],["📈","Grow sales","Reviews, offers, ads, social campaigns, store credit and product view analytics."]],
      built:["Next.js App Router with cached catalogue reads","Prisma 6 on PostgreSQL, 9 migrations","Orders marked paid only after server-side confirmation","A cron job emails customers tracking updates"],
-     cta:["Want a store like this?","Buy the same app as Storefront Pro, with 12 one-click themes, or get a custom store built."]},
+     cta:["Want a store like this?","Buy the same app as E-commerce Studio, with 12 one-click themes, or get a custom store built."]},
    bn:{kicker:"ফুল-স্ট্যাক ই-কমার্স · লাইভ",title:"একটি পূর্ণাঙ্গ অনলাইন শপ,",em:"বিক্রির জন্য তৈরি।",
      lead:"স্টোরফ্রন্ট আর অ্যাডমিন প্যানেল। গ্রাহক কার্ড, PayPal, বিকাশ, নগদ বা ক্যাশ অন ডেলিভারিতে দিতে পারে, আর প্রতিটি অর্ডার নিজে থেকেই কুরিয়ারে বুক হয়।",
      status:"লাইভ · আসল অর্ডার নিচ্ছে",
      feats:[["🛍️","শপ ও অ্যাডমিন","দ্রুত শপ আর প্রোডাক্ট, অর্ডার, অফার ও রিপোর্টের পুরো অ্যাডমিন প্যানেল।"],["💳","সব পেমেন্ট","Stripe কার্ড ও FPX, PayPal আর SSLCommerz (বিকাশ, নগদ), সার্ভারে নিশ্চিত হয়।"],["🚚","অটো কুরিয়ার","বাংলাদেশে Steadfast বুকিং ও ট্র্যাকিং, বাকি দেশে Ship24, ইমেইলে আপডেট।"],["🌍","চার ভাষা","ইংরেজি, বাংলা, হিন্দি আর ডান-থেকে-বাম আরবি।"],["📈","বিক্রি বাড়ান","রিভিউ, অফার, বিজ্ঞাপন, সোশ্যাল ক্যাম্পেইন, স্টোর ক্রেডিট আর অ্যানালিটিক্স।"]],
      built:["Next.js App Router, ক্যাশ করা ক্যাটালগ","PostgreSQL-এ Prisma 6, ৯টি মাইগ্রেশন","সার্ভারে নিশ্চিত হওয়ার পরই অর্ডার পেইড হয়","ক্রন জব গ্রাহককে ট্র্যাকিং ইমেইল পাঠায়"],
-     cta:["এমন একটি স্টোর চান?","Storefront Pro হিসেবে একই অ্যাপ ১২টি থিমসহ কিনুন, অথবা কাস্টম স্টোর বানিয়ে নিন।"]}},
+     cta:["এমন একটি স্টোর চান?","ই-কমার্স স্টুডিও (E-commerce Studio) হিসেবে একই অ্যাপ ১২টি থিমসহ কিনুন, অথবা কাস্টম স্টোর বানিয়ে নিন।"]}},
 
   {slug:"ai-agent-front-desk",agencyProduct:"ai-front-desk",stage:"progress",n:"AI Agent Front Desk",accent:"#22C3E6",frame:"browser",demo:"/demo/ai-agent.html",shot:"dev-ai-agent.webp",
    tags:["AI agent","Tool calling","WhatsApp","Automation"],
@@ -205,7 +205,7 @@ const SHOWCASE = [
 // Products that already have their own sales page. Listed on the /projects/ hub too.
 const SHOWCASE_LINKED = [
   {n:"Easy Life",stage:"progress",href:"/easy-life/",accent:"#5B8CFF",shot:"dev-easy-life.webp",en:{kicker:"New app · Android",p:"Say it once, the AI does the rest: voice notes, reminders, money tracking and messages in Bangla and English."},bn:{kicker:"নতুন অ্যাপ · অ্যান্ড্রয়েড",p:"একবার বলুন, বাকিটা AI করবে: বাংলা ও ইংরেজিতে ভয়েস নোট, রিমাইন্ডার, টাকার হিসাব আর মেসেজ।"}},
-  {n:"Storefront Pro",stage:"ready",href:"/storefront-pro/",accent:"#E8B04A",shot:"dev-sunnah.webp",en:{kicker:"Ready-made store app",p:"The Sunnah Store app for your business: shop, admin panel, payments, couriers and 12 themes."},bn:{kicker:"রেডিমেড স্টোর অ্যাপ",p:"আপনার ব্যবসার জন্য Sunnah Store অ্যাপ: শপ, অ্যাডমিন, পেমেন্ট, কুরিয়ার আর ১২টি থিম।"}},
+  {n:"E-commerce Studio",stage:"ready",href:"/ecommerce-studio/",accent:"#E8B04A",shot:"dev-sunnah.webp",en:{kicker:"Ready-made store app",p:"The Sunnah Store app for your business: shop, admin panel, payments, couriers and 12 themes."},bn:{kicker:"রেডিমেড স্টোর অ্যাপ",p:"আপনার ব্যবসার জন্য Sunnah Store অ্যাপ: শপ, অ্যাডমিন, পেমেন্ট, কুরিয়ার আর ১২টি থিম।"}},
 ];
 
 // Address of a project's showcase page, by its name in DEV (data/content.js), or "".
