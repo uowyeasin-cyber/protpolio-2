@@ -106,6 +106,7 @@ Read the note and return JSON only:
 {"area": one of ${JSON.stringify(AREAS)}, "title": short title in the note's own language (max 8 words),
  "topic": the exact file inside that area (course code, subject, teacher like "Rahim sir", family member, friend, client or business); reuse one of these existing files when it fits, spelled exactly: ${JSON.stringify(files)}; otherwise a short new name, or "General",
  "important": true if it needs attention (deadline, exam, money, medicine, bills), else false,
+ "points": the note rewritten as short, clear bullet points in the note's own language (fix speech-to-text mistakes, keep every fact, number, name and date; 1 point for a one-line note, up to 10 for long ones),
  "tasks": [{"title": short action in the note's language, "at": ISO 8601 local time with offset or null, "repeat": "none"|"daily"|"weekly", "level": "normal"|"urgent"|"critical"}]}
 Rules: one task per separate thing to do that has a time or day; if only a day is given use 09:00; bare hours 1-6 mean PM;
 medicine and bills are "urgent"; "must/অবশ্যই/wake me" is "critical"; ideas and plain notes have no tasks.
@@ -119,16 +120,26 @@ async function gemini(prompt, image, temperature = 0.2) {
   if (!prompt) return { error: "Nothing to read." };
   const parts = [{ text: prompt }];
   if (image) parts.push({ inline_data: { mime_type: image.mime, data: image.base64 } });
-  const model = process.env.GEMINI_MODEL || "gemini-2.5-flash";
-  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "x-goog-api-key": key },
-    body: JSON.stringify({ contents: [{ role: "user", parts }], generationConfig: { responseMimeType: "application/json", temperature } }),
-  });
-  if (!r.ok) return { error: "AI is busy. Try again." };
-  const j = await r.json();
-  const raw = j?.candidates?.[0]?.content?.parts?.[0]?.text;
-  try { return { result: JSON.parse(raw) }; } catch { return { error: "AI gave an unreadable answer." }; }
+  // Google retires model names (gemini-2.5-flash now answers 404) and the newest model is often
+  // "high demand" (503), so try the configured model, then the always-current Flash and Flash-Lite aliases.
+  const models = [...new Set([process.env.GEMINI_MODEL, "gemini-flash-latest", "gemini-flash-lite-latest"].filter(Boolean))];
+  for (const model of models) {
+    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+      body: JSON.stringify({ contents: [{ role: "user", parts }], generationConfig: { responseMimeType: "application/json", temperature } }),
+    }).catch(() => null);
+    if (!r) continue;
+    if ([400, 401, 403].includes(r.status)) return { error: "The server's AI key is not valid." };
+    if (!r.ok) continue;
+    const j = await r.json().catch(() => null);
+    const raw = (j?.candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
+    try { return { result: JSON.parse(raw) }; } catch {
+      const m = raw.match(/\{[\s\S]*\}/);
+      try { if (m) return { result: JSON.parse(m[0]) }; } catch {}
+    }
+  }
+  return { error: "AI is busy. Try again." };
 }
 
 export default async function handler(req, res) {
