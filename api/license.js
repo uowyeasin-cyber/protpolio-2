@@ -116,10 +116,10 @@ Note: ${JSON.stringify(text)}`;
 
 async function gemini(prompt, image, temperature = 0.2) {
   const key = process.env.GEMINI_API_KEY;
-  if (!key) return { error: "AI is not set up on the server yet." };
   if (!prompt) return { error: "Nothing to read." };
   const parts = [{ text: prompt }];
   if (image) parts.push({ inline_data: { mime_type: image.mime, data: image.base64 } });
+  if (!key) return (await groq(parts, temperature)) || { error: "AI is not set up on the server yet." };
   // Google retires model names (gemini-2.5-flash now answers 404) and the newest model is often
   // "high demand" (503), so try the configured model, then the always-current Flash and Flash-Lite aliases.
   const models = [...new Set([process.env.GEMINI_MODEL, "gemini-flash-latest", "gemini-flash-lite-latest"].filter(Boolean))];
@@ -130,7 +130,7 @@ async function gemini(prompt, image, temperature = 0.2) {
       body: JSON.stringify({ contents: [{ role: "user", parts }], generationConfig: { responseMimeType: "application/json", temperature } }),
     }).catch(() => null);
     if (!r) continue;
-    if ([400, 401, 403].includes(r.status)) return { error: "The server's AI key is not valid." };
+    if ([400, 401, 403].includes(r.status)) break; // Gemini key not valid: go straight to the backup
     if (!r.ok) continue;
     const j = await r.json().catch(() => null);
     const raw = (j?.candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
@@ -139,7 +139,56 @@ async function gemini(prompt, image, temperature = 0.2) {
       try { if (m) return { result: JSON.parse(m[0]) }; } catch {}
     }
   }
-  return { error: "AI is busy. Try again." };
+  // Backup: Groq, when GROQ_API_KEY is set, so Easy Life keeps working while Gemini is down or busy.
+  const backup = await groq(parts, temperature);
+  return backup || { error: "AI is busy. Try again." };
+}
+
+// Groq speaks the OpenAI chat format. Model names change often, so pick from the live list
+// (GROQ_MODEL wins when set); photos go to a vision-capable model.
+let groqModels = null;
+async function groqPick(key, vision) {
+  if (process.env.GROQ_MODEL && !vision) return [process.env.GROQ_MODEL];
+  if (!groqModels) {
+    const r = await fetch("https://api.groq.com/openai/v1/models", { headers: { Authorization: `Bearer ${key}` } }).catch(() => null);
+    const j = r && r.ok ? await r.json().catch(() => null) : null;
+    const ids = (j?.data || []).filter((m) => m.active !== false).map((m) => m.id);
+    if (!ids.length) return [];
+    groqModels = ids;
+  }
+  const prefs = vision
+    ? [/llama-4-maverick/, /llama-4-scout/, /vision/]
+    : [/gpt-oss-120b/, /llama-4-maverick/, /llama-3\.3-70b/, /qwen3?-?32b/, /kimi/, /gpt-oss-20b/, /llama-4-scout/, /llama-3\.1-8b/];
+  const out = [];
+  for (const re of prefs) for (const id of groqModels) if (re.test(id) && !/guard|whisper|tts|orpheus|compound/.test(id) && !out.includes(id)) out.push(id);
+  return out.slice(0, 3);
+}
+
+async function groq(parts, temperature) {
+  const key = process.env.GROQ_API_KEY;
+  if (!key) return null;
+  const text = parts.filter((p) => p.text).map((p) => p.text).join("\n");
+  const img = parts.find((p) => p.inline_data)?.inline_data;
+  const content = img
+    ? [{ type: "text", text }, { type: "image_url", image_url: { url: `data:${img.mime_type};base64,${img.data}` } }]
+    : text;
+  for (const model of await groqPick(key, !!img)) {
+    const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
+      body: JSON.stringify({ model, temperature, response_format: { type: "json_object" }, messages: [{ role: "user", content }] }),
+    }).catch(() => null);
+    if (!r) continue;
+    if (r.status === 401 || r.status === 403) return null;
+    if (!r.ok) continue;
+    const j = await r.json().catch(() => null);
+    const raw = j?.choices?.[0]?.message?.content || "";
+    try { return { result: JSON.parse(raw) }; } catch {
+      const m = raw.match(/\{[\s\S]*\}/);
+      try { if (m) return { result: JSON.parse(m[0]) }; } catch {}
+    }
+  }
+  return null;
 }
 
 export default async function handler(req, res) {
