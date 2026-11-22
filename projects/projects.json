@@ -1,6 +1,7 @@
 {
   "source": "https://yeasinarafatbd.vercel.app",
-  "updated": "2026-11-13",
+  "agency": "https://averroessolutions.vercel.app",
+  "updated": "2026-11-22",
   "projects": [
     {
       "slug": "amalnama",
@@ -9,6 +10,7 @@
       "url": "https://yeasinarafatbd.vercel.app/projects/amalnama/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-amalnama.webp",
       "demo": "https://uowyeasin-cyber.github.io/AmalnamaForever/",
+      "agency": null,
       "accent": "#2FBF8F",
       "tags": [
         "PWA",
@@ -132,6 +134,7 @@
       "url": "https://yeasinarafatbd.vercel.app/projects/averroes-code/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-averroes-code.webp",
       "demo": "https://uowyeasin-cyber.github.io/averroes-code/",
+      "agency": null,
       "accent": "#8B7CFF",
       "tags": [
         "C · C++ · Python · Java",
@@ -233,6 +236,7 @@
       "url": "https://yeasinarafatbd.vercel.app/projects/sunnah-store/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-sunnah-store.webp",
       "demo": "https://sunnahstore.vercel.app/",
+      "agency": "https://averroessolutions.vercel.app/products/storefront-pro",
       "accent": "#E8B04A",
       "tags": [
         "Next.js 16",
@@ -347,6 +351,7 @@
       "url": "https://yeasinarafatbd.vercel.app/projects/ai-agent-front-desk/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-ai-agent-front-desk.webp",
       "demo": "https://yeasinarafatbd.vercel.app/demo/ai-agent.html",
+      "agency": null,
       "accent": "#22C3E6",
       "tags": [
         "AI agent",
@@ -456,6 +461,7 @@
       "url": "https://yeasinarafatbd.vercel.app/projects/campus-islamic-society/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-campus-islamic-society.webp",
       "demo": "https://yeasinarafatbd.vercel.app/demo/campus-islamic-society.html",
+      "agency": null,
       "accent": "#D9A441",
       "tags": [
         "Next.js 16",
@@ -555,6 +561,7 @@
       "url": "https://yeasinarafatbd.vercel.app/projects/campusearn/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-campusearn.webp",
       "demo": "https://yeasinarafatbd.vercel.app/demo/campusearn.html",
+      "agency": null,
       "accent": "#5B8CFF",
       "tags": [
         "Node.js",
@@ -652,6 +659,7 @@
       "url": "https://yeasinarafatbd.vercel.app/projects/cloudeats/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-cloudeats.webp",
       "demo": "https://yeasinarafatbd.vercel.app/demo/cloudeats.html",
+      "agency": null,
       "accent": "#FF8A3D",
       "tags": [
         "Docker",
@@ -753,6 +761,7 @@
       "url": "https://yeasinarafatbd.vercel.app/projects/online-food-ordering/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-online-food-ordering.webp",
       "demo": "https://yeasinarafatbd.vercel.app/demo/food-ordering.html",
+      "agency": null,
       "accent": "#FF6B5B",
       "tags": [
         "Java",
@@ -841,6 +850,7 @@
       "url": "https://yeasinarafatbd.vercel.app/projects/tic-tac-toe/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-tic-tac-toe.webp",
       "demo": "https://yeasinarafatbd.vercel.app/demo/tictactoe.html",
+      "agency": "https://averroessolutions.vercel.app/products/tic-tac-toe-unbeatable-ai",
       "accent": "#FF5C8A",
       "tags": [
         "JavaScript",
@@ -937,6 +947,7 @@
       "url": "https://yeasinarafatbd.vercel.app/projects/animated-login/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-animated-login.webp",
       "demo": "https://yeasinarafatbd.vercel.app/demo/login.html",
+      "agency": "https://averroessolutions.vercel.app/products/animated-login-sign-up",
       "accent": "#9B5CFF",
       "tags": [
         "HTML",
@@ -1023,6 +1034,7 @@
       "url": "https://yeasinarafatbd.vercel.app/projects/portfolio-studio/",
       "cover": "https://yeasinarafatbd.vercel.app/img/cover-portfolio-studio.webp",
       "demo": "https://yeasinarafatbd.vercel.app/",
+      "agency": "https://averroessolutions.vercel.app/products/portfolio-studio",
       "accent": "#5B8CFF",
       "tags": [
         "HTML",
