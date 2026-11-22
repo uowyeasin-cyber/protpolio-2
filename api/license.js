@@ -18,7 +18,8 @@
 //
 // Storage: the whole state is one JSON blob, written as a new file on each change (newest wins, old ones pruned).
 import crypto from "node:crypto";
-import { guard, sameOrigin, store, query, readJSON, send } from "./_lib.js";
+import { guard, sameOrigin, store, query, readJSON, send, checkLogin } from "./_lib.js";
+import { askAny, saveRing, storedRing, ownerToken, checkOwnerToken, mask } from "./_ai.js";
 
 const APPS = {
   storefront: { dir: "store-licences/", prefix: "SP" },
@@ -111,37 +112,11 @@ Read the note and return JSON only:
 Rules: one task per separate thing to do that has a time or day; if only a day is given use 09:00; bare hours 1-6 mean PM;
 medicine and bills are "urgent"; "must/অবশ্যই/wake me" is "critical"; ideas and plain notes have no tasks.
 Note: ${JSON.stringify(text)}`;
-  return gemini(prompt, null, 0.1);
+  return askAny(prompt, null, 0.1);
 }
 
-async function gemini(prompt, image, temperature = 0.2) {
-  const key = process.env.GEMINI_API_KEY;
-  if (!key) return { error: "AI is not set up on the server yet." };
-  if (!prompt) return { error: "Nothing to read." };
-  const parts = [{ text: prompt }];
-  if (image) parts.push({ inline_data: { mime_type: image.mime, data: image.base64 } });
-  // Google retires model names (gemini-2.5-flash now answers 404) and the newest model is often
-  // "high demand" (503), so try the configured model, then the always-current Flash and Flash-Lite aliases.
-  const models = [...new Set([process.env.GEMINI_MODEL, "gemini-flash-latest", "gemini-flash-lite-latest"].filter(Boolean))];
-  for (const model of models) {
-    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "x-goog-api-key": key },
-      body: JSON.stringify({ contents: [{ role: "user", parts }], generationConfig: { responseMimeType: "application/json", temperature } }),
-    }).catch(() => null);
-    if (!r) continue;
-    if ([400, 401, 403].includes(r.status)) return { error: "The server's AI key is not valid." };
-    if (!r.ok) continue;
-    const j = await r.json().catch(() => null);
-    const raw = (j?.candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
-    try { return { result: JSON.parse(raw) }; } catch {
-      const m = raw.match(/\{[\s\S]*\}/);
-      try { if (m) return { result: JSON.parse(m[0]) }; } catch {}
-    }
-  }
-  return { error: "AI is busy. Try again." };
-}
 
+const TRIES = new Map();
 export default async function handler(req, res) {
   const q = query(req), a = q.get("a");
   const APP = q.get("app") === "easylife" ? APPS.easylife : APPS.storefront;
@@ -166,9 +141,31 @@ export default async function handler(req, res) {
       if (r.status === "locked") return send(res, 402, { error: "AI needs Easy Life Pro." });
       const files = Array.isArray(b.files) ? b.files.slice(0, 80).map((f) => clean(f, 60)).filter(Boolean) : [];
       const out = b.task === "raw"
-        ? await gemini(String(b.prompt || "").slice(0, 20000), b.image && typeof b.image.base64 === "string" ? { mime: clean(b.image.mime, 30) || "image/jpeg", base64: b.image.base64.slice(0, 3_500_000) } : null)
+        ? await askAny(String(b.prompt || "").slice(0, 20000), b.image && typeof b.image.base64 === "string" ? { mime: clean(b.image.mime, 30) || "image/jpeg", base64: b.image.base64.slice(0, 3_500_000) } : null)
         : await aiRead(clean(b.text, 2000), clean(b.now, 40), clean(b.weekday, 12), files);
       return send(res, out.error ? 503 : 200, out);
+    }
+    // The owner signs in once from the app (website admin email + password) and gets a long-lived token;
+    // with it the app keeps the server's AI keys in sync. Keys are stored encrypted and only shown masked.
+    if (a === "owner" && APP === APPS.easylife) {
+      if (req.method !== "POST") return send(res, 405, { error: "POST only." });
+      const ip = String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() || "?";
+      const t = TRIES.get(ip), now = Date.now();
+      if (t && now - t.t < 15 * 60e3 && t.n >= 8) return send(res, 429, { error: "Too many attempts. Try again in 15 minutes." });
+      const b = await readJSON(req, 2_000);
+      if (!checkLogin(b.email, b.password)) {
+        TRIES.set(ip, t && now - t.t < 15 * 60e3 ? { t: t.t, n: t.n + 1 } : { t: now, n: 1 });
+        return send(res, 401, { error: "Wrong email or password." });
+      }
+      TRIES.delete(ip);
+      return send(res, 200, { token: ownerToken() });
+    }
+    if (a === "aikeys" && APP === APPS.easylife) {
+      if (req.method !== "POST") return send(res, 405, { error: "POST only." });
+      const b = await readJSON(req, 20_000);
+      if (!checkOwnerToken(b.token)) return send(res, 401, { error: "Sign in as the owner again." });
+      const ring = typeof b.ring === "string" ? await saveRing(b.ring.slice(0, 15_000)) : await storedRing();
+      return send(res, 200, { keys: ring.map((k) => ({ provider: k.provider, key: mask(k.key), model: k.model || "" })) });
     }
     if (a === "info") {
       const l = await load(APP);
