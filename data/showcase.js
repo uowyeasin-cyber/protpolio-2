@@ -57,7 +57,7 @@ const SHOWCASE = [
      built:["Pyodide (WebAssembly) দিয়ে ব্রাউজারেই Python চলে","C++ ও JavaScript চলে ওয়েব ওয়ার্কারে","ডেস্কটপ আর ফোনের জন্য একটাই কোডবেস","পাবলিক যাচাইসহ সার্টিফিকেট"],
      cta:["লার্নিং প্ল্যাটফর্ম বা অনলাইন টুল দরকার?","কোর্স প্ল্যাটফর্ম, কোডিং টুল আর অফলাইনে চলা ওয়েব অ্যাপ বানিয়ে দিই।"]}},
 
-  {slug:"sunnah-store",agencyProduct:"storefront-pro",stage:"ready",buyHref:"/ecommerce-studio/",n:"Sunnah Store",accent:"#E8B04A",frame:"browser",demo:"https://sunnahstore.vercel.app/",external:true,shot:"dev-sunnah.webp",
+  {slug:"sunnah-store",agencyProduct:"ecommerce-studio",stage:"ready",buyHref:"/ecommerce-studio/",n:"Sunnah Store",accent:"#E8B04A",frame:"browser",demo:"https://sunnahstore.vercel.app/",external:true,shot:"dev-sunnah.webp",
    tags:["Next.js 16","Prisma 6","PostgreSQL","Stripe · PayPal · SSLCommerz"],
    links:{live:["Visit Sunnah Store","https://sunnahstore.vercel.app/"],gh:"sunnah-store",more:["Buy this store app: E-commerce Studio","/ecommerce-studio/"]},
    en:{kicker:"Full-stack e-commerce · live",title:"A complete online shop,",em:"ready to sell.",
