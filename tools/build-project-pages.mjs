@@ -9,7 +9,9 @@ import path from "node:path";
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const load = (f, names) => new Function(fs.readFileSync(path.join(root, f), "utf8") + `;return {${names}}`)();
 const { SITE } = load("data/content.js", "SITE");
-const { SHOWCASE, SHOWCASE_LINKED } = load("data/showcase.js", "SHOWCASE,SHOWCASE_LINKED");
+const { SHOWCASE, SHOWCASE_LINKED, AGENCY_URL } = load("data/showcase.js", "SHOWCASE,SHOWCASE_LINKED,AGENCY_URL");
+// Agency product page for a project, only for finished projects that are for sale.
+const agencyHref = (p) => (p.agencyProduct && p.stage === "ready" ? `${AGENCY_URL}/products/${p.agencyProduct}` : "");
 const BASE = SITE.url.replace(/\/$/, "");
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -135,7 +137,8 @@ const asCard = (p) => ({ n: p.n, stage: p.stage, href: `/projects/${p.slug}/`, a
 const linkedCards = SHOWCASE_LINKED.map((l) => ({ ...l, img: `/img/${l.shot}`, en: l.en, bn: l.bn }));
 const allCards = [...linkedCards, ...SHOWCASE.map(asCard)];
 
-const footer = (name) => `<div class="wrap"><footer><span>${esc(name)} · <a href="/">${esc(SITE.name)}</a> · Averroes AI</span><span><a href="/projects/">${T("All projects", "সব প্রজেক্ট")}</a> · <a href="/services/">${T("Services", "সার্ভিস")}</a> · <a href="/#contact">${T("Contact", "যোগাযোগ")}</a></span></footer></div>`;
+const agencyLinks = SHOWCASE.filter(agencyHref).map((p) => `<a href="${agencyHref(p)}" target="_blank" rel="noopener">${esc(p.n.split(":")[0])}</a>`).join(" · ");
+const footer = (name) => `<div class="wrap"><footer><span>${esc(name)} · <a href="/">${esc(SITE.name)}</a> · <a href="${AGENCY_URL}/" target="_blank" rel="noopener">Averroes Solutions ↗</a></span><span><a href="/projects/">${T("All projects", "সব প্রজেক্ট")}</a> · <a href="/services/">${T("Services", "সার্ভিস")}</a> · <a href="/#contact">${T("Contact", "যোগাযোগ")}</a></span>${agencyLinks ? `<span style="flex-basis:100%">${T("Ready-made at Averroes Solutions:", "Averroes Solutions-এ রেডিমেড:")} ${agencyLinks}</span>` : ""}</footer></div>`;
 
 function demoBlock(p) {
   const title = `${p.n} live demo`;
@@ -154,7 +157,7 @@ function buySection(p, href, attr) {
   <span class="mono">${T("Ready to buy", "কেনার জন্য তৈরি")}</span>
   <h2>${T(`Get ${p.n} for your business`, `আপনার ব্যবসার জন্য ${p.n} নিন`)}</h2>
   <div class="buy"><div class="built"><ul style="grid-column:1/-1">${get.map(([e, b]) => `<li>${T(e, b)}</li>`).join("")}</ul></div>
-  <div class="price"><span class="mono">${T("Price", "দাম")}</span><b>${T("Based on what you need", "আপনার প্রয়োজন অনুযায়ী")}</b><p>${T("Tell me your business and what you need on WhatsApp, and I'll send you a clear price before any work starts.", "হোয়াটসঅ্যাপে আপনার ব্যবসা আর কী দরকার জানান, কাজ শুরুর আগেই পরিষ্কার দাম জানিয়ে দেব।")}</p><a class="btn wa" href="${href}"${attr}>${T("Buy this", "এটি কিনুন")}</a></div></div>
+  <div class="price"><span class="mono">${T("Price", "দাম")}</span><b>${T("Based on what you need", "আপনার প্রয়োজন অনুযায়ী")}</b><p>${T("Tell me your business and what you need on WhatsApp, and I'll send you a clear price before any work starts.", "হোয়াটসঅ্যাপে আপনার ব্যবসা আর কী দরকার জানান, কাজ শুরুর আগেই পরিষ্কার দাম জানিয়ে দেব।")}</p><a class="btn wa" href="${href}"${attr}>${T("Buy this", "এটি কিনুন")}</a>${agencyHref(p) ? `<p style="margin:14px 0 0;font-size:.9rem">${T("Or buy it ready-made from my agency:", "অথবা আমার এজেন্সি থেকে রেডিমেড কিনুন:")} <a href="${agencyHref(p)}" target="_blank" rel="noopener">Averroes Solutions ↗</a></p>` : ""}</div></div>
 </div></section>`;
 }
 
@@ -173,6 +176,7 @@ function page(p) {
       <div class="acts">
         <a class="btn" href="${p.external ? links.live[1] : "#demo"}"${p.external ? tgt(links.live[1]) : ""}>${p.external ? T(links.live[0] + " ↗", "লাইভ অ্যাপ খুলুন ↗") : T("Try the live demo", "লাইভ ডেমো চালান")}</a>
         ${ready ? `<a class="btn wa" href="${buyHref}"${buyAttr}>${T("Buy this", "এটি কিনুন")}</a>` : `<a class="btn ghost" href="${wa(waText)}" target="_blank" rel="noopener">${T("Want one like this?", "এমন একটি চান?")}</a>`}
+        ${agencyHref(p) ? `<a class="btn ghost" href="${agencyHref(p)}" target="_blank" rel="noopener">${T("Buy this ready-made ↗", "রেডিমেড কিনুন ↗")}</a>` : ""}
         ${links.gh ? `<a class="btn ghost" href="https://github.com/uowyeasin-cyber/${links.gh}" target="_blank" rel="noopener">${T("Code on GitHub ↗", "GitHub-এ কোড ↗")}</a>` : ""}
         ${links.more ? `<a class="btn ghost" href="${links.more[1]}">${esc(links.more[0])}</a>` : ""}
       </div>
@@ -252,8 +256,8 @@ for (const p of SHOWCASE) {
 fs.writeFileSync(path.join(out, "index.html"), hub());
 // Machine-readable copy for other sites (agency website etc.).
 const json = {
-  source: BASE, updated: new Date().toISOString().slice(0, 10),
-  projects: SHOWCASE.map((p) => ({ slug: p.slug, name: p.n, stage: p.stage, url: `${BASE}/projects/${p.slug}/`, cover: BASE + cover(p), demo: ext(p.demo) ? p.demo : BASE + p.demo, accent: p.accent, tags: p.tags, links: p.links, en: p.en, bn: p.bn })),
+  source: BASE, agency: AGENCY_URL, updated: new Date().toISOString().slice(0, 10),
+  projects: SHOWCASE.map((p) => ({ slug: p.slug, name: p.n, stage: p.stage, url: `${BASE}/projects/${p.slug}/`, cover: BASE + cover(p), demo: ext(p.demo) ? p.demo : BASE + p.demo, agency: agencyHref(p) || null, accent: p.accent, tags: p.tags, links: p.links, en: p.en, bn: p.bn })),
   products: SHOWCASE_LINKED.map((l) => ({ name: l.n, stage: l.stage, url: BASE + l.href, cover: `${BASE}/img/${l.shot}`, en: l.en, bn: l.bn })),
 };
 fs.writeFileSync(path.join(out, "projects.json"), JSON.stringify(json, null, 2));

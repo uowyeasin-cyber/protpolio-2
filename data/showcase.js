@@ -19,6 +19,11 @@
 //            feats [[icon, title, text]...], built [line...], cta [title, text]
 //   links    {live, gh, more:[label, href]}
 //   buyHref  optional: where "Buy this" goes (default: WhatsApp)
+//   agencyProduct  optional: slug of the same product on the agency site
+//            (AGENCY_URL/products/<slug>), shown as "Buy this ready-made"
+// Agency website (Averroes Solutions), where ready-made products are sold.
+const AGENCY_URL = "https://averroessolutions.vercel.app";
+
 const SHOWCASE = [
   {slug:"amalnama",stage:"ready",n:"Amalnama",accent:"#2FBF8F",frame:"phone",demo:"https://uowyeasin-cyber.github.io/AmalnamaForever/",external:true,shot:"dev-amalnama.webp",
    tags:["PWA","Vanilla JS","Gemini AI","Web Push","6 languages"],
@@ -52,7 +57,7 @@ const SHOWCASE = [
      built:["Pyodide (WebAssembly) দিয়ে ব্রাউজারেই Python চলে","C++ ও JavaScript চলে ওয়েব ওয়ার্কারে","ডেস্কটপ আর ফোনের জন্য একটাই কোডবেস","পাবলিক যাচাইসহ সার্টিফিকেট"],
      cta:["লার্নিং প্ল্যাটফর্ম বা অনলাইন টুল দরকার?","কোর্স প্ল্যাটফর্ম, কোডিং টুল আর অফলাইনে চলা ওয়েব অ্যাপ বানিয়ে দিই।"]}},
 
-  {slug:"sunnah-store",stage:"ready",buyHref:"/storefront-pro/",n:"Sunnah Store",accent:"#E8B04A",frame:"browser",demo:"https://sunnahstore.vercel.app/",external:true,shot:"dev-sunnah.webp",
+  {slug:"sunnah-store",agencyProduct:"storefront-pro",stage:"ready",buyHref:"/storefront-pro/",n:"Sunnah Store",accent:"#E8B04A",frame:"browser",demo:"https://sunnahstore.vercel.app/",external:true,shot:"dev-sunnah.webp",
    tags:["Next.js 16","Prisma 6","PostgreSQL","Stripe · PayPal · SSLCommerz"],
    links:{live:["Visit Sunnah Store","https://sunnahstore.vercel.app/"],gh:"sunnah-store",more:["Buy this store app: Storefront Pro","/storefront-pro/"]},
    en:{kicker:"Full-stack e-commerce · live",title:"A complete online shop,",em:"ready to sell.",
@@ -68,7 +73,7 @@ const SHOWCASE = [
      built:["Next.js App Router, ক্যাশ করা ক্যাটালগ","PostgreSQL-এ Prisma 6, ৯টি মাইগ্রেশন","সার্ভারে নিশ্চিত হওয়ার পরই অর্ডার পেইড হয়","ক্রন জব গ্রাহককে ট্র্যাকিং ইমেইল পাঠায়"],
      cta:["এমন একটি স্টোর চান?","Storefront Pro হিসেবে একই অ্যাপ ১২টি থিমসহ কিনুন, অথবা কাস্টম স্টোর বানিয়ে নিন।"]}},
 
-  {slug:"ai-agent-front-desk",stage:"progress",n:"AI Agent Front Desk",accent:"#22C3E6",frame:"browser",demo:"/demo/ai-agent.html",shot:"dev-ai-agent.webp",
+  {slug:"ai-agent-front-desk",agencyProduct:"ai-front-desk",stage:"progress",n:"AI Agent Front Desk",accent:"#22C3E6",frame:"browser",demo:"/demo/ai-agent.html",shot:"dev-ai-agent.webp",
    tags:["AI agent","Tool calling","WhatsApp","Automation"],
    links:{live:["Open full screen","/demo/ai-agent.html"]},
    en:{kicker:"AI agents & automation · live prototype",title:"An AI that runs",em:"your front desk.",
@@ -148,7 +153,7 @@ const SHOWCASE = [
      built:["অবজেক্ট-ওরিয়েন্টেড বিশ্লেষণ ও ডিজাইন (OOSAD)","ক্লাস ডায়াগ্রাম থেকে হুবহু জাভা ক্লাস","গ্রাহকের জন্য ওয়েব ফ্রন্টএন্ড"],
      cta:["বানানোর আগে সফটওয়্যারের সঠিক পরিকল্পনা দরকার?","রিকোয়ারমেন্ট, UML আর চালু প্রোটোটাইপ, যাতে পরে কোনো চমক না থাকে।"]}},
 
-  {slug:"tic-tac-toe",stage:"ready",n:"Tic Tac Toe: Unbeatable AI",accent:"#FF5C8A",frame:"browser",demo:"/demo/tictactoe.html",shot:"demo-tictactoe.jpg",
+  {slug:"tic-tac-toe",agencyProduct:"tic-tac-toe-unbeatable-ai",stage:"ready",n:"Tic Tac Toe: Unbeatable AI",accent:"#FF5C8A",frame:"browser",demo:"/demo/tictactoe.html",shot:"demo-tictactoe.jpg",
    tags:["JavaScript","Minimax","CSS animation"],
    links:{live:["Play full screen","/demo/tictactoe.html"]},
    en:{kicker:"Browser game · playable",title:"An AI that",em:"never loses.",
@@ -164,7 +169,7 @@ const SHOWCASE = [
      built:["মিনিম্যাক্স গেম-ট্রি সার্চ","প্রতিটি থিমে CSS অ্যানিমেশন","লাইব্রেরি ছাড়া ভ্যানিলা জাভাস্ক্রিপ্ট"],
      cta:["আপনার ব্র্যান্ড বা ক্লাসের জন্য গেম চান?","কুইজ, প্রোমো আর শেখার গেম, যেকোনো ব্রাউজারে চলে।"]}},
 
-  {slug:"animated-login",stage:"ready",n:"Animated login & sign-up",accent:"#9B5CFF",frame:"browser",demo:"/demo/login.html",shot:"demo-login.jpg",
+  {slug:"animated-login",agencyProduct:"animated-login-sign-up",stage:"ready",n:"Animated login & sign-up",accent:"#9B5CFF",frame:"browser",demo:"/demo/login.html",shot:"demo-login.jpg",
    tags:["HTML","CSS","JavaScript"],
    links:{live:["Open full screen","/demo/login.html"]},
    en:{kicker:"UI component · live demo",title:"A login screen people",em:"enjoy using.",
@@ -180,7 +185,7 @@ const SHOWCASE = [
      built:["HTML ও CSS ট্রানজিশন","খুব ছোট জাভাস্ক্রিপ্ট, লাইব্রেরি নেই","ফোন আর কম্পিউটারে চলে"],
      cta:["আপনার অ্যাপের স্ক্রিন এমন সুন্দর চান?","অ্যাপ, ড্যাশবোর্ড আর সাইন-আপের UI/UX ডিজাইন ও ফ্রন্টএন্ড।"]}},
 
-  {slug:"portfolio-studio",stage:"ready",n:"Portfolio Studio",accent:"#5B8CFF",frame:"browser",demo:"/",shot:"dev-portfolio.webp",
+  {slug:"portfolio-studio",agencyProduct:"portfolio-studio",stage:"ready",n:"Portfolio Studio",accent:"#5B8CFF",frame:"browser",demo:"/",shot:"dev-portfolio.webp",
    tags:["HTML","CSS","JavaScript","Vercel","Visual editor"],
    links:{live:["Open the live site","/"],gh:"protpolio-2"},
    en:{kicker:"Portfolio website · live",title:"A portfolio you can",em:"edit by clicking.",
@@ -208,4 +213,12 @@ const SHOWCASE_ALIAS = {"This portfolio":"portfolio-studio","CloudEats: from mon
 function showcasePage(name){
   const slug = SHOWCASE_ALIAS[name] || (SHOWCASE.find((p) => p.n === name) || {}).slug;
   return slug ? `/projects/${slug}/` : "";
+}
+
+// Agency product page for a DEV project (by its name in data/content.js), or "".
+// Only finished projects that are for sale get one.
+function agencyProductUrl(name){
+  const slug = SHOWCASE_ALIAS[name] || (SHOWCASE.find((p) => p.n === name) || {}).slug;
+  const p = SHOWCASE.find((x) => x.slug === slug);
+  return p && p.agencyProduct && p.stage === "ready" ? `${AGENCY_URL}/products/${p.agencyProduct}` : "";
 }

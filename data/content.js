@@ -28,7 +28,7 @@ const SITE = {
   areas: ["Malaysia","Bangladesh","United States","Worldwide"],
   languages: ["English","Bengali"],
   // Agency website (Averroes Solutions). Leave "" to hide every agency link; set the address
-  // (for example "https://averroes-solutions.vercel.app") once the agency site is live.
+  // (for example "https://averroessolutions.vercel.app") once the agency site is live.
   agency: "https://averroessolutions.vercel.app",
 };
 
