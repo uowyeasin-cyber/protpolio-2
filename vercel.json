@@ -1,0 +1,7 @@
+{
+  "redirects": [
+    { "source": "/storefront-pro", "destination": "/ecommerce-studio/", "permanent": true },
+    { "source": "/storefront-pro/", "destination": "/ecommerce-studio/", "permanent": true },
+    { "source": "/downloads/storefront-pro.zip", "destination": "/downloads/ecommerce-studio.zip", "permanent": true }
+  ]
+}
